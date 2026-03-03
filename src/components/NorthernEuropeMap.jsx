@@ -3,11 +3,11 @@ import { COLORS } from "../constants/colors";
 import europeSvg from "../assets/Europe.svg";
 
 const partners = [
-  { name: "EFS", city: "Liverpool", x: 22, y: 53.5, founded: "2004" },
-  { name: "Corten", city: "London", x: 26, y: 57, founded: "1991" },
-  { name: "PVY & Boxlines", city: "Rotterdam", x: 33.5, y: 54, founded: "1974" },
-  { name: "Remiro", city: "Amsterdam", x: 33, y: 52.5, founded: "2008" },
-  { name: "Soli-Trans", city: "Bremen", x: 37, y: 52.5, founded: "2009" },
+  { name: "EFS", city: "Liverpool", x: 35, y: 53, founded: "2004" },
+  { name: "Corten", city: "London", x: 37, y: 55, founded: "1991" },
+  { name: "PVY & Boxlines", city: "Rotterdam", x: 44, y: 54.5, founded: "1974" },
+  { name: "Remiro", city: "Amsterdam", x: 45, y: 54, founded: "2008" },
+  { name: "Soli-Trans", city: "Bremen", x: 52, y: 53.5, founded: "2009" },
 ];
 
 export default function NorthernEuropeMap() {
