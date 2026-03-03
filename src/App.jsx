@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/voyfai-website">
       <div
         style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif",
