@@ -1,6 +1,6 @@
-<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="512" height="512" rx="76" fill="#1A1A1A"/>
-  <g transform="translate(102, 127) scale(2.42)">
-    <path d="M97.789 6.08211L64.3604 71.7985L29.9903 6.08211L0 6.06843L49.1424 95.3329C51.1163 98.9191 54.8776 101.146 58.9572 101.146H69.9136C74.0615 101.146 77.8683 98.8507 79.8149 95.1777L127.038 6.06386L97.789 6.07755V6.08211Z" fill="white"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="432" height="432"><svg width="432" height="432" viewBox="0 0 432 432" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="432" height="432" rx="120" fill="black"></rect>
+<path d="M306.223 89.0488L216 264.602L126.265 89.0488L46 89.0122L175.271 327.472C180.554 337.052 190.621 343 201.539 343H230.863C241.964 343 252.152 336.869 257.362 327.057L386 89L306.223 89.0366V89.0488Z" fill="white"></path>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>
