@@ -658,9 +658,37 @@ export default function Home() {
       </section>
 
       {/* ─── INVESTORS ─────────────────────────────────────────── */}
-      <Section bg={COLORS.cream}>
+      <Section bg="#000">
         <div style={{ textAlign: "center" }}>
           <SectionLabel>Investors</SectionLabel>
+          <h2
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: "clamp(28px, 3.5vw, 38px)",
+              fontWeight: 600,
+              color: COLORS.white,
+              margin: "0 auto 16px",
+              lineHeight: 1.25,
+              letterSpacing: "-0.02em",
+              maxWidth: 600,
+            }}
+          >
+            Backed by the Greatest Investors
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 17,
+              fontWeight: 400,
+              lineHeight: 1.7,
+              color: "rgba(255,255,255,0.5)",
+              maxWidth: 540,
+              margin: "0 auto 48px",
+            }}
+          >
+            All our investors have long proven track records of picking the
+            winners across different industries.
+          </p>
           <div
             style={{
               display: "flex",
@@ -668,7 +696,6 @@ export default function Home() {
               justifyContent: "center",
               gap: 64,
               flexWrap: "wrap",
-              marginTop: 32,
             }}
           >
             {[
@@ -685,6 +712,7 @@ export default function Home() {
                   height: logo.height,
                   objectFit: "contain",
                   opacity: 0.7,
+                  filter: "brightness(0) invert(1)",
                 }}
               />
             ))}
