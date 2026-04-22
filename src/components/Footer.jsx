@@ -1,11 +1,11 @@
+import { Link } from "react-router-dom";
 import { COLORS } from "../constants/colors";
 
 const navLinks = [
-  { label: "Benefits", href: "#benefits" },
-  { label: "Partners", href: "#partners" },
-  { label: "Procurement", href: "#procurement" },
-  { label: "Technology", href: "#technology" },
-  { label: "Growth", href: "#growth" },
+  { label: "Benefits", href: "/#benefits" },
+  { label: "Group", href: "/#partners" },
+  { label: "Technology", href: "/#technology" },
+  { label: "Careers", href: "/careers", route: true },
 ];
 
 export default function Footer() {
@@ -68,8 +68,8 @@ export default function Footer() {
               lineHeight: 1.6,
             }}
           >
-            Uniting independent freight forwarders across Europe with the scale,
-            technology, and partnerships to thrive.
+            A group of independent freight forwarders united by shared scale,
+            technology, and partnerships.
           </p>
         </div>
         <div
@@ -79,23 +79,17 @@ export default function Footer() {
             flexWrap: "wrap",
           }}
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 13,
-                color: "rgba(255,255,255,0.4)",
-                textDecoration: "none",
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={(e) => (e.target.style.color = "rgba(255,255,255,0.7)")}
-              onMouseLeave={(e) => (e.target.style.color = "rgba(255,255,255,0.4)")}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.route ? (
+              <Link key={link.label} to={link.href} className="footer-link">
+                {link.label}
+              </Link>
+            ) : (
+              <a key={link.label} href={link.href} className="footer-link">
+                {link.label}
+              </a>
+            )
+          )}
         </div>
         <div
           style={{

@@ -6,6 +6,27 @@
   padding: 0;
 }
 
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.12);
+  --shadow-copper: 0 10px 30px rgba(3, 166, 150, 0.25);
+
+  --copper: #03a696;
+  --copper-light: #04c9b4;
+  --focus-ring: 0 0 0 2px #ffffff, 0 0 0 4px #03a696;
+  --focus-ring-dark: 0 0 0 2px #111111, 0 0 0 4px #04c9b4;
+}
+
 html {
   scroll-behavior: smooth;
   background-color: #000;
@@ -76,6 +97,31 @@ body {
   }
 }
 
+@keyframes skeletonPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* ─── REVEAL (scroll-in) ─────────────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal[data-in="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ─── NAV LINKS ──────────────────────────────────────────────── */
 
 .nav-link {
@@ -83,12 +129,20 @@ body {
   font-size: 14px;
   font-weight: 400;
   color: rgba(253, 251, 247, 0.7);
-  transition: color 0.2s;
+  transition: color 200ms ease;
   letter-spacing: 0.01em;
+  position: relative;
+  padding: 6px 2px;
+  border-radius: 4px;
 }
 
 .nav-link:hover {
   color: #fff;
+}
+
+.nav-link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring-dark);
 }
 
 .nav-scrolled .nav-link {
@@ -97,6 +151,10 @@ body {
 
 .nav-scrolled .nav-link:hover {
   color: #1d1d1f;
+}
+
+.nav-scrolled .nav-link:focus-visible {
+  box-shadow: var(--focus-ring);
 }
 
 /* ─── CTA BUTTONS ────────────────────────────────────────────── */
@@ -109,12 +167,24 @@ body {
   font-size: 15px;
   font-weight: 500;
   padding: 14px 28px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   border: none;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   letter-spacing: 0.01em;
+  transition: transform 160ms var(--ease-out), background 200ms ease,
+    box-shadow 240ms ease, color 200ms ease, border-color 200ms ease;
+  will-change: transform;
+}
+
+.cta-btn:active {
+  transform: scale(0.97);
+  transition-duration: 100ms;
+}
+
+.cta-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 .cta-primary {
@@ -125,7 +195,11 @@ body {
 .cta-primary:hover {
   background: #029486;
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(3, 166, 150, 0.25);
+  box-shadow: var(--shadow-copper);
+}
+
+.cta-primary:active {
+  transform: scale(0.97);
 }
 
 .cta-outline {
@@ -139,6 +213,10 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
+.cta-outline:focus-visible {
+  box-shadow: var(--focus-ring-dark);
+}
+
 .cta-dark {
   background: #111111;
   color: #ffffff;
@@ -150,6 +228,171 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
+.cta-ghost {
+  background: transparent;
+  color: #1d1d1f;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.cta-ghost:hover {
+  border-color: rgba(0, 0, 0, 0.24);
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* ─── HOVER-LIFT CARD (tokenized) ────────────────────────────── */
+
+.lift-card {
+  transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out),
+    border-color 200ms ease, background 200ms ease;
+  will-change: transform, box-shadow;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lift-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.lift-card:focus-within {
+  box-shadow: var(--shadow-md), var(--focus-ring);
+  outline: none;
+}
+
+/* ─── BENEFIT CARD ──────────────────────────────────────────── */
+
+@media (hover: hover) and (pointer: fine) {
+  .benefit-card:hover {
+    background: #ffffff !important;
+    border-color: rgba(0, 0, 0, 0.06) !important;
+  }
+}
+
+/* ─── DETAIL SECTION ITEM ───────────────────────────────────── */
+
+.detail-item {
+  transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out),
+    border-color 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .detail-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* ─── FOOTER LINKS ───────────────────────────────────────────── */
+
+.footer-link {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+  transition: color 200ms ease;
+  padding: 4px 2px;
+  border-radius: 4px;
+}
+
+.footer-link:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.footer-link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring-dark);
+}
+
+/* ─── INVESTOR LOGOS ─────────────────────────────────────────── */
+
+.investor-logo {
+  opacity: 0.7;
+  filter: brightness(0);
+  transition: opacity 300ms ease;
+}
+
+.investor-logo:hover {
+  opacity: 1;
+}
+
+/* ─── PROSE (job descriptions) ───────────────────────────────── */
+
+.prose {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #3a3a3c;
+}
+
+.prose h1,
+.prose h2 {
+  font-size: clamp(22px, 2.6vw, 28px);
+  font-weight: 600;
+  color: #111111;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin: 40px 0 12px;
+}
+
+.prose h3 {
+  font-size: 19px;
+  font-weight: 600;
+  color: #111111;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  margin: 32px 0 10px;
+}
+
+.prose h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111111;
+  margin: 24px 0 8px;
+}
+
+.prose p {
+  margin: 0 0 16px;
+}
+
+.prose ul,
+.prose ol {
+  margin: 0 0 20px;
+  padding-left: 22px;
+}
+
+.prose li {
+  margin-bottom: 8px;
+}
+
+.prose li::marker {
+  color: #03a696;
+}
+
+.prose strong,
+.prose b {
+  color: #111111;
+  font-weight: 600;
+}
+
+.prose a {
+  color: #03a696;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 200ms ease;
+}
+
+.prose a:hover {
+  color: #029486;
+}
+
+.prose a:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 2px;
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────────── */
 
 @media (max-width: 1024px) {
@@ -158,6 +401,27 @@ body {
   }
   .detail-grid-4 {
     grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .jobs-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .perks-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .life-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .team-spotlight {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .values-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 
@@ -168,6 +432,9 @@ body {
   .mobile-trigger {
     display: flex !important;
   }
+  .mobile-apply-bar {
+    display: block !important;
+  }
   .detail-grid-4 {
     grid-template-columns: 1fr 1fr !important;
   }
@@ -177,13 +444,25 @@ body {
   .benefits-grid {
     grid-template-columns: 1fr !important;
   }
-  .testimonials-grid {
-    grid-template-columns: 1fr !important;
-  }
   .partners-layout {
     grid-template-columns: 1fr !important;
   }
   .partner-cards-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .job-detail-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .perks-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .stats-row {
     grid-template-columns: 1fr 1fr !important;
   }
 }
@@ -206,5 +485,35 @@ body {
   }
   .mobile-menu {
     display: none !important;
+  }
+}
+
+/* ─── REDUCED MOTION ─────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 200ms !important;
+  }
+
+  .reveal {
+    transform: none !important;
+    transition: opacity 200ms ease !important;
+  }
+
+  .lift-card:hover {
+    transform: none !important;
+  }
+
+  .cta-btn:hover,
+  .cta-btn:active {
+    transform: none !important;
   }
 }

@@ -36,6 +36,7 @@ export default function DetailSection({ id, label, title, items, bg }) {
         {items.map((item, i) => (
           <div
             key={i}
+            className="detail-item"
             style={{
               background: bg === COLORS.warmWhite ? COLORS.white : COLORS.warmWhite,
               border: `1px solid ${COLORS.border}`,

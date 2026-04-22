@@ -1,29 +1,22 @@
-import { useState } from "react";
-import { COLORS } from "../constants/colors";
+import { COLORS, RADIUS } from "../constants/colors";
 import { Icons } from "../constants/icons";
 
 export default function BenefitCard({ icon, title, subtitle, description, items }) {
-  const [hover, setHover] = useState(false);
-
   return (
     <div
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      className="lift-card benefit-card"
       style={{
-        background: hover ? COLORS.white : "transparent",
-        border: `1px solid ${hover ? COLORS.border : "transparent"}`,
-        borderRadius: 12,
+        background: "transparent",
+        border: `1px solid transparent`,
+        borderRadius: RADIUS.lg,
         padding: "36px 28px",
-        transition: "all 0.35s ease",
-        boxShadow: hover ? "0 8px 40px rgba(0,0,0,0.06)" : "none",
-        transform: hover ? "translateY(-4px)" : "translateY(0)",
       }}
     >
       <div
         style={{
           width: 56,
           height: 56,
-          borderRadius: 12,
+          borderRadius: RADIUS.md,
           background: COLORS.copperMuted,
           display: "flex",
           alignItems: "center",

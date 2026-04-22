@@ -4,6 +4,7 @@ import { Icons } from "../constants/icons";
 export default function TestimonialCard({ quote, name, company, role }) {
   return (
     <div
+      className="lift-card"
       style={{
         background: COLORS.white,
         border: `1px solid ${COLORS.border}`,

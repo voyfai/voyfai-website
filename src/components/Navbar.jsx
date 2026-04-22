@@ -5,10 +5,9 @@ import { Icons } from "../constants/icons";
 
 const navLinks = [
   { label: "Benefits", href: "#benefits" },
-  { label: "Partners", href: "#partners" },
-  { label: "Procurement", href: "#procurement" },
+  { label: "Group", href: "#partners" },
   { label: "Technology", href: "#technology" },
-  { label: "Growth", href: "#growth" },
+  { label: "Careers", href: "/careers", absolute: true },
 ];
 
 export default function Navbar() {
@@ -27,7 +26,8 @@ export default function Navbar() {
     setMobileMenu(false);
   }, [location]);
 
-  const resolveHref = (href) => {
+  const resolveHref = (href, absolute) => {
+    if (absolute) return href;
     if (isHome) return href;
     return "/" + href;
   };
@@ -51,7 +51,8 @@ export default function Navbar() {
           borderBottom: scrolled
             ? `1px solid ${COLORS.border}`
             : "1px solid transparent",
-          transition: "all 0.4s ease",
+          transition:
+            "background 300ms ease, backdrop-filter 300ms ease, border-color 300ms ease",
         }}
       >
         <div
@@ -71,7 +72,6 @@ export default function Navbar() {
               textDecoration: "none",
               display: "flex",
               alignItems: "center",
-              transition: "all 0.4s",
             }}
           >
             <svg
@@ -80,7 +80,7 @@ export default function Navbar() {
               viewBox="0 0 435 142"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              style={{ transition: "fill 0.4s" }}
+              style={{ transition: "fill 200ms ease" }}
             >
               <path
                 d="M97.789 6.08211L64.3604 71.7985L29.9903 6.08211L0 6.06843L49.1424 95.3329C51.1163 98.9191 54.8776 101.146 58.9572 101.146H69.9136C74.0615 101.146 77.8683 98.8507 79.8149 95.1777L127.038 6.06386L97.789 6.07755V6.08211Z"
@@ -114,11 +114,21 @@ export default function Navbar() {
               gap: 32,
             }}
           >
-            {navLinks.map((link) => (
-              <a key={link.label} href={resolveHref(link.href)} className="nav-link">
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.absolute ? (
+                <Link key={link.label} to={link.href} className="nav-link">
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.label}
+                  href={resolveHref(link.href, link.absolute)}
+                  className="nav-link"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
             <a
               href={resolveHref("#contact")}
               className="cta-btn"
@@ -133,7 +143,7 @@ export default function Navbar() {
                 textDecoration: "none",
               }}
             >
-              Start a Conversation
+              Explore Partnership
             </a>
           </div>
 
@@ -174,31 +184,43 @@ export default function Navbar() {
             animation: "slideDown 0.3s ease",
           }}
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={resolveHref(link.href)}
-              onClick={() => setMobileMenu(false)}
-              style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 18,
-                fontWeight: 400,
-                color: "rgba(255,255,255,0.8)",
-                textDecoration: "none",
-                padding: "14px 0",
-                borderBottom: "1px solid rgba(255,255,255,0.08)",
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const commonStyle = {
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 18,
+              fontWeight: 400,
+              color: "rgba(255,255,255,0.8)",
+              textDecoration: "none",
+              padding: "14px 0",
+              borderBottom: "1px solid rgba(255,255,255,0.08)",
+            };
+            return link.absolute ? (
+              <Link
+                key={link.label}
+                to={link.href}
+                onClick={() => setMobileMenu(false)}
+                style={commonStyle}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.label}
+                href={resolveHref(link.href, link.absolute)}
+                onClick={() => setMobileMenu(false)}
+                style={commonStyle}
+              >
+                {link.label}
+              </a>
+            );
+          })}
           <a
             href={resolveHref("#contact")}
             className="cta-btn cta-primary"
             onClick={() => setMobileMenu(false)}
             style={{ marginTop: 16, justifyContent: "center" }}
           >
-            Start a Conversation
+            Explore Partnership
           </a>
         </div>
       )}

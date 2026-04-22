@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
+import Careers from "./pages/Careers";
+import CareerDetail from "./pages/CareerDetail";
 
 export default function App() {
   return (
@@ -18,6 +20,8 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/careers/:jobId" element={<CareerDetail />} />
         </Routes>
         <Footer />
       </div>

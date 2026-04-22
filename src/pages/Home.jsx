@@ -3,10 +3,10 @@ import { Icons } from "../constants/icons";
 import Section from "../components/Section";
 import SectionLabel from "../components/SectionLabel";
 import BenefitCard from "../components/BenefitCard";
-import PartnerCard from "../components/PartnerCard";
 import DetailSection from "../components/DetailSection";
 import TestimonialCard from "../components/TestimonialCard";
 import NorthernEuropeMap from "../components/NorthernEuropeMap";
+import Reveal from "../components/Reveal";
 import heroImg from "../assets/Voyfai-hero.jpg";
 import atlanticLabsLogo from "../assets/1-Atlantic-Labs.webp";
 import heartcoreLogo from "../assets/2-Heartcore.svg";
@@ -69,35 +69,6 @@ export default function Home() {
             animation: "fadeInUp 1s ease",
           }}
         >
-          {/* Tagline chip */}
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              background: "rgba(3,166,150,0.12)",
-              border: "1px solid rgba(3,166,150,0.25)",
-              backdropFilter: "blur(12px)",
-              borderRadius: 100,
-              padding: "8px 20px",
-              marginBottom: 36,
-              animation: "fadeIn 1.2s ease",
-            }}
-          >
-            <span style={{ color: COLORS.copperLight }}>{Icons.ship}</span>
-            <span
-              style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 13,
-                fontWeight: 400,
-                color: COLORS.copperLight,
-                letterSpacing: "0.04em",
-              }}
-            >
-              A New Chapter for Freight Forwarders
-            </span>
-          </div>
-
           <h1
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -138,9 +109,8 @@ export default function Home() {
               margin: "0 auto 48px",
             }}
           >
-            We unite successful, family run freight forwarders across Europe while
-            preserving what makes them great and unlocking the scale, technology, and
-            rates they need to thrive.
+            A group of independent freight forwarders operating autonomously at local
+            level while benefiting from the collective scale.
           </p>
 
           <div
@@ -152,11 +122,8 @@ export default function Home() {
             }}
           >
             <a href="#contact" className="cta-btn cta-primary">
-              Start a Conversation
+              Explore Partnership
               <span>{Icons.arrowRight}</span>
-            </a>
-            <a href="#benefits" className="cta-btn cta-outline">
-              Discover Our Model
             </a>
           </div>
         </div>
@@ -212,34 +179,36 @@ export default function Home() {
 
       {/* ─── BENEFITS ───────────────────────────────────────────── */}
       <Section id="benefits" bg={COLORS.cream}>
-        <SectionLabel>Partner Benefits</SectionLabel>
-        <h2
-          style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontSize: "clamp(28px, 3.5vw, 42px)",
-            fontWeight: 600,
-            color: COLORS.navy,
-            margin: "0 0 16px",
-            lineHeight: 1.25,
-            maxWidth: 600,
-          }}
-        >
-          Everything your business needs to compete at global scale
-        </h2>
-        <p
-          style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontSize: 17,
-            fontWeight: 400,
-            lineHeight: 1.7,
-            color: COLORS.textMuted,
-            maxWidth: 540,
-            margin: "0 0 40px",
-          }}
-        >
-          Voyfai partners keep their brand, their team, and their clients. We add the
-          resources that transform good forwarders into great ones.
-        </p>
+        <Reveal>
+          <SectionLabel>Partner Benefits</SectionLabel>
+          <h2
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: "clamp(28px, 3.5vw, 42px)",
+              fontWeight: 600,
+              color: COLORS.navy,
+              margin: "0 0 16px",
+              lineHeight: 1.25,
+              maxWidth: 600,
+            }}
+          >
+            Everything forwarders need to compete at global scale
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 17,
+              fontWeight: 400,
+              lineHeight: 1.7,
+              color: COLORS.textMuted,
+              maxWidth: 540,
+              margin: "0 0 40px",
+            }}
+          >
+            Voyfai group forwarders access the resources that unlock the next stage of
+            growth.
+          </p>
+        </Reveal>
         <div
           className="benefits-grid"
           style={{
@@ -248,44 +217,51 @@ export default function Home() {
             gap: 0,
           }}
         >
-          <BenefitCard
-            icon={Icons.anchor}
-            title="Central Procurement"
-            subtitle="Direct, lasting carrier partnerships at scale."
-            description="We leverage group volume to secure stronger terms and lasting relationships with major carriers worldwide."
-            items={[
-              "Group negotiated rates across all trade lanes",
-              "Direct carrier partnerships with allocation priority",
-              "Flexible rate structures from monthly to annual",
-            ]}
-          />
-          <BenefitCard
-            icon={Icons.cpu}
-            title="Proprietary Technology"
-            subtitle="Technology that empowers people."
-            description="Our AI tools enhance the way your operators work, reducing manual tasks so your team can focus on service, relationships, and growth."
-            items={[
-              "Instant rate comparison and rapid quoting",
-              "Automated shipment creation from email",
-              "Real time tracking with proactive alerts",
-            ]}
-          />
-          <BenefitCard
-            icon={Icons.trending}
-            title="Growth Support"
-            subtitle="Operational backbone for expansion."
-            description="Comprehensive administrative, financial, and strategic support that frees you to do what you do best: grow the business."
-            items={[
-              "Growth capital while keeping independence",
-              "Centralized talent acquisition",
-              "New revenue streams and market entry support",
-            ]}
-          />
+          <Reveal delay={60}>
+            <BenefitCard
+              icon={Icons.anchor}
+              title="Central Trade Management"
+              subtitle="Direct, lasting carrier partnerships at scale."
+              description="We leverage the group's collective procurement power to secure stronger terms and lasting relationships with major carriers worldwide."
+              items={[
+                "Group negotiated rates across all trade lanes",
+                "Direct carrier relationships with secured allocations",
+                "Flexible rate structures from spot to annual",
+              ]}
+            />
+          </Reveal>
+          <Reveal delay={120}>
+            <BenefitCard
+              icon={Icons.cpu}
+              title="Proprietary Tech"
+              subtitle="Productivity increase 3x."
+              description="Our AI tools enhance the way operators work, reducing manual tasks so teams focus on service quality, relationships, and growth."
+              items={[
+                "Modern-age customer visibility across every shipment",
+                "Automated manual workflows such as customs and accounts payable",
+                "Eliminated data entry via automated shipment creation",
+              ]}
+            />
+          </Reveal>
+          <Reveal delay={180}>
+            <BenefitCard
+              icon={Icons.trending}
+              title="Growth"
+              subtitle="Operational backbone for expansion."
+              description="Comprehensive administrative, financial, and strategic support to grow the business together."
+              items={[
+                "Growth financing",
+                "Centralized talent acquisition",
+                "Product and service expansion",
+              ]}
+            />
+          </Reveal>
         </div>
       </Section>
 
       {/* ─── OUR PARTNERS / MAP ─────────────────────────────────── */}
       <Section id="partners" bg={COLORS.warmWhite}>
+        <Reveal>
         <div
           className="partners-layout"
           style={{
@@ -296,7 +272,7 @@ export default function Home() {
           }}
         >
           <div>
-            <SectionLabel>Our Network</SectionLabel>
+            <SectionLabel>Our Group</SectionLabel>
             <h2
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
@@ -307,7 +283,7 @@ export default function Home() {
                 lineHeight: 1.3,
               }}
             >
-              Voyfai&rsquo;s group spans Northern Europe
+              A growing group of independent freight forwarders
             </h2>
             <p
               style={{
@@ -320,7 +296,7 @@ export default function Home() {
                 maxWidth: 460,
               }}
             >
-              Five established freight forwarders, each a leader in their market, united
+              Established freight forwarders, each a leader in their market, united
               under the Voyfai group. Every partner maintains their identity while
               gaining the strength of the collective.
             </p>
@@ -335,9 +311,9 @@ export default function Home() {
             >
               {[
                 { number: "5", label: "Partner Companies" },
-                { number: "50+", label: "Years Combined Experience" },
-                { number: "6", label: "Office Locations" },
-                { number: "3", label: "Countries" },
+                { number: "200+", label: "Years Combined Experience" },
+                { number: "25", label: "Office Locations" },
+                { number: "6", label: "Countries" },
               ].map((stat, i) => (
                 <div
                   key={i}
@@ -378,159 +354,60 @@ export default function Home() {
             <NorthernEuropeMap />
           </div>
         </div>
-
-        {/* Partner cards grid */}
-        <div
-          className="partner-cards-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(5, 1fr)",
-            gap: 16,
-            marginTop: 48,
-          }}
-        >
-          <PartnerCard
-            name="Remiro"
-            founded="2008"
-            withVoyfai="Jul '24"
-            service="Operating & Management of Air Freight, Sea, Road & Warehousing"
-            customers="Diverse base across Europe in general cargo and food products"
-          />
-          <PartnerCard
-            name="Corten"
-            founded="1991"
-            withVoyfai="Apr '25"
-            service="Operating & Management of Sea Freight"
-            customers="Industrial companies across multiple sectors"
-          />
-          <PartnerCard
-            name="EFS"
-            founded="2004"
-            withVoyfai="Dec '24"
-            service="Air Freight, Road Freight and Warehousing"
-            customers="Broadcasting equipment, military, pharma and more"
-          />
-          <PartnerCard
-            name="PVY & Boxlines"
-            founded="1974 / 2001"
-            withVoyfai="Feb '25"
-            service="Sea Freight FCL & Consolidations"
-            customers="General cargo, machinery and equipment"
-          />
-          <PartnerCard
-            name="Soli-Trans"
-            founded="2009"
-            withVoyfai="Jul '24"
-            service="Operating & Management of Sea and Air Freight"
-            customers="Consumer & retail brands, ecommerce businesses"
-          />
-        </div>
+        </Reveal>
       </Section>
-
-      {/* ─── PROCUREMENT ────────────────────────────────────────── */}
-      <DetailSection
-        id="procurement"
-        bg={COLORS.cream}
-        label="Central Procurement"
-        title="Carrier relationships built on trust, powered by scale"
-        items={[
-          {
-            title: "Direct Carrier Partnerships",
-            description:
-              "Establish trusted, lasting partnerships with major carriers that enhance stability and give your business allocation priority, even in peak season.",
-          },
-          {
-            title: "Group Negotiated Rates",
-            description:
-              "Leverage the collective scale of the Voyfai group to access pricing and terms that no individual forwarder could secure alone.",
-          },
-          {
-            title: "Flexible Rate Structures",
-            description:
-              "From alternative product solutions to monthly and annual agreements, we build rate structures that ensure resilience in changing markets.",
-          },
-        ]}
-      />
 
       {/* ─── TECHNOLOGY ─────────────────────────────────────────── */}
       <DetailSection
         id="technology"
-        bg={COLORS.warmWhite}
+        bg={COLORS.cream}
         label="AI Technology"
         title="Tools built by forwarders, for forwarders"
         items={[
           {
             title: "Instant Rate Comparison",
             description:
-              "Compare carrier options in seconds and deliver accurate quotes within minutes. Your operators spend time on relationships, not spreadsheets.",
+              "Compare carrier options in seconds and deliver accurate quotes within minutes — operators spend time on relationships, not spreadsheets.",
           },
           {
             title: "Automated Shipment Creation",
             description:
-              "Our AI agent converts booking emails directly into structured shipments in your TMS, reducing manual data entry and eliminating errors.",
+              "Our AI agent converts booking emails directly into structured shipments in the TMS, reducing manual data entry and eliminating errors.",
           },
           {
-            title: "Real Time Visibility",
+            title: "Voyfai Hub — Real-Time Visibility",
             description:
-              "Keep clients continuously informed with automated updates, proactive exception alerts, and full shipment transparency from origin to destination.",
+              "A self-management tool that keeps clients continuously informed with smart alerts, automated updates, and full shipment transparency from origin to destination.",
           },
           {
             title: "Intelligent Customs Automation",
             description:
-              "Streamline customs declarations with AI powered HS code classification and document processing that improves both speed and accuracy.",
-          },
-        ]}
-      />
-
-      {/* ─── GROWTH ─────────────────────────────────────────────── */}
-      <DetailSection
-        id="growth"
-        bg={COLORS.cream}
-        label="Growth Support"
-        title="Your ambition, our infrastructure"
-        items={[
-          {
-            title: "Growth Capital",
-            description:
-              "Access financial resources that accelerate your expansion while preserving the operational independence that made your business successful.",
-          },
-          {
-            title: "Talent Acquisition",
-            description:
-              "Leverage centralized recruitment capabilities to attract and retain top professionals, solving the industry's biggest challenge.",
-          },
-          {
-            title: "Geographic Expansion",
-            description:
-              "Enter new markets with strategic planning and structured local support from partners who already know the territory.",
-          },
-          {
-            title: "New Revenue Streams",
-            description:
-              "Broaden your product offering from cargo insurance to carbon offset solutions, services your clients want but you couldn't offer alone.",
+              "Streamline customs declarations with AI-powered HS code classification and document processing that improves both speed and accuracy.",
           },
         ]}
       />
 
       {/* ─── TESTIMONIALS ───────────────────────────────────────── */}
       <Section bg={COLORS.warmWhite}>
-        <div style={{ textAlign: "center", marginBottom: 40 }}>
-          <SectionLabel>What Our Partners Say</SectionLabel>
-          <h2
-            style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: "clamp(28px, 3.5vw, 38px)",
-              fontWeight: 600,
-              color: COLORS.navy,
-              margin: "0 auto",
-              lineHeight: 1.25,
-              letterSpacing: "-0.02em",
-              maxWidth: 500,
-            }}
-          >
-            Built on trust, proven by results
-          </h2>
-        </div>
+        <Reveal>
+          <div style={{ textAlign: "center", marginBottom: 40 }}>
+            <SectionLabel>What Voyfai Group Forwarders Say</SectionLabel>
+            <h2
+              style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontSize: "clamp(28px, 3.5vw, 38px)",
+                fontWeight: 600,
+                color: COLORS.navy,
+                margin: "0 auto",
+                lineHeight: 1.25,
+                letterSpacing: "-0.02em",
+                maxWidth: 500,
+              }}
+            >
+              Built on trust, proven by results
+            </h2>
+          </div>
+        </Reveal>
         <div
           className="testimonials-grid"
           style={{
@@ -539,18 +416,22 @@ export default function Home() {
             gap: 16,
           }}
         >
-          <TestimonialCard
-            quote="Partner testimonial placeholder. A quote from one of the founding partners about their experience joining the Voyfai group and the impact on their business."
-            name="Partner Name"
-            company="Corten"
-            role="Managing Director"
-          />
-          <TestimonialCard
-            quote="Partner testimonial placeholder. A quote about how Voyfai's technology and procurement capabilities have helped them compete with much larger forwarders."
-            name="Partner Name"
-            company="Soli-Trans"
-            role="Founder"
-          />
+          <Reveal delay={60}>
+            <TestimonialCard
+              quote="Our experience with Voyfai during the acquisition process was exceptionally smooth, transparent, and well-communicated. From the outset, James and Adrian made it clear that their approach is built on trust and autonomy, and they have followed through on that commitment. Since the deal, we've continued to run Corten independently, with Voyfai offering meaningful support where needed — from tech development to procurement efficiencies. Their input has been practical and value-adding, without ever being overbearing."
+              name="Sam"
+              company="Corten"
+              role="Managing Director"
+            />
+          </Reveal>
+          <Reveal delay={120}>
+            <TestimonialCard
+              quote="Joining Voyfai gave us access to group-level procurement and tooling we could never have built alone, while leaving the parts of our business that make us who we are completely intact. Decisions that affect our customers still sit with us, and the collective scale has opened lanes and rates we simply could not reach before."
+              name="Partner Name"
+              company="Remiro"
+              role="Managing Director"
+            />
+          </Reveal>
         </div>
       </Section>
 
@@ -577,7 +458,7 @@ export default function Home() {
           }}
         />
 
-        <div
+        <Reveal
           style={{
             maxWidth: 680,
             margin: "0 auto",
@@ -624,8 +505,9 @@ export default function Home() {
               maxWidth: 480,
             }}
           >
-            Every Voyfai partnership starts with a conversation. No pressure, no pitch.
-            Just two freight forwarding people talking about what&rsquo;s possible.
+            Every Voyfai partnership starts with a conversation rooted in shared values
+            &mdash; independence, ambition, and a belief in what the group can build
+            together. No pressure, no pitch.
           </p>
           <div
             style={{
@@ -640,7 +522,7 @@ export default function Home() {
               className="cta-btn cta-primary"
               style={{ fontSize: 16, padding: "16px 32px" }}
             >
-              Schedule a Conversation
+              Explore Partnership
               <span>{Icons.arrowRight}</span>
             </a>
           </div>
@@ -654,7 +536,7 @@ export default function Home() {
           >
             Or reach us directly at partner@voyfai.com
           </p>
-        </div>
+        </Reveal>
       </section>
 
       {/* ─── INVESTORS ─────────────────────────────────────────── */}
@@ -741,21 +623,18 @@ export default function Home() {
               { src: heartcoreLogo, alt: "Heartcore", height: 48 },
               { src: earlybirdLogo, alt: "Earlybird", height: 52 },
               { src: blisceLogo, alt: "blisce", height: 55 },
-            ].map((logo) => (
-              <img
-                key={logo.alt}
-                src={logo.src}
-                alt={logo.alt}
-                style={{
-                  height: logo.height,
-                  objectFit: "contain",
-                  opacity: 0.7,
-                  filter: "brightness(0)",
-                  transition: "opacity 0.3s ease",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = 1)}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = 0.7)}
-              />
+            ].map((logo, i) => (
+              <Reveal key={logo.alt} delay={i * 60}>
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="investor-logo"
+                  style={{
+                    height: logo.height,
+                    objectFit: "contain",
+                  }}
+                />
+              </Reveal>
             ))}
           </div>
         </div>
