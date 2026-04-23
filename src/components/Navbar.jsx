@@ -29,7 +29,7 @@ export default function Navbar() {
   const resolveHref = (href, absolute) => {
     if (absolute) return href;
     if (isHome) return href;
-    return "/" + href;
+    return import.meta.env.BASE_URL + href;
   };
 
   return (

@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { COLORS } from "../constants/colors";
 
 const navLinks = [
-  { label: "Benefits", href: "/#benefits" },
-  { label: "Group", href: "/#partners" },
-  { label: "Technology", href: "/#technology" },
+  { label: "Benefits", hash: "#benefits" },
+  { label: "Group", hash: "#partners" },
+  { label: "Technology", hash: "#technology" },
   { label: "Careers", href: "/careers", route: true },
 ];
 
@@ -85,7 +85,11 @@ export default function Footer() {
                 {link.label}
               </Link>
             ) : (
-              <a key={link.label} href={link.href} className="footer-link">
+              <a
+                key={link.label}
+                href={import.meta.env.BASE_URL + link.hash}
+                className="footer-link"
+              >
                 {link.label}
               </a>
             )
