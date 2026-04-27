@@ -379,11 +379,11 @@ body {
 
 .footer-link-quiet {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.2);
 }
 
 .footer-link-quiet:hover {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .footer-link-button {
