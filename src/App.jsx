@@ -5,6 +5,9 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Careers from "./pages/Careers";
 import CareerDetail from "./pages/CareerDetail";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Imprint from "./pages/Imprint";
+import { initCookieConsent } from "./lib/cookieConsent";
 
 function ScrollToLocation() {
   const { pathname, hash } = useLocation();
@@ -30,6 +33,10 @@ function ScrollToLocation() {
 }
 
 export default function App() {
+  useEffect(() => {
+    initCookieConsent();
+  }, []);
+
   return (
     <BrowserRouter basename="/voyfai-website">
       <ScrollToLocation />
@@ -47,6 +54,8 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/careers/:jobId" element={<CareerDetail />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/imprint" element={<Imprint />} />
         </Routes>
         <Footer />
       </div>

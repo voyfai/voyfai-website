@@ -1,0 +1,83 @@
+/* Voyfai brand overrides for vanilla-cookieconsent v3.
+   Loaded after the library's stylesheet so cascade wins. */
+
+#cc-main {
+  --cc-font-family: "Plus Jakarta Sans", sans-serif;
+
+  --cc-bg: #ffffff;
+  --cc-primary-color: #1d1d1f;
+  --cc-secondary-color: #6b6b6b;
+
+  --cc-btn-primary-bg: var(--voyfai-teal, #03a696);
+  --cc-btn-primary-color: #ffffff;
+  --cc-btn-primary-border-color: var(--voyfai-teal, #03a696);
+  --cc-btn-primary-hover-bg: var(--voyfai-teal-700, #029486);
+  --cc-btn-primary-hover-color: #ffffff;
+  --cc-btn-primary-hover-border-color: var(--voyfai-teal-700, #029486);
+
+  --cc-btn-secondary-bg: #f4f4f4;
+  --cc-btn-secondary-color: #1d1d1f;
+  --cc-btn-secondary-border-color: rgba(0, 0, 0, 0.06);
+  --cc-btn-secondary-hover-bg: #ebebeb;
+  --cc-btn-secondary-hover-color: #1d1d1f;
+  --cc-btn-secondary-hover-border-color: rgba(0, 0, 0, 0.1);
+
+  --cc-toggle-bg-on: var(--voyfai-teal, #03a696);
+  --cc-toggle-bg-off: #c5c5c7;
+  --cc-toggle-bg-readonly: #e5e5e7;
+  --cc-toggle-knob-bg: #ffffff;
+  --cc-toggle-knob-icon-color: var(--voyfai-teal, #03a696);
+
+  --cc-cookie-category-block-bg: #fafafa;
+  --cc-cookie-category-block-border: rgba(0, 0, 0, 0.06);
+  --cc-cookie-category-block-bg-hover: #f4f4f4;
+  --cc-cookie-category-block-border-hover: rgba(0, 0, 0, 0.1);
+
+  --cc-section-border: rgba(0, 0, 0, 0.06);
+  --cc-cookie-table-border: rgba(0, 0, 0, 0.06);
+
+  --cc-overlay-bg: rgba(17, 17, 17, 0.45);
+
+  --cc-modal-border-radius: 16px;
+  --cc-btn-border-radius: 10px;
+}
+
+#cc-main .cm,
+#cc-main .pm {
+  letter-spacing: -0.005em;
+}
+
+#cc-main .cm__title,
+#cc-main .pm__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+#cc-main .cm__btn,
+#cc-main .pm__btn {
+  font-weight: 500;
+  letter-spacing: 0;
+  transition: background-color 200ms var(--ease-out, ease),
+    color 200ms var(--ease-out, ease),
+    border-color 200ms var(--ease-out, ease),
+    transform 160ms var(--ease-out, ease);
+}
+
+#cc-main .cm__btn:active,
+#cc-main .pm__btn:active {
+  transform: scale(0.98);
+}
+
+#cc-main a {
+  color: var(--voyfai-teal, #03a696);
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #cc-main .cm,
+  #cc-main .pm {
+    animation-duration: 200ms !important;
+    transition-duration: 200ms !important;
+  }
+}

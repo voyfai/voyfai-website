@@ -1,11 +1,18 @@
 import { Link } from "react-router-dom";
 import { COLORS } from "../constants/colors";
+import { showCookiePreferences } from "../lib/cookieConsent";
 
 const navLinks = [
   { label: "Benefits", hash: "#benefits" },
   { label: "Group", hash: "#partners" },
   { label: "Technology", hash: "#technology" },
   { label: "Careers", href: "/careers", route: true },
+];
+
+const legalLinks = [
+  { label: "Privacy", href: "/privacy-policy", route: true },
+  { label: "Imprint", href: "/imprint", route: true },
+  { label: "Cookie settings", action: "cookies" },
 ];
 
 export default function Footer() {
@@ -21,13 +28,17 @@ export default function Footer() {
         style={{
           maxWidth: 1280,
           margin: "0 auto",
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: 24,
         }}
       >
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            gap: 32,
+          }}
+        >
         <div>
           <div style={{ marginBottom: 12 }}>
             <svg
@@ -95,14 +106,59 @@ export default function Footer() {
             )
           )}
         </div>
+        </div>
         <div
           style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontSize: 12,
-            color: "rgba(255,255,255,0.2)",
+            marginTop: 32,
+            paddingTop: 24,
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: 16,
           }}
         >
-          &copy; {new Date().getFullYear()} Voyfai. All rights reserved.
+          <div
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 12,
+              color: "rgba(255,255,255,0.2)",
+            }}
+          >
+            &copy; {new Date().getFullYear()} Voyfai. All rights reserved.
+          </div>
+          <div
+            style={{
+              display: "flex",
+              gap: 24,
+              flexWrap: "wrap",
+            }}
+          >
+            {legalLinks.map((link) => {
+              if (link.route) {
+                return (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className="footer-link footer-link-quiet"
+                  >
+                    {link.label}
+                  </Link>
+                );
+              }
+              return (
+                <button
+                  key={link.label}
+                  type="button"
+                  onClick={showCookiePreferences}
+                  className="footer-link footer-link-quiet footer-link-button"
+                >
+                  {link.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </footer>

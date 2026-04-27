@@ -377,6 +377,25 @@ body {
   box-shadow: var(--focus-ring-dark);
 }
 
+.footer-link-quiet {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.footer-link-quiet:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-link-button {
+  background: none;
+  border: 0;
+  margin: 0;
+  padding: 4px 2px;
+  cursor: pointer;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  line-height: inherit;
+}
+
 /* ─── INVESTOR LOGOS ─────────────────────────────────────────── */
 
 .investor-logo {
@@ -1255,6 +1274,139 @@ body {
   }
   .mobile-menu {
     display: none !important;
+  }
+}
+
+/* ─── LEGAL PROSE (privacy / imprint pages) ──────────────────── */
+
+.legal-prose {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: var(--voyfai-ink);
+}
+
+.legal-prose h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--voyfai-ink);
+  margin-top: 56px;
+  margin-bottom: 16px;
+  scroll-margin-top: 96px;
+}
+
+.legal-prose h2:first-child {
+  margin-top: 0;
+}
+
+.legal-prose h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  color: var(--voyfai-ink);
+  margin-top: 28px;
+  margin-bottom: 10px;
+  scroll-margin-top: 96px;
+}
+
+.legal-prose p {
+  font-size: 16px;
+  line-height: 1.75;
+  margin-bottom: 14px;
+  text-wrap: pretty;
+}
+
+.legal-prose ul,
+.legal-prose ol {
+  font-size: 16px;
+  line-height: 1.75;
+  margin: 0 0 18px 0;
+  padding-left: 1.25em;
+}
+
+.legal-prose ul li,
+.legal-prose ol li {
+  margin-bottom: 8px;
+}
+
+.legal-prose ul li::marker {
+  color: var(--voyfai-teal);
+}
+
+.legal-prose a {
+  color: var(--voyfai-teal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 200ms ease;
+}
+
+.legal-prose a:hover {
+  color: var(--voyfai-teal-700);
+}
+
+.legal-prose strong {
+  font-weight: 600;
+  color: var(--voyfai-ink);
+}
+
+.legal-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0 24px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.legal-prose th,
+.legal-prose td {
+  text-align: left;
+  padding: 12px 14px;
+  border: 1px solid var(--voyfai-teal-50);
+  vertical-align: top;
+}
+
+.legal-prose th {
+  font-weight: 600;
+  background: var(--voyfai-teal-50);
+  color: var(--voyfai-ink);
+}
+
+.legal-prose .legal-dl {
+  margin: 12px 0 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.legal-prose .legal-dl > div {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.legal-prose .legal-dl dt {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--voyfai-ink);
+  opacity: 0.55;
+}
+
+.legal-prose .legal-dl dd {
+  font-size: 16px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .legal-prose .legal-dl > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 }
 
