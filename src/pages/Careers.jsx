@@ -20,74 +20,74 @@ const VALUES = [
     icon: Icons.users,
     title: "Voyaging Together",
     description:
-      "We navigate the journey together, through calm seas and rough waters. Believing in the power of diverse opinions, we achieve exceptional results as a team.",
-    chips: ["Trust and Supportiveness", "Diversity and Inclusiveness", "Fun", "Communication"],
+      "Freight forwarding is a team sport. We work closely with operators, partner companies, and product teams so decisions reflect the reality of daily shipments.",
+    chips: ["Trust", "Clear communication", "Partner context", "Shared ownership"],
   },
   {
     icon: Icons.heart,
     title: "Entrepreneurs At Heart",
     description:
-      "We embody the entrepreneurial spirit with grit and a bias for action. Maximizing impact with minimal resources and taking ownership to drive results.",
-    chips: ["Entrepreneurship", "Ownership", "Speed and Execution", "Frugality"],
+      "Our partners are independent operators. We build with respect for that autonomy and keep the bias toward practical improvements that make their teams faster.",
+    chips: ["Ownership", "Pragmatism", "Speed", "Operator empathy"],
   },
   {
     icon: Icons.zap,
     title: "Humble with Bold Moves",
     description:
-      "We push boundaries, taking calculated risks that redefine the rules — yet we stay grounded and humble, never letting success cloud our focus.",
-    chips: ["Humbleness", "Frugality", "Speed and Execution"],
+      "We are ambitious about AI in logistics, but we validate ideas against real documents, real lanes, and real forwarding workflows before calling them progress.",
+    chips: ["Evidence", "Focus", "Craft", "Measured risk"],
   },
 ];
 
 const LIFE = [
   {
     icon: Icons.users,
-    title: "Team Collaboration",
+    title: "Close to Operations",
     description:
-      "Daily standups, weekly innovation sessions, and quarterly hack days keep us connected and creative.",
+      "Product decisions are shaped by freight operators, customs documents, carrier updates, and the workflows our partner teams use every day.",
   },
   {
     icon: Icons.book,
-    title: "Learning Culture",
+    title: "Learning the Domain",
     description:
-      "Regular tech talks, book clubs, and conference attendance. We're always growing together.",
+      "We expect curiosity about forwarding, trade lanes, documents, and exception handling, not just software patterns.",
   },
   {
     icon: Icons.camera,
-    title: "Celebrating Wins",
+    title: "Shipping Useful Work",
     description:
-      "From product launches to personal milestones, we make sure every achievement is recognized.",
+      "The bar is whether a change helps operators quote faster, enter less data, avoid misses, or serve customers with more confidence.",
   },
 ];
 
 const STATS = [
-  { value: "4.9/5", label: "Employee Satisfaction" },
-  { value: "50+", label: "Team Members" },
-  { value: "12", label: "Countries Represented" },
-  { value: "95%", label: "Retention Rate" },
+  { value: "Freight", label: "Domain focus" },
+  { value: "AI", label: "Document automation" },
+  { value: "Group", label: "Partner enablement" },
+  { value: "Hybrid", label: "Berlin team rhythm" },
 ];
 
 const TEAM = [
   {
-    name: "Sarah Chen",
-    role: "Senior Product Manager",
-    note: "Former Google PM with 8 years in B2B SaaS",
+    name: "Operations",
+    role: "Forwarding context",
+    note: "Freight workflows, partner support, and day-to-day operator feedback",
     quote:
-      "At Voyfai, I get to work on products that directly impact entrepreneurs' success. The pace is fast, the challenges are exciting, and the team is incredibly supportive.",
+      "We keep the work grounded in what forwarders actually need: faster quote prep, clearer shipment status, fewer manual checks, and fewer surprises for customers.",
   },
   {
-    name: "Marcus Rodriguez",
-    role: "Lead AI Engineer",
-    note: "PhD in Machine Learning from Stanford",
+    name: "Product & AI",
+    role: "Workflow automation",
+    note: "Document parsing, shipment creation, visibility tools, and internal systems",
     quote:
-      "Voyfai gives me the freedom to push AI into problems that actually matter — real logistics, real efficiency gains, real customers using what we ship every day.",
+      "The best product work here is specific. A good AI feature has to survive messy emails, incomplete documents, different customer habits, and the pace of operations.",
   },
   {
-    name: "Emma Thompson",
-    role: "Head of Design",
-    note: "Previously design lead at Stripe and Airbnb",
+    name: "Partner Growth",
+    role: "Group building",
+    note: "Commercial support, integration planning, and shared procurement initiatives",
     quote:
-      "We treat design as craft. Every detail is reviewed, every interaction tuned. It's rare to find a team that cares about the work at this level.",
+      "We support independent forwarders without flattening what makes them strong locally. The work is about useful scale, not central control for its own sake.",
   },
 ];
 
@@ -96,49 +96,49 @@ const PERKS = [
     icon: Icons.dollar,
     title: "Competitive Compensation",
     description:
-      "Top-tier salaries, equity packages, and performance bonuses. We reward great work.",
+      "Compensation is role-specific and discussed directly during the process, with clarity on expectations and scope.",
   },
   {
     icon: Icons.clock,
-    title: "30 Days PTO",
+    title: "Sustainable Pace",
     description:
-      "Generous paid time off policy to help you recharge and maintain work-life balance.",
+      "We care about doing focused work well and keeping enough room for life outside the office.",
   },
   {
     icon: Icons.mapPin,
     title: "Hybrid Work",
     description:
-      "Flexible hybrid work arrangement combining office collaboration with remote flexibility.",
+      "A Berlin-centered hybrid rhythm with in-person collaboration where it makes the work better.",
   },
   {
     icon: Icons.laptop,
-    title: "Tech Setup",
+    title: "Useful Setup",
     description:
-      "Complete tech setup including laptop, monitor, and home office equipment to keep you productive.",
+      "The tools and equipment needed to build, test, and support freight workflows properly.",
   },
   {
-    icon: Icons.car,
-    title: "Navit Mobility Bonus",
+    icon: Icons.book,
+    title: "Domain Learning",
     description:
-      "€50 monthly mobility bonus through Navit to support your commuting and transportation needs.",
+      "Time with product, operations, and partner teams so you understand the logistics context behind the work.",
   },
   {
-    icon: Icons.pizza,
-    title: "Pizza Thursday",
+    icon: Icons.users,
+    title: "Small-Team Ownership",
     description:
-      "Bi-weekly pizza Thursday to bring the team together and enjoy great food while collaborating.",
+      "Clear ownership, direct communication, and room to take responsibility for meaningful pieces of the product.",
   },
   {
     icon: Icons.calendar,
-    title: "Company Parties",
+    title: "Team Rituals",
     description:
-      "Twice yearly company parties to celebrate our achievements and strengthen team bonds.",
+      "Regular moments to review work, share domain learnings, and align around partner priorities.",
   },
   {
     icon: Icons.coffee,
-    title: "Office Perks",
+    title: "Office Basics",
     description:
-      "Premium coffee, snacks, and refreshments to keep you energized throughout the day.",
+      "A practical workspace for deep work, design reviews, technical discussions, and partner planning.",
   },
 ];
 
@@ -216,9 +216,9 @@ export default function Careers() {
           </div>
           <h1
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 3.8vw, 44px)",
-              fontWeight: 600,
+              fontWeight: 700,
               color: COLORS.white,
               lineHeight: 1.2,
               margin: "0 0 20px",
@@ -238,9 +238,9 @@ export default function Careers() {
               margin: "0 auto 40px",
             }}
           >
-            Join Voyfai's mission to revolutionize business planning with AI. We're
-            looking for passionate innovators who want to shape the future of
-            entrepreneurship.
+            Join the team building AI-assisted tools and shared infrastructure for
+            independent freight forwarders. We work on the operational details that
+            help local forwarding teams compete with more speed and clarity.
           </p>
           <div
             style={{
@@ -254,10 +254,6 @@ export default function Careers() {
               View Open Positions
               <span>{Icons.arrowRight}</span>
             </a>
-            <a href="#life-at-voyfai" className="cta-btn cta-outline">
-              <span>{Icons.play}</span>
-              Watch Our Story
-            </a>
           </div>
         </div>
       </header>
@@ -270,19 +266,19 @@ export default function Careers() {
         title="Empowering freight forwarders around the globe to redefine what's possible"
         items={[
           {
-            title: "Labor Shortage Solutions",
+            title: "Operator Capacity",
             description:
-              "Solving labor shortage to ensure continuity and growth of the businesses we partner with.",
+              "Reducing repetitive manual work so partner teams can keep serving customers as volumes and complexity grow.",
           },
           {
-            title: "SME Profitability",
+            title: "Independent Forwarder Strength",
             description:
-              "Elevating profitability of SME forwarders to ensure they can thrive for generations to come.",
+              "Giving established SME forwarders access to shared technology, procurement support, and group knowledge without losing local autonomy.",
           },
           {
-            title: "Greener Supply Chains",
+            title: "Better Logistics Decisions",
             description:
-              "Driving greener supply chains to enable a better future for everyone.",
+              "Turning shipment, document, and status data into clearer decisions for operators, customers, and partner companies.",
           },
         ]}
       />
@@ -294,9 +290,9 @@ export default function Careers() {
             <SectionLabel>Our Values</SectionLabel>
             <h2
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 3.5vw, 42px)",
-                fontWeight: 600,
+                fontWeight: 700,
                 color: COLORS.navy,
                 margin: "0 auto 14px",
                 lineHeight: 1.25,
@@ -344,9 +340,9 @@ export default function Careers() {
             <SectionLabel>Life at Voyfai</SectionLabel>
             <h2
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 3.5vw, 42px)",
-                fontWeight: 600,
+                fontWeight: 700,
                 color: COLORS.navy,
                 margin: "0 auto 14px",
                 lineHeight: 1.25,
@@ -354,7 +350,7 @@ export default function Careers() {
                 maxWidth: 500,
               }}
             >
-              Built on collaboration, innovation, and fun
+              Built around real logistics work
             </h2>
             <p
               style={{
@@ -366,92 +362,10 @@ export default function Careers() {
                 margin: "0 auto",
               }}
             >
-              Our culture is built on collaboration, innovation, and fun. Here's what
-              makes working at Voyfai special.
+              We are a small team working close to freight operations. The culture is
+              practical, direct, and focused on building tools that forwarders can trust.
             </p>
           </div>
-        </Reveal>
-
-        <Reveal delay={60}>
-          <button
-            type="button"
-            aria-label="Play culture video"
-            className="lift-card"
-            style={{
-              display: "block",
-              width: "100%",
-              position: "relative",
-              aspectRatio: "21/9",
-              background: `
-                linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%),
-                radial-gradient(ellipse 60% 80% at 50% 50%, rgba(3,166,150,0.2) 0%, transparent 60%)
-              `,
-              border: `1px solid ${COLORS.border}`,
-              borderRadius: RADIUS.lg,
-              marginBottom: 36,
-              overflow: "hidden",
-              cursor: "pointer",
-              padding: 0,
-            }}
-          >
-            <div
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                inset: 0,
-                backgroundImage:
-                  "radial-gradient(ellipse 50% 70% at 50% 50%, rgba(3,166,150,0.25) 0%, transparent 60%)",
-                pointerEvents: "none",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 14,
-                color: COLORS.white,
-              }}
-            >
-              <div
-                style={{
-                  width: 72,
-                  height: 72,
-                  borderRadius: RADIUS.pill,
-                  background: "rgba(255,255,255,0.1)",
-                  backdropFilter: "blur(8px)",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: COLORS.copperLight,
-                }}
-              >
-                {Icons.play}
-              </div>
-              <div
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: 17,
-                  fontWeight: 600,
-                }}
-              >
-                Watch Our Culture Video
-              </div>
-              <div
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: 13,
-                  color: "rgba(255,255,255,0.55)",
-                }}
-              >
-                See what it's really like to work at Voyfai
-              </div>
-            </div>
-          </button>
         </Reveal>
 
         <div
@@ -494,12 +408,12 @@ export default function Careers() {
       <Section id="team" bg={COLORS.warmWhite}>
         <Reveal>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
-            <SectionLabel>Hear from Our Team</SectionLabel>
+            <SectionLabel>How We Work</SectionLabel>
             <h2
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 3.5vw, 42px)",
-                fontWeight: 600,
+                fontWeight: 700,
                 color: COLORS.navy,
                 margin: "0 auto 14px",
                 lineHeight: 1.25,
@@ -507,7 +421,7 @@ export default function Careers() {
                 maxWidth: 500,
               }}
             >
-              The people behind Voyfai
+              Cross-functional work, grounded in forwarding
             </h2>
             <p
               style={{
@@ -519,8 +433,8 @@ export default function Careers() {
                 margin: "0 auto",
               }}
             >
-              Our people are what make Voyfai special. Here's what they have to say
-              about working here.
+              The work sits between partner companies, operations, product, and AI.
+              These are the lenses that shape how we make decisions.
             </p>
           </div>
         </Reveal>
@@ -536,9 +450,9 @@ export default function Careers() {
             <SectionLabel>Perks &amp; Benefits</SectionLabel>
             <h2
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 3.5vw, 42px)",
-                fontWeight: 600,
+                fontWeight: 700,
                 color: COLORS.navy,
                 margin: "0 auto 14px",
                 lineHeight: 1.25,
@@ -546,7 +460,7 @@ export default function Careers() {
                 maxWidth: 500,
               }}
             >
-              Taking care of our team
+              Practical support for focused work
             </h2>
             <p
               style={{
@@ -558,8 +472,8 @@ export default function Careers() {
                 margin: "0 auto",
               }}
             >
-              We believe in taking care of our team. Here's how we support your
-              success and happiness.
+              Benefits are designed to help people do strong, focused work while
+              staying close to the domain and the team.
             </p>
           </div>
         </Reveal>
@@ -584,7 +498,7 @@ export default function Careers() {
         <Reveal>
           <TealCTABanner
             title="Join Our Team!"
-            subtitle="Ready to be part of revolutionizing the freight forwarding industry? Your journey with us starts here."
+            subtitle="Build the tools, workflows, and shared systems that help independent freight forwarders move faster without losing what makes them local."
             primaryLabel="View Open Positions"
             primaryHref="#open-positions"
             secondaryLabel="View All Jobs on Ashby"
@@ -601,9 +515,9 @@ export default function Careers() {
             <SectionLabel>Open Positions</SectionLabel>
             <h2
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 3.5vw, 42px)",
-                fontWeight: 600,
+                fontWeight: 700,
                 color: COLORS.navy,
                 margin: "0 auto 14px",
                 lineHeight: 1.25,
@@ -623,9 +537,8 @@ export default function Careers() {
                 margin: "0 auto 24px",
               }}
             >
-              Join our growing team and help build the future of freight forwarding.
-              All positions offer hybrid work arrangements with competitive
-              compensation.
+              Open roles are loaded directly from Ashby. Each listing has the current
+              team, location, employment type, and application link.
             </p>
           </div>
         </Reveal>
@@ -756,9 +669,9 @@ export default function Careers() {
         >
           <h2
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 4vw, 44px)",
-              fontWeight: 600,
+              fontWeight: 700,
               color: COLORS.white,
               margin: "0 0 16px",
               lineHeight: 1.2,
@@ -778,7 +691,7 @@ export default function Careers() {
               maxWidth: 480,
             }}
           >
-            Join us in revolutionizing the freight forwarding industry.
+            Join us in building the operating layer for independent freight forwarders.
           </p>
           <a href="#open-positions" className="cta-btn cta-primary">
             Apply Now

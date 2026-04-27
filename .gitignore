@@ -2,3 +2,21 @@ node_modules
 dist
 .DS_Store
 *.local
+
+# Editor / tooling local state
+.claude/
+.playwright-mcp/
+
+# Local audit & screenshot artifacts (root only)
+/*-audit.json
+/*-map.json
+/desktop-after-*.json
+/careers-links.json
+/hub-preview-computed.json
+/skills-lock.json
+/*.png
+
+# Local working docs
+/DesignImprovementsRoadmap.md
+/IMprovement PLAN.md
+/Voyfai Brand Guidelines.md

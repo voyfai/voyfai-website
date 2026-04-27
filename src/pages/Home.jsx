@@ -7,13 +7,29 @@ import DetailSection from "../components/DetailSection";
 import TestimonialCard from "../components/TestimonialCard";
 import NorthernEuropeMap from "../components/NorthernEuropeMap";
 import Reveal from "../components/Reveal";
+import useReducedMotion from "../hooks/useReducedMotion";
 import heroImg from "../assets/Voyfai-hero.jpg";
 import atlanticLabsLogo from "../assets/1-Atlantic-Labs.webp";
+import { motion } from "motion/react";
+import CountUp from "../components/motion/CountUp";
 import heartcoreLogo from "../assets/2-Heartcore.svg";
 import earlybirdLogo from "../assets/3-Earlybird.svg";
 import blisceLogo from "../assets/4-blisce.png";
 
+// Tech graphics
+import RateCompare from "../components/sections/tech/RateCompare";
+import ShipmentIntake from "../components/sections/tech/ShipmentIntake";
+import HubTracker from "../components/sections/tech/HubTracker";
+import CustomsScan from "../components/sections/tech/CustomsScan";
+
+import BenchmarkChart from "../components/sections/BenchmarkChart";
+import CustomsFlow from "../components/sections/CustomsFlow";
+import HubPreview from "../components/sections/HubPreview";
+import ComplianceBand from "../components/sections/ComplianceBand";
+
 export default function Home() {
+  const reducedMotion = useReducedMotion();
+
   return (
     <>
       {/* ─── HERO ───────────────────────────────────────────────── */}
@@ -71,9 +87,9 @@ export default function Home() {
         >
           <h1
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(38px, 5.8vw, 68px)",
-              fontWeight: 600,
+              fontWeight: 700,
               color: COLORS.white,
               lineHeight: 1.1,
               margin: "0 0 8px",
@@ -84,11 +100,14 @@ export default function Home() {
             <br />
             Forwarders.
           </h1>
-          <h1
+          <motion.h1
+            initial={reducedMotion ? { opacity: 0 } : { clipPath: "inset(0 100% 0 0)" }}
+            animate={reducedMotion ? { opacity: 1 } : { clipPath: "inset(0 0% 0 0)" }}
+            transition={{ duration: reducedMotion ? 0.2 : 0.7, delay: 0.2, ease: [0.6, 0.01, 0.05, 1] }}
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(38px, 5.8vw, 68px)",
-              fontWeight: 600,
+              fontWeight: 700,
               color: COLORS.copperLight,
               lineHeight: 1.1,
               margin: "0 0 36px",
@@ -96,7 +115,7 @@ export default function Home() {
             }}
           >
             Stronger Together.
-          </h1>
+          </motion.h1>
 
           <p
             style={{
@@ -183,9 +202,9 @@ export default function Home() {
           <SectionLabel>Partner Benefits</SectionLabel>
           <h2
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 3.5vw, 42px)",
-              fontWeight: 600,
+              fontWeight: 700,
               color: COLORS.navy,
               margin: "0 0 16px",
               lineHeight: 1.25,
@@ -234,7 +253,7 @@ export default function Home() {
             <BenefitCard
               icon={Icons.cpu}
               title="Proprietary Tech"
-              subtitle="Productivity increase 3x."
+              subtitle="Less manual work for operators."
               description="Our AI tools enhance the way operators work, reducing manual tasks so teams focus on service quality, relationships, and growth."
               items={[
                 "Modern-age customer visibility across every shipment",
@@ -275,9 +294,9 @@ export default function Home() {
             <SectionLabel>Our Group</SectionLabel>
             <h2
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 3.5vw, 38px)",
-                fontWeight: 600,
+                fontWeight: 700,
                 color: COLORS.navy,
                 margin: "0 0 16px",
                 lineHeight: 1.3,
@@ -306,41 +325,47 @@ export default function Home() {
               style={{
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
-                gap: 16,
+                gap: 32,
               }}
             >
               {[
-                { number: "5", label: "Partner Companies" },
-                { number: "200+", label: "Years Combined Experience" },
-                { number: "25", label: "Office Locations" },
-                { number: "6", label: "Countries" },
+                { number: 5, label: "Partner Companies" },
+                { number: 200, prefix: "+", label: "Years Combined Experience" },
+                { number: 25, label: "Office Locations" },
+                { number: 6, label: "Countries" },
               ].map((stat, i) => (
-                <div
-                  key={i}
-                  style={{
-                    padding: "16px 0",
-                    borderTop: `2px solid ${i < 2 ? COLORS.copper : COLORS.border}`,
-                  }}
-                >
-                  <div
-                    style={{
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
-                      fontSize: 32,
-                      fontWeight: 600,
-                      color: COLORS.navy,
-                      lineHeight: 1.2,
-                      letterSpacing: "-0.02em",
-                    }}
-                  >
-                    {stat.number}
+                <div key={i} style={{ position: "relative" }}>
+                  <div style={{ position: "relative", paddingBottom: 16 }}>
+                    <div
+                      style={{
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontSize: 48,
+                        fontWeight: 600,
+                        color: COLORS.navy,
+                        lineHeight: 1,
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      <CountUp to={stat.number} duration={1400} prefix={stat.prefix || ""} delay={i * 100} />
+                    </div>
+                    {/* Animated divider */}
+                    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: "rgba(0,0,0,0.06)" }}>
+                      <motion.div
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true, margin: "-10%" }}
+                        transition={{ duration: 0.8, delay: i * 0.1, ease: "easeOut" }}
+                        style={{ width: "100%", height: "100%", background: "var(--voyfai-teal)", transformOrigin: "left" }}
+                      />
+                    </div>
                   </div>
                   <div
                     style={{
                       fontFamily: "'Plus Jakarta Sans', sans-serif",
-                      fontSize: 13,
+                      fontSize: 14,
                       color: COLORS.textMuted,
                       fontWeight: 500,
-                      marginTop: 4,
+                      marginTop: 12,
                     }}
                   >
                     {stat.label}
@@ -357,6 +382,9 @@ export default function Home() {
         </Reveal>
       </Section>
 
+      <BenchmarkChart />
+      <div className="section-breath" aria-hidden="true" />
+
       {/* ─── TECHNOLOGY ─────────────────────────────────────────── */}
       <DetailSection
         id="technology"
@@ -365,27 +393,36 @@ export default function Home() {
         title="Tools built by forwarders, for forwarders"
         items={[
           {
+            graphic: <RateCompare />,
             title: "Instant Rate Comparison",
             description:
               "Compare carrier options in seconds and deliver accurate quotes within minutes — operators spend time on relationships, not spreadsheets.",
           },
           {
+            graphic: <ShipmentIntake />,
             title: "Automated Shipment Creation",
             description:
               "Our AI agent converts booking emails directly into structured shipments in the TMS, reducing manual data entry and eliminating errors.",
           },
           {
+            graphic: <HubTracker />,
             title: "Voyfai Hub — Real-Time Visibility",
             description:
               "A self-management tool that keeps clients continuously informed with smart alerts, automated updates, and full shipment transparency from origin to destination.",
           },
           {
+            graphic: <CustomsScan />,
             title: "Intelligent Customs Automation",
             description:
               "Streamline customs declarations with AI-powered HS code classification and document processing that improves both speed and accuracy.",
           },
         ]}
       />
+
+      <CustomsFlow />
+      <div className="section-breath" aria-hidden="true" />
+      <HubPreview />
+      <ComplianceBand />
 
       {/* ─── TESTIMONIALS ───────────────────────────────────────── */}
       <Section bg={COLORS.warmWhite}>
@@ -394,9 +431,9 @@ export default function Home() {
             <SectionLabel>What Voyfai Group Forwarders Say</SectionLabel>
             <h2
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-display)",
                 fontSize: "clamp(28px, 3.5vw, 38px)",
-                fontWeight: 600,
+                fontWeight: 700,
                 color: COLORS.navy,
                 margin: "0 auto",
                 lineHeight: 1.25,
@@ -412,8 +449,10 @@ export default function Home() {
           className="testimonials-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
+            gridTemplateColumns: "minmax(0, 1fr)",
             gap: 16,
+            maxWidth: 760,
+            margin: "0 auto",
           }}
         >
           <Reveal delay={60}>
@@ -421,14 +460,6 @@ export default function Home() {
               quote="Our experience with Voyfai during the acquisition process was exceptionally smooth, transparent, and well-communicated. From the outset, James and Adrian made it clear that their approach is built on trust and autonomy, and they have followed through on that commitment. Since the deal, we've continued to run Corten independently, with Voyfai offering meaningful support where needed — from tech development to procurement efficiencies. Their input has been practical and value-adding, without ever being overbearing."
               name="Sam"
               company="Corten"
-              role="Managing Director"
-            />
-          </Reveal>
-          <Reveal delay={120}>
-            <TestimonialCard
-              quote="Joining Voyfai gave us access to group-level procurement and tooling we could never have built alone, while leaving the parts of our business that make us who we are completely intact. Decisions that affect our customers still sit with us, and the collective scale has opened lanes and rates we simply could not reach before."
-              name="Partner Name"
-              company="Remiro"
               role="Managing Director"
             />
           </Reveal>
@@ -483,9 +514,9 @@ export default function Home() {
           </div>
           <h2
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 4vw, 44px)",
-              fontWeight: 600,
+              fontWeight: 700,
               color: COLORS.white,
               margin: "0 0 16px",
               lineHeight: 1.2,
@@ -572,9 +603,9 @@ export default function Home() {
           <SectionLabel>Investors</SectionLabel>
           <h2
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(28px, 3.5vw, 42px)",
-              fontWeight: 600,
+              fontWeight: 700,
               color: COLORS.navy,
               margin: "0 auto 16px",
               lineHeight: 1.25,

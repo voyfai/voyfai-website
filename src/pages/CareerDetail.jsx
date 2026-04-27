@@ -101,9 +101,9 @@ export default function CareerDetail() {
       >
         <h1
           style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "var(--font-display)",
             fontSize: "clamp(28px, 4vw, 40px)",
-            fontWeight: 600,
+            fontWeight: 700,
             color: COLORS.navy,
             margin: "0 0 16px",
           }}
@@ -197,9 +197,9 @@ export default function CareerDetail() {
           </div>
           <h1
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-display)",
               fontSize: "clamp(30px, 4.4vw, 48px)",
-              fontWeight: 600,
+              fontWeight: 700,
               color: COLORS.white,
               lineHeight: 1.15,
               margin: "0 0 24px",

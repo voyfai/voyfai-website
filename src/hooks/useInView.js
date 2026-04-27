@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export default function useInView({ once = true, rootMargin = "-80px", threshold = 0.15 } = {}) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
+  const [observed, setObserved] = useState(false);
 
   useEffect(() => {
     const node = ref.current;
@@ -12,6 +13,8 @@ export default function useInView({ once = true, rootMargin = "-80px", threshold
       setInView(true);
       return;
     }
+
+    setObserved(true);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -29,5 +32,5 @@ export default function useInView({ once = true, rootMargin = "-80px", threshold
     return () => observer.disconnect();
   }, [once, rootMargin, threshold]);
 
-  return [ref, inView];
+  return [ref, inView, observed];
 }

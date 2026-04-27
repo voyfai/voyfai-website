@@ -35,9 +35,9 @@ export default function TealCTABanner({
       />
       <h3
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "var(--font-display)",
           fontSize: "clamp(22px, 2.8vw, 30px)",
-          fontWeight: 600,
+          fontWeight: 700,
           margin: "0 0 10px",
           lineHeight: 1.25,
           letterSpacing: "-0.02em",

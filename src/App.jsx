@@ -6,10 +6,13 @@ import Home from "./pages/Home";
 import Careers from "./pages/Careers";
 import CareerDetail from "./pages/CareerDetail";
 
-function ScrollToHash() {
+function ScrollToLocation() {
   const { pathname, hash } = useLocation();
   useEffect(() => {
-    if (!hash) return;
+    if (!hash) {
+      window.scrollTo({ top: 0, behavior: "auto" });
+      return;
+    }
     const id = hash.slice(1);
     let raf;
     const tryScroll = (attemptsLeft) => {
@@ -29,7 +32,7 @@ function ScrollToHash() {
 export default function App() {
   return (
     <BrowserRouter basename="/voyfai-website">
-      <ScrollToHash />
+      <ScrollToLocation />
       <div
         style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif",

@@ -177,10 +177,9 @@ export default function TeamSpotlight({ members }) {
               lineHeight: 1.7,
               color: "rgba(255,255,255,0.92)",
               margin: "0 0 28px",
-              fontStyle: "italic",
             }}
           >
-            &ldquo;{active.quote}&rdquo;
+            {active.quote}
           </p>
           <div
             style={{
