@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { COLORS } from "../constants/colors";
 import { Icons } from "../constants/icons";
 import Section from "../components/Section";
@@ -8,7 +9,8 @@ import TestimonialCard from "../components/TestimonialCard";
 import NorthernEuropeMap from "../components/NorthernEuropeMap";
 import Reveal from "../components/Reveal";
 import useReducedMotion from "../hooks/useReducedMotion";
-import heroImg from "../assets/Voyfai-hero.jpg";
+
+const HERO_BASE = `${import.meta.env.BASE_URL}hero`;
 import atlanticLabsLogo from "../assets/1-Atlantic-Labs.webp";
 import { motion } from "motion/react";
 import CountUp from "../components/motion/CountUp";
@@ -29,6 +31,7 @@ import ComplianceBand from "../components/sections/ComplianceBand";
 
 export default function Home() {
   const reducedMotion = useReducedMotion();
+  const [heroLoaded, setHeroLoaded] = useState(reducedMotion);
 
   return (
     <>
@@ -46,16 +49,41 @@ export default function Home() {
         }}
       >
         {/* Hero background image */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `url(${heroImg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center 40%",
-            filter: "brightness(0.3) saturate(0.7)",
-          }}
-        />
+        <picture>
+          <source
+            type="image/avif"
+            srcSet={`${HERO_BASE}/hero-1280.avif 1280w, ${HERO_BASE}/hero-1920.avif 1920w, ${HERO_BASE}/hero-2560.avif 2560w`}
+            sizes="100vw"
+          />
+          <source
+            type="image/webp"
+            srcSet={`${HERO_BASE}/hero-1280.webp 1280w, ${HERO_BASE}/hero-1920.webp 1920w, ${HERO_BASE}/hero-2560.webp 2560w`}
+            sizes="100vw"
+          />
+          <img
+            src={`${HERO_BASE}/hero-1920.jpg`}
+            alt=""
+            aria-hidden="true"
+            width={1920}
+            height={1440}
+            fetchpriority="high"
+            decoding="async"
+            onLoad={() => setHeroLoaded(true)}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center 40%",
+              filter: "brightness(0.3) saturate(0.7)",
+              clipPath: heroLoaded ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
+              transition: reducedMotion
+                ? "none"
+                : "clip-path 1000ms cubic-bezier(0.6, 0.01, 0.05, 1)",
+            }}
+          />
+        </picture>
         {/* Gradient overlay */}
         <div
           style={{

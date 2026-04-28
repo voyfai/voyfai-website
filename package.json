@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "build:hero": "node scripts/optimize-hero.js",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -21,6 +22,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.0",
+    "sharp": "^0.34.5",
     "vite": "^6.0.0"
   }
 }
