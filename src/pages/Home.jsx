@@ -156,7 +156,7 @@ export default function Home() {
               margin: "0 auto 48px",
             }}
           >
-            A group of independent freight forwarders operating autonomously at local
+            A group of independent local heroes operating autonomously at local
             level while benefiting from the collective scale.
           </p>
 
@@ -359,7 +359,7 @@ export default function Home() {
               }}
             >
               {[
-                { number: 5, label: "Partner Companies" },
+                { number: 8, label: "Partner Companies" },
                 { number: 200, prefix: "+", label: "Years Combined Experience" },
                 { number: 25, label: "Office Locations" },
                 { number: 6, label: "Countries" },
@@ -485,7 +485,7 @@ export default function Home() {
         >
           <Reveal delay={60}>
             <TestimonialCard
-              quote="Our experience with Voyfai during the acquisition process was exceptionally smooth, transparent, and well-communicated. From the outset, James and Adrian made it clear that their approach is built on trust and autonomy, and they have followed through on that commitment. Since the deal, we've continued to run Corten independently, with Voyfai offering meaningful support where needed, from tech development to procurement efficiencies. Their input has been practical and value-adding, without ever being overbearing."
+              quote="Our experience with Voyfai during the process was exceptionally smooth, transparent, and well-communicated. From the outset, James and Adrian made it clear that their approach is built on trust and autonomy, and they have followed through on that commitment. Since the deal, we've continued to run Corten independently, with Voyfai offering meaningful support where needed, from tech development to procurement efficiencies. Their input has been practical and value-adding, without ever being overbearing."
               name="Sam"
               company="Corten"
               role="Managing Director"
