@@ -208,6 +208,7 @@ export default function Home() {
               color: COLORS.navy,
               margin: "0 0 16px",
               lineHeight: 1.25,
+              letterSpacing: "-0.02em",
               maxWidth: 600,
             }}
           >
@@ -295,11 +296,12 @@ export default function Home() {
             <h2
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(28px, 3.5vw, 38px)",
+                fontSize: "clamp(28px, 3.5vw, 42px)",
                 fontWeight: 700,
                 color: COLORS.navy,
                 margin: "0 0 16px",
-                lineHeight: 1.3,
+                lineHeight: 1.25,
+                letterSpacing: "-0.02em",
               }}
             >
               A growing group of independent freight forwarders
@@ -307,12 +309,12 @@ export default function Home() {
             <p
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 16,
+                fontSize: 17,
                 fontWeight: 400,
                 lineHeight: 1.7,
                 color: COLORS.textMuted,
                 margin: "0 0 40px",
-                maxWidth: 460,
+                maxWidth: 540,
               }}
             >
               Established freight forwarders, each a leader in their market, united
@@ -383,7 +385,6 @@ export default function Home() {
       </Section>
 
       <BenchmarkChart />
-      <div className="section-breath" aria-hidden="true" />
 
       {/* ─── TECHNOLOGY ─────────────────────────────────────────── */}
       <DetailSection
@@ -396,7 +397,7 @@ export default function Home() {
             graphic: <RateCompare />,
             title: "Instant Rate Comparison",
             description:
-              "Compare carrier options in seconds and deliver accurate quotes within minutes — operators spend time on relationships, not spreadsheets.",
+              "Compare carrier options in seconds and deliver accurate quotes within minutes. Operators spend time on relationships, not spreadsheets.",
           },
           {
             graphic: <ShipmentIntake />,
@@ -406,21 +407,20 @@ export default function Home() {
           },
           {
             graphic: <HubTracker />,
-            title: "Voyfai Hub — Real-Time Visibility",
+            title: "Voyfai Hub: Live Visibility",
             description:
-              "A self-management tool that keeps clients continuously informed with smart alerts, automated updates, and full shipment transparency from origin to destination.",
+              "A client portal that keeps clients continuously informed with smart alerts, automated updates, and full shipment transparency from origin to destination.",
           },
           {
             graphic: <CustomsScan />,
             title: "Intelligent Customs Automation",
             description:
-              "Streamline customs declarations with AI-powered HS code classification and document processing that improves both speed and accuracy.",
+              "Streamline customs declarations with AI that classifies HS codes and processes documents, improving both speed and accuracy.",
           },
         ]}
       />
 
       <CustomsFlow />
-      <div className="section-breath" aria-hidden="true" />
       <HubPreview />
       <ComplianceBand />
 
@@ -432,7 +432,7 @@ export default function Home() {
             <h2
               style={{
                 fontFamily: "var(--font-display)",
-                fontSize: "clamp(28px, 3.5vw, 38px)",
+                fontSize: "clamp(28px, 3.5vw, 42px)",
                 fontWeight: 700,
                 color: COLORS.navy,
                 margin: "0 auto",
@@ -457,7 +457,7 @@ export default function Home() {
         >
           <Reveal delay={60}>
             <TestimonialCard
-              quote="Our experience with Voyfai during the acquisition process was exceptionally smooth, transparent, and well-communicated. From the outset, James and Adrian made it clear that their approach is built on trust and autonomy, and they have followed through on that commitment. Since the deal, we've continued to run Corten independently, with Voyfai offering meaningful support where needed — from tech development to procurement efficiencies. Their input has been practical and value-adding, without ever being overbearing."
+              quote="Our experience with Voyfai during the acquisition process was exceptionally smooth, transparent, and well-communicated. From the outset, James and Adrian made it clear that their approach is built on trust and autonomy, and they have followed through on that commitment. Since the deal, we've continued to run Corten independently, with Voyfai offering meaningful support where needed, from tech development to procurement efficiencies. Their input has been practical and value-adding, without ever being overbearing."
               name="Sam"
               company="Corten"
               role="Managing Director"
@@ -471,7 +471,7 @@ export default function Home() {
         id="contact"
         style={{
           background: "linear-gradient(165deg, #000000 0%, #141414 100%)",
-          padding: "72px 24px",
+          padding: "96px 24px",
           position: "relative",
           overflow: "hidden",
         }}
@@ -515,12 +515,12 @@ export default function Home() {
           <h2
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 4vw, 44px)",
+              fontSize: "clamp(28px, 3.5vw, 42px)",
               fontWeight: 700,
               color: COLORS.white,
               margin: "0 0 16px",
-              lineHeight: 1.2,
-              letterSpacing: "-0.025em",
+              lineHeight: 1.25,
+              letterSpacing: "-0.02em",
             }}
           >
             Ready to write the next chapter?
@@ -530,10 +530,10 @@ export default function Home() {
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 17,
               fontWeight: 300,
-              lineHeight: 1.75,
+              lineHeight: 1.7,
               color: "rgba(255,255,255,0.5)",
               margin: "0 auto 40px",
-              maxWidth: 480,
+              maxWidth: 540,
             }}
           >
             Every Voyfai partnership starts with a conversation rooted in shared values

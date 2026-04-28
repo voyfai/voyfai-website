@@ -17,12 +17,12 @@ export default function DetailSection({ id, label, title, items, bg }) {
           className="detail-section-title"
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(28px, 3.5vw, 38px)",
+            fontSize: "clamp(28px, 3.5vw, 42px)",
             fontWeight: 700,
             color: COLORS.navy,
             margin: 0,
             lineHeight: 1.25,
-            letterSpacing: 0,
+            letterSpacing: "-0.02em",
             maxWidth: hasGraphics ? 760 : 600,
           }}
         >
@@ -62,7 +62,7 @@ export default function DetailSection({ id, label, title, items, bg }) {
                 {item.graphic}
               </div>
             )}
-            <div style={{ padding: "28px 24px", flex: 1 }}>
+            <div style={{ padding: "32px 24px", flex: 1 }}>
               <div
                 style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",

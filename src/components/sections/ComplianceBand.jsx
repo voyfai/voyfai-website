@@ -10,6 +10,7 @@ export default function ComplianceBand() {
 
   return (
     <section style={{ background: "var(--voyfai-ink)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+      {/* Strip / spacer between sections — not a stacked content section, so it skips the canonical 96px padding. */}
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "32px 24px" }}>
         <FadeUp>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 48, alignItems: "center" }}>

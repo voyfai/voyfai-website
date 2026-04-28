@@ -61,7 +61,7 @@ export default function HubTracker() {
         transition={{ times: [0, 0.1, 0.9, 1], duration: 3, delay: 2.4 }} // Pops in at 60% of 4s
         style={{ alignSelf: "flex-end", maxWidth: "100%", background: "var(--voyfai-ink)", color: "#fff", padding: "6px 10px", borderRadius: 4, fontSize: 9.5, lineHeight: 1.1, fontFamily: "monospace", whiteSpace: "nowrap" }}
       >
-        ETA updated — Rotterdam +6h
+        ETA updated: Rotterdam +6h
       </motion.div>
     </div>
   );

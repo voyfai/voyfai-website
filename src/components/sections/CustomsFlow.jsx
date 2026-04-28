@@ -128,6 +128,7 @@ export default function CustomsFlow() {
   }, [lineMetrics.length]);
 
   return (
+    /* Pinned ScrollTrigger scrub section — sized by viewport, so it skips the canonical 96px padding. */
     <section ref={containerRef} className="customs-flow-section">
       <div style={{ width: "100%", maxWidth: 1200, padding: "0 24px", position: "relative", zIndex: 1 }}>
         <div className="customs-flow-heading">

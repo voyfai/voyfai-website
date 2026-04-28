@@ -238,7 +238,7 @@ export default function Careers() {
               margin: "0 auto 40px",
             }}
           >
-            Join the team building AI-assisted tools and shared infrastructure for
+            Join the team building AI tools and shared infrastructure for
             independent freight forwarders. We work on the operational details that
             help local forwarding teams compete with more speed and clarity.
           </p>

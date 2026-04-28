@@ -11,15 +11,16 @@ export default function BenchmarkChart() {
   ];
 
   return (
-    <section style={{ background: "var(--voyfai-ink)", padding: "120px 24px", color: "#fff" }}>
+    <section style={{ background: "var(--voyfai-ink)", padding: "96px 24px", color: "#fff" }}>
+      {/* 900 cap is intentional — keeps horizontal bars within a comfortable read length */}
       <div style={{ maxWidth: 900, margin: "0 auto" }}>
         <FadeUp>
           <div style={{ textAlign: "center", marginBottom: 64 }}>
-            <SectionLabel color="rgba(255,255,255,0.6)">Performance</SectionLabel>
-            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3.5vw, 42px)", margin: "0 0 16px", color: "#fff" }}>
+            <SectionLabel>Performance</SectionLabel>
+            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 700, lineHeight: 1.25, letterSpacing: "-0.02em", margin: "0 0 16px", color: "#fff" }}>
               Forwarding teams are more efficient with the Voyfai platform
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 17, maxWidth: 540, margin: "0 auto" }}>
+            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 400, lineHeight: 1.7, color: "rgba(255,255,255,0.6)", maxWidth: 540, margin: "0 auto" }}>
               A product benchmark across quote preparation, booking intake, document handling, shipment visibility, and exception follow-up.
             </p>
           </div>

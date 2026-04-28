@@ -6,7 +6,7 @@ export default function Section({ children, bg = COLORS.warmWhite, id, style = {
       id={id}
       style={{
         background: bg,
-        padding: "72px 24px",
+        padding: "96px 24px",
         ...style,
       }}
     >

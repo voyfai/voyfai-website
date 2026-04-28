@@ -284,7 +284,7 @@ export default function CareerDetail() {
                 margin: "0 0 20px",
               }}
             >
-              Submit your application through Ashby — it takes just a few minutes.
+              Submit your application through Ashby. It takes just a few minutes.
             </p>
             <a
               href={job.applyUrl}
