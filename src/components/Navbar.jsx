@@ -10,17 +10,25 @@ const navLinks = [
   { label: "Careers", href: "/careers", absolute: true },
 ];
 
+const LIGHT_HEADER_ROUTES = ["/privacy-policy", "/imprint"];
+
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenu, setMobileMenu] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const forceLight = LIGHT_HEADER_ROUTES.includes(location.pathname);
+  const [scrolled, setScrolled] = useState(forceLight);
+  const [mobileMenu, setMobileMenu] = useState(false);
 
   useEffect(() => {
+    if (forceLight) {
+      setScrolled(true);
+      return;
+    }
     const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [forceLight]);
 
   useEffect(() => {
     setMobileMenu(false);

@@ -10,7 +10,7 @@ const navLinks = [
 ];
 
 const legalLinks = [
-  { label: "Privacy", href: "/privacy-policy", route: true },
+  { label: "Privacy Policy", href: "/privacy-policy", route: true },
   { label: "Imprint", href: "/imprint", route: true },
   { label: "Cookie settings", action: "cookies" },
 ];
