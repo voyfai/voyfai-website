@@ -15,6 +15,7 @@ export default function ValueCard({ icon, title, description, chips = [], accent
       }}
     >
       <div
+        className="value-icon-reveal"
         style={{
           width: 56,
           height: 56,
@@ -23,6 +24,7 @@ export default function ValueCard({ icon, title, description, chips = [], accent
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          alignSelf: "center",
           color: COLORS.white,
           marginBottom: 24,
           boxShadow: "0 8px 24px rgba(3,166,150,0.25)",

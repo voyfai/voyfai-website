@@ -67,6 +67,10 @@ html {
   overscroll-behavior: none;
 }
 
+section[id] {
+  scroll-margin-top: 80px;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -237,6 +241,16 @@ body {
   transition: transform 160ms var(--ease-out), background 200ms ease,
     box-shadow 240ms ease, color 200ms ease, border-color 200ms ease;
   will-change: transform;
+}
+
+.cta-btn > span {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.cta-btn svg {
+  display: block;
 }
 
 .cta-btn:active {
@@ -1787,6 +1801,30 @@ body {
   }
 }
 
+/* ─── VALUE CARD ICON REVEAL ─────────────────────────────────── */
+
+.value-icon-reveal {
+  transform: scale(0.92);
+  transition: transform 600ms var(--ease-voyfai);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: transform;
+}
+
+.value-icon-reveal svg {
+  transform: rotate(-4deg);
+  transition: transform 600ms var(--ease-voyfai);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: transform;
+}
+
+.reveal[data-in="true"] .value-icon-reveal {
+  transform: scale(1);
+}
+
+.reveal[data-in="true"] .value-icon-reveal svg {
+  transform: rotate(0deg);
+}
+
 /* ─── REDUCED MOTION ─────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1825,7 +1863,9 @@ body {
   .hub-callout,
   .hub-node,
   .hub-preview-heading > div,
-  .hub-preview-heading p {
+  .hub-preview-heading p,
+  .value-icon-reveal,
+  .value-icon-reveal svg {
     transform: none !important;
   }
 }

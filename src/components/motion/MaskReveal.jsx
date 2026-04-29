@@ -1,9 +1,10 @@
 import { motion } from "motion/react";
 import useInView from "../../hooks/useInView";
 
-export default function MaskReveal({ children, delay = 0, className = "" }) {
+export default function MaskReveal({ children, delay = 0, className = "", inViewOverride }) {
   const [ref, inView, observed] = useInView();
-  const shouldEnhance = observed && inView;
+  const shouldEnhance =
+    inViewOverride !== undefined ? inViewOverride : observed && inView;
 
   return (
     <span

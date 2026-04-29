@@ -1,4 +1,6 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform } from "motion/react";
 import { COLORS, RADIUS } from "../constants/colors";
 import { Icons } from "../constants/icons";
 import Section from "../components/Section";
@@ -14,25 +16,32 @@ import JobCard from "../components/JobCard";
 import DepartmentFilter from "../components/DepartmentFilter";
 import TealCTABanner from "../components/TealCTABanner";
 import useAshbyJobs from "../hooks/useAshbyJobs";
+import useReducedMotion from "../hooks/useReducedMotion";
+import CountUp from "../components/motion/CountUp";
+import MaskReveal from "../components/motion/MaskReveal";
+import OperatorCapacity from "../components/sections/careers/OperatorCapacity";
+import PartnerNetwork from "../components/sections/careers/PartnerNetwork";
+import SignalToInsight from "../components/sections/careers/SignalToInsight";
+import HowDecisionsFlow from "../components/sections/careers/HowDecisionsFlow";
 
 const VALUES = [
   {
     icon: Icons.users,
-    title: "Voyaging Together",
+    title: "Voyaging together",
     description:
       "Freight forwarding is a team sport. We work closely with operators, partner companies, and product teams so decisions reflect the reality of daily shipments.",
     chips: ["Trust", "Clear communication", "Partner context", "Shared ownership"],
   },
   {
     icon: Icons.heart,
-    title: "Entrepreneurs At Heart",
+    title: "Entrepreneurs at heart",
     description:
       "Our partners are independent operators. We build with respect for that autonomy and keep the bias toward practical improvements that make their teams faster.",
     chips: ["Ownership", "Pragmatism", "Speed", "Operator empathy"],
   },
   {
     icon: Icons.zap,
-    title: "Humble with Bold Moves",
+    title: "Humble with bold moves",
     description:
       "We are ambitious about AI in logistics, but we validate ideas against real documents, real lanes, and real forwarding workflows before calling them progress.",
     chips: ["Evidence", "Focus", "Craft", "Measured risk"],
@@ -42,29 +51,29 @@ const VALUES = [
 const LIFE = [
   {
     icon: Icons.users,
-    title: "Close to Operations",
+    title: "Close to operations",
     description:
       "Product decisions are shaped by freight operators, customs documents, carrier updates, and the workflows our partner teams use every day.",
   },
   {
     icon: Icons.book,
-    title: "Learning the Domain",
+    title: "Learning the domain",
     description:
       "We expect curiosity about forwarding, trade lanes, documents, and exception handling, not just software patterns.",
   },
   {
     icon: Icons.camera,
-    title: "Shipping Useful Work",
+    title: "Shipping useful work",
     description:
       "The bar is whether a change helps operators quote faster, enter less data, avoid misses, or serve customers with more confidence.",
   },
 ];
 
 const STATS = [
-  { value: "Freight", label: "Domain focus" },
-  { value: "AI", label: "Document automation" },
-  { value: "Group", label: "Partner enablement" },
-  { value: "Hybrid", label: "Berlin team rhythm" },
+  { value: 8, label: "Partner companies" },
+  { value: 6, label: "Countries" },
+  { value: 25, label: "Office locations" },
+  { value: 2024, label: "Founded" },
 ];
 
 const TEAM = [
@@ -94,49 +103,49 @@ const TEAM = [
 const PERKS = [
   {
     icon: Icons.dollar,
-    title: "Competitive Compensation",
+    title: "Competitive compensation",
     description:
       "Compensation is role-specific and discussed directly during the process, with clarity on expectations and scope.",
   },
   {
     icon: Icons.clock,
-    title: "Sustainable Pace",
+    title: "Sustainable pace",
     description:
       "We care about doing focused work well and keeping enough room for life outside the office.",
   },
   {
     icon: Icons.mapPin,
-    title: "Hybrid Work",
+    title: "Hybrid work",
     description:
       "A Berlin-centered hybrid rhythm with in-person collaboration where it makes the work better.",
   },
   {
     icon: Icons.laptop,
-    title: "Useful Setup",
+    title: "Useful setup",
     description:
       "The tools and equipment needed to build, test, and support freight workflows properly.",
   },
   {
     icon: Icons.book,
-    title: "Domain Learning",
+    title: "Domain learning",
     description:
       "Time with product, operations, and partner teams so you understand the logistics context behind the work.",
   },
   {
     icon: Icons.users,
-    title: "Small-Team Ownership",
+    title: "Small-team ownership",
     description:
       "Clear ownership, direct communication, and room to take responsibility for meaningful pieces of the product.",
   },
   {
     icon: Icons.calendar,
-    title: "Team Rituals",
+    title: "Team rituals",
     description:
       "Regular moments to review work, share domain learnings, and align around partner priorities.",
   },
   {
     icon: Icons.coffee,
-    title: "Office Basics",
+    title: "Office basics",
     description:
       "A practical workspace for deep work, design reviews, technical discussions, and partner planning.",
   },
@@ -145,6 +154,15 @@ const PERKS = [
 export default function Careers() {
   const { jobs, loading, error } = useAshbyJobs();
   const [selectedDept, setSelectedDept] = useState("All");
+  const reducedMotion = useReducedMotion();
+  const [heroLoaded, setHeroLoaded] = useState(reducedMotion);
+
+  const lifeImgRef = useRef(null);
+  const { scrollYProgress: lifeImgScroll } = useScroll({
+    target: lifeImgRef,
+    offset: ["start end", "end start"]
+  });
+  const lifeImgY = useTransform(lifeImgScroll, [0, 1], ["-5%", "5%"]);
 
   const departments = useMemo(() => {
     const set = new Set(jobs.map((j) => j.department).filter(Boolean));
@@ -156,31 +174,52 @@ export default function Careers() {
     return jobs.filter((j) => j.department === selectedDept);
   }, [jobs, selectedDept]);
 
+  const viewOpenRolesCtaStyle = { fontSize: 16, padding: "16px 32px" };
+
   return (
     <>
       {/* ─── HERO ───────────────────────────────────────────────── */}
       <header
         style={{
           position: "relative",
-          minHeight: "80vh",
+          minHeight: "100vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           background: "#000",
           overflow: "hidden",
-          padding: "140px 24px 100px",
+          padding: "120px 24px 80px",
         }}
       >
+        {/* Hero background image */}
+        <picture>
+          <img
+            src="/voyfai-website/images/voyfai_careers_hero_1777475797821.png"
+            alt=""
+            aria-hidden="true"
+            onLoad={() => setHeroLoaded(true)}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
+              filter: "brightness(0.3) saturate(0.7)",
+              clipPath: heroLoaded ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
+              transition: reducedMotion
+                ? "none"
+                : "clip-path 1000ms cubic-bezier(0.6, 0.01, 0.05, 1)",
+            }}
+          />
+        </picture>
         <div
-          aria-hidden="true"
           style={{
             position: "absolute",
             inset: 0,
             background: `
-              linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.8) 100%),
-              radial-gradient(ellipse 900px 600px at 50% 40%, rgba(3,166,150,0.18) 0%, transparent 65%),
-              radial-gradient(ellipse 600px 400px at 20% 90%, rgba(4,201,180,0.12) 0%, transparent 60%),
-              #050505
+              linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.6) 100%),
+              radial-gradient(ellipse 800px 600px at 20% 80%, rgba(3,166,150,0.06) 0%, transparent 60%)
             `,
           }}
         />
@@ -189,7 +228,7 @@ export default function Careers() {
           style={{
             position: "absolute",
             inset: 0,
-            boxShadow: "inset 0 0 200px rgba(0,0,0,0.4)",
+            boxShadow: "inset 0 0 200px rgba(0,0,0,0.3)",
             pointerEvents: "none",
           }}
         />
@@ -198,44 +237,48 @@ export default function Careers() {
             position: "relative",
             textAlign: "center",
             maxWidth: 820,
-            animation: "fadeInUp 900ms var(--ease-out) both",
+            animation: "fadeInUp 1s ease",
           }}
         >
-          <div
+          {/* Hero intentionally pairs two Adrianna display lines (#jointhevoyage + headline) per AGENT.md §10 user override of §3.1. */}
+          <motion.h1
+            initial={reducedMotion ? { opacity: 0 } : { clipPath: "inset(0 100% 0 0)" }}
+            animate={reducedMotion ? { opacity: 1 } : { clipPath: "inset(0 0% 0 0)" }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.6, 0.01, 0.05, 1] }}
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: "clamp(32px, 4.8vw, 52px)",
-              fontWeight: 600,
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(38px, 5.8vw, 68px)",
+              fontWeight: 700,
               color: COLORS.copperLight,
-              marginBottom: 24,
-              letterSpacing: "-0.02em",
               lineHeight: 1.1,
+              letterSpacing: "-0.035em",
+              margin: "0 0 8px",
             }}
           >
             #jointhevoyage
-          </div>
+          </motion.h1>
           <h1
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 3.8vw, 44px)",
+              fontSize: "clamp(38px, 5.8vw, 68px)",
               fontWeight: 700,
               color: COLORS.white,
-              lineHeight: 1.2,
+              lineHeight: 1.1,
               margin: "0 0 20px",
-              letterSpacing: "-0.02em",
+              letterSpacing: "-0.035em",
             }}
           >
-            Shape the future of freight forwarding
+            Shape the future of freight forwarding.
           </h1>
           <p
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: "clamp(15px, 1.8vw, 17px)",
+              fontSize: "clamp(16px, 2vw, 18px)",
               fontWeight: 300,
               lineHeight: 1.75,
-              color: "rgba(255,255,255,0.62)",
-              maxWidth: 580,
-              margin: "0 auto 40px",
+              color: "rgba(255,255,255,0.55)",
+              maxWidth: 560,
+              margin: "0 auto 48px",
             }}
           >
             Join the team building AI tools and shared infrastructure for
@@ -245,15 +288,67 @@ export default function Careers() {
           <div
             style={{
               display: "flex",
-              gap: 12,
+              gap: 16,
               justifyContent: "center",
               flexWrap: "wrap",
             }}
           >
-            <a href="#open-positions" className="cta-btn cta-primary">
-              View Open Positions
+            <Link
+              to="/careers#find-your-role"
+              className="cta-btn cta-primary"
+              style={viewOpenRolesCtaStyle}
+            >
+              View open positions
               <span>{Icons.arrowRight}</span>
-            </a>
+            </Link>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 40,
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 8,
+            animation: "fadeIn 2s ease",
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 11,
+              fontWeight: 400,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.3)",
+            }}
+          >
+            Scroll
+          </span>
+          <div
+            style={{
+              width: 1,
+              height: 32,
+              background: "rgba(255,255,255,0.1)",
+              position: "relative",
+              overflow: "hidden",
+              borderRadius: 1,
+            }}
+          >
+            <div
+              style={{
+                width: 1,
+                height: 12,
+                background: "rgba(255,255,255,0.4)",
+                borderRadius: 1,
+                animation: "scrollLine 2s ease infinite",
+              }}
+            />
           </div>
         </div>
       </header>
@@ -266,16 +361,19 @@ export default function Careers() {
         title="Empowering freight forwarders around the globe to redefine what's possible"
         items={[
           {
+            graphic: <OperatorCapacity />,
             title: "Operator Capacity",
             description:
               "Reducing repetitive manual work so partner teams can keep serving customers as volumes and complexity grow.",
           },
           {
+            graphic: <PartnerNetwork />,
             title: "Independent Forwarder Strength",
             description:
               "Giving established SME forwarders access to shared technology, procurement support, and group knowledge without losing local autonomy.",
           },
           {
+            graphic: <SignalToInsight />,
             title: "Better Logistics Decisions",
             description:
               "Turning shipment, document, and status data into clearer decisions for operators, customers, and partner companies.",
@@ -297,7 +395,8 @@ export default function Careers() {
                 margin: "0 auto 14px",
                 lineHeight: 1.25,
                 letterSpacing: "-0.02em",
-                maxWidth: 600,
+                maxWidth: 760,
+                textWrap: "balance",
               }}
             >
               The principles that guide us
@@ -305,10 +404,10 @@ export default function Careers() {
             <p
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 16,
+                fontSize: 17,
                 lineHeight: 1.7,
                 color: COLORS.textMuted,
-                maxWidth: 560,
+                maxWidth: 540,
                 margin: "0 auto",
               }}
             >
@@ -322,7 +421,7 @@ export default function Careers() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 20,
+            gap: 16,
           }}
         >
           {VALUES.map((v, i) => (
@@ -332,6 +431,9 @@ export default function Careers() {
           ))}
         </div>
       </Section>
+
+      <HowDecisionsFlow />
+
 
       {/* ─── LIFE AT VOYFAI ─────────────────────────────────────── */}
       <Section id="life-at-voyfai" bg={COLORS.cream}>
@@ -355,16 +457,27 @@ export default function Careers() {
             <p
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 16,
+                fontSize: 17,
                 lineHeight: 1.7,
                 color: COLORS.textMuted,
-                maxWidth: 560,
+                maxWidth: 540,
                 margin: "0 auto",
               }}
             >
               We are a small team working close to freight operations. The culture is
               practical, direct, and focused on building tools that forwarders can trust.
             </p>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div style={{ marginBottom: 56, borderRadius: RADIUS.lg, overflow: "hidden", height: "min(60vh, 500px)", position: "relative" }}>
+            <motion.img 
+              ref={lifeImgRef}
+              src="/voyfai-website/images/voyfai_careers_life_1777475811545.png" 
+              alt="Life at Voyfai" 
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", scale: 1.1, y: reducedMotion ? 0 : lifeImgY }} 
+            />
           </div>
         </Reveal>
 
@@ -397,8 +510,44 @@ export default function Careers() {
               borderRadius: RADIUS.lg,
             }}
           >
-            {STATS.map((s) => (
-              <StatBlock key={s.label} {...s} />
+            {STATS.map((stat, i) => (
+              <div key={i} style={{ position: "relative" }}>
+                <div style={{ position: "relative", paddingBottom: 16 }}>
+                  <div
+                    style={{
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontSize: 48,
+                      fontWeight: 600,
+                      color: COLORS.navy,
+                      lineHeight: 1,
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    <CountUp to={stat.value} duration={1400} prefix={stat.prefix || ""} delay={i * 100} />
+                  </div>
+                  {/* Animated divider */}
+                  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: "rgba(0,0,0,0.06)" }}>
+                    <motion.div
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true, margin: "-10%" }}
+                      transition={{ duration: 0.8, delay: i * 0.1, ease: "easeOut" }}
+                      style={{ width: "100%", height: "100%", background: "var(--voyfai-teal)", transformOrigin: "left" }}
+                    />
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontSize: 14,
+                    color: COLORS.textMuted,
+                    fontWeight: 500,
+                    marginTop: 12,
+                  }}
+                >
+                  {stat.label}
+                </div>
+              </div>
             ))}
           </div>
         </Reveal>
@@ -426,10 +575,10 @@ export default function Careers() {
             <p
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 16,
+                fontSize: 17,
                 lineHeight: 1.7,
                 color: COLORS.textMuted,
-                maxWidth: 560,
+                maxWidth: 540,
                 margin: "0 auto",
               }}
             >
@@ -438,6 +587,16 @@ export default function Careers() {
             </p>
           </div>
         </Reveal>
+        <Reveal>
+          <div style={{ marginBottom: 56, borderRadius: RADIUS.lg, overflow: "hidden", height: "min(60vh, 500px)" }}>
+            <img 
+              src="/voyfai-website/images/voyfai_careers_team_1777475827094.png" 
+              alt="Our Team" 
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} 
+            />
+          </div>
+        </Reveal>
+        
         <Reveal delay={60}>
           <TeamSpotlight members={TEAM} />
         </Reveal>
@@ -465,10 +624,10 @@ export default function Careers() {
             <p
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 16,
+                fontSize: 17,
                 lineHeight: 1.7,
                 color: COLORS.textMuted,
-                maxWidth: 560,
+                maxWidth: 540,
                 margin: "0 auto",
               }}
             >
@@ -493,23 +652,115 @@ export default function Careers() {
         </div>
       </Section>
 
-      {/* ─── JOIN OUR TEAM BANNER ───────────────────────────────── */}
-      <Section bg={COLORS.warmWhite} style={{ paddingTop: 24, paddingBottom: 24 }}>
-        <Reveal>
-          <TealCTABanner
-            title="Join Our Team!"
-            subtitle="Build the tools, workflows, and shared systems that help independent freight forwarders move faster without losing what makes them local."
-            primaryLabel="View Open Positions"
-            primaryHref="#open-positions"
-            secondaryLabel="View All Jobs on Ashby"
-            secondaryHref="https://jobs.ashbyhq.com/voyfai"
-            secondaryExternal
-          />
+      {/* ─── JOIN OUR TEAM CTA ───────────────────────────────── */}
+      <section
+        style={{
+          background: "linear-gradient(165deg, #000000 0%, #141414 100%)",
+          padding: "96px 24px",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Subtle texture */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            opacity: 0.04,
+            backgroundImage: `
+              radial-gradient(circle at 25% 50%, rgba(3,166,150,0.3) 0%, transparent 50%),
+              radial-gradient(circle at 75% 50%, rgba(20,20,20,0.4) 0%, transparent 50%)
+            `,
+          }}
+        />
+
+        <Reveal
+          style={{
+            maxWidth: 680,
+            margin: "0 auto",
+            textAlign: "center",
+            position: "relative",
+          }}
+        >
+          <div
+            style={{
+              width: 56,
+              height: 56,
+              borderRadius: 12,
+              background: "rgba(3,166,150,0.15)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: COLORS.copperLight,
+              margin: "0 auto 28px",
+            }}
+          >
+            {Icons.send}
+          </div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(28px, 3.5vw, 42px)",
+              fontWeight: 700,
+              color: COLORS.white,
+              margin: "0 0 16px",
+              lineHeight: 1.25,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Join our team
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 17,
+              fontWeight: 300,
+              lineHeight: 1.7,
+              color: "rgba(255,255,255,0.5)",
+              margin: "0 auto 40px",
+              maxWidth: 540,
+            }}
+          >
+            Build the tools, workflows, and shared systems that help independent freight forwarders move faster without losing what makes them local.
+          </p>
+          <div
+            style={{
+              display: "flex",
+              gap: 16,
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <Link
+              to="/careers#find-your-role"
+              className="cta-btn cta-primary"
+              style={viewOpenRolesCtaStyle}
+            >
+              View open positions
+              <span>{Icons.arrowRight}</span>
+            </Link>
+            <a
+              href="https://jobs.ashbyhq.com/voyfai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-btn cta-secondary"
+              style={{
+                fontSize: 16,
+                padding: "16px 32px",
+                background: "rgba(255,255,255,0.05)",
+                color: COLORS.white,
+                borderColor: "rgba(255,255,255,0.1)"
+              }}
+            >
+              View all jobs on Ashby
+              <span>{Icons.external}</span>
+            </a>
+          </div>
         </Reveal>
-      </Section>
+      </section>
 
       {/* ─── OPEN POSITIONS ─────────────────────────────────────── */}
-      <Section id="open-positions" bg={COLORS.cream}>
+      <Section id="find-your-role" bg={COLORS.cream}>
         <Reveal>
           <div style={{ textAlign: "center", marginBottom: 28 }}>
             <SectionLabel>Open Positions</SectionLabel>
@@ -530,11 +781,11 @@ export default function Careers() {
             <p
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 16,
+                fontSize: 17,
                 lineHeight: 1.7,
                 color: COLORS.textMuted,
-                maxWidth: 560,
-                margin: "0 auto 24px",
+                maxWidth: 540,
+                margin: "0 auto 40px",
               }}
             >
               Open roles are loaded directly from Ashby. Each listing has the current
@@ -603,7 +854,7 @@ export default function Careers() {
               rel="noopener noreferrer"
               className="cta-btn cta-primary"
             >
-              View All Jobs on Ashby
+              View all jobs on Ashby
               <span>{Icons.external}</span>
             </a>
           </div>
@@ -667,36 +918,65 @@ export default function Careers() {
             position: "relative",
           }}
         >
+          <div
+            style={{
+              width: 56,
+              height: 56,
+              borderRadius: 12,
+              background: "rgba(3,166,150,0.15)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: COLORS.copperLight,
+              margin: "0 auto 28px",
+            }}
+          >
+            {Icons.compass}
+          </div>
           <h2
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 4vw, 44px)",
+              fontSize: "clamp(28px, 3.5vw, 42px)",
               fontWeight: 700,
               color: COLORS.white,
               margin: "0 0 16px",
-              lineHeight: 1.2,
-              letterSpacing: "-0.025em",
+              lineHeight: 1.25,
+              letterSpacing: "-0.02em",
             }}
           >
-            Ready to Shape the Future?
+            Ready to shape the future?
           </h2>
           <p
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: 17,
               fontWeight: 300,
-              lineHeight: 1.75,
+              lineHeight: 1.7,
               color: "rgba(255,255,255,0.5)",
-              margin: "0 auto 36px",
-              maxWidth: 480,
+              margin: "0 auto 40px",
+              maxWidth: 540,
             }}
           >
             Join us in building the operating layer for independent freight forwarders.
           </p>
-          <a href="#open-positions" className="cta-btn cta-primary">
-            Apply Now
-            <span>{Icons.arrowRight}</span>
-          </a>
+          <div
+            style={{
+              display: "flex",
+              gap: 16,
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <a
+              href="https://jobs.ashbyhq.com/voyfai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-btn cta-primary"
+            >
+              Apply now
+              <span>{Icons.external}</span>
+            </a>
+          </div>
         </Reveal>
       </section>
     </>
