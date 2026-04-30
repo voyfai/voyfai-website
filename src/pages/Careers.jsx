@@ -194,7 +194,7 @@ export default function Careers() {
         {/* Hero background image */}
         <picture>
           <img
-            src="/voyfai-website/images/voyfai_careers_hero_1777475797821.png"
+            src="/images/voyfai_careers_hero_1777475797821.png"
             alt=""
             aria-hidden="true"
             onLoad={() => setHeroLoaded(true)}
@@ -474,7 +474,7 @@ export default function Careers() {
           <div style={{ marginBottom: 56, borderRadius: RADIUS.lg, overflow: "hidden", height: "min(60vh, 500px)", position: "relative" }}>
             <motion.img 
               ref={lifeImgRef}
-              src="/voyfai-website/images/voyfai_careers_life_1777475811545.png" 
+              src="/images/voyfai_careers_life_1777475811545.png" 
               alt="Life at Voyfai" 
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", scale: 1.1, y: reducedMotion ? 0 : lifeImgY }} 
             />
@@ -590,7 +590,7 @@ export default function Careers() {
         <Reveal>
           <div style={{ marginBottom: 56, borderRadius: RADIUS.lg, overflow: "hidden", height: "min(60vh, 500px)" }}>
             <img 
-              src="/voyfai-website/images/voyfai_careers_team_1777475827094.png" 
+              src="/images/voyfai_careers_team_1777475827094.png" 
               alt="Our Team" 
               style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} 
             />
