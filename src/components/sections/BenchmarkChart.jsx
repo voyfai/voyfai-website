@@ -27,7 +27,7 @@ export default function BenchmarkChart() {
         
         <FadeUp delay={800}>
           <div style={{ textAlign: "center", color: "rgba(255,255,255,0.4)", fontSize: 13, marginTop: 32 }}>
-            Operator effort across common freight-forwarding workflows.
+            Efficiency measured by freight forwarder operator time required per shipment.
           </div>
         </FadeUp>
       </div>
