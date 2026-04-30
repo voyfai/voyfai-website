@@ -1,9 +1,28 @@
 @font-face {
   font-family: "Adrianna Extended";
-  src: url("/AdriannaExtended-Bold.ttf") format("truetype");
+  src: url("/AdriannaExtended-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: optional;
+  unicode-range: U+0000-00FF, U+0100-024F, U+0259, U+1E00-1EFF,
+                 U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+                 U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+                 U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Metric-adjusted fallback — minimizes CLS when Adrianna misses the
+   font-display: optional budget. Calibrate visually with
+   https://meowni.ca/font-style-matcher/ if heading reflow is visible. */
+@font-face {
+  font-family: "Adrianna Extended Fallback";
+  src: local("Plus Jakarta Sans Bold"), local("PlusJakartaSans-Bold"),
+       local("Arial Bold"), local("Arial");
+  font-weight: 700;
+  font-style: normal;
+  size-adjust: 108%;
+  ascent-override: 95%;
+  descent-override: 22%;
+  line-gap-override: 0%;
 }
 
 *,
@@ -15,8 +34,10 @@
 }
 
 :root {
-  --font-display: "Adrianna Extended", "Bricolage Grotesque", "Plus Jakarta Sans",
-    system-ui, sans-serif;
+  /* Bricolage Grotesque (per AGENT.md) is not yet self-hosted; metric-
+     adjusted Plus Jakarta Sans is the active fallback. Follow-up: self-host. */
+  --font-display: "Adrianna Extended", "Adrianna Extended Fallback",
+    "Plus Jakarta Sans", system-ui, sans-serif;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -63,7 +84,7 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #000;
+  background-color: #111111;
   overscroll-behavior: none;
 }
 
@@ -761,6 +782,28 @@ body {
   opacity: 1;
 }
 
+.hub-mobile-connectors {
+  display: none;
+}
+
+.hub-mobile-connector-path {
+  fill: none;
+  opacity: 0;
+  stroke: rgba(3, 166, 150, 0.45);
+  stroke-dasharray: 2 6;
+  stroke-dashoffset: 16;
+  stroke-linecap: round;
+  stroke-width: 1;
+  transition: opacity 700ms var(--ease-voyfai) 1100ms,
+    stroke-dashoffset 700ms var(--ease-voyfai) 1100ms;
+  vector-effect: non-scaling-stroke;
+}
+
+.hub-preview-section[data-has-entered="true"] .hub-mobile-connector-path {
+  opacity: 1;
+  stroke-dashoffset: 0;
+}
+
 .hub-node {
   align-items: center;
   background: #0a0a0a;
@@ -1378,6 +1421,15 @@ body {
   }
   .hub-callout {
     display: none;
+  }
+  .hub-mobile-connectors {
+    display: block;
+    height: 32px;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: -32px;
+    width: 100%;
   }
 }
 

@@ -139,6 +139,22 @@ function ConnectorField() {
   );
 }
 
+function MobileConnectorField() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="hub-mobile-connectors"
+      viewBox="0 0 600 32"
+      preserveAspectRatio="none"
+      focusable="false"
+    >
+      <path className="hub-mobile-connector-path" d="M 100 32 C 100 16 240 14 300 0" />
+      <path className="hub-mobile-connector-path" d="M 300 32 L 300 0" />
+      <path className="hub-mobile-connector-path" d="M 500 32 C 500 16 360 14 300 0" />
+    </svg>
+  );
+}
+
 function InputTile({ input, index }) {
   const Icon = input.Icon;
 
@@ -273,6 +289,7 @@ export default function HubPreview() {
           }}
         >
           <div className="hub-inputs" aria-label="Signals feeding Voyfai Hub">
+            <MobileConnectorField />
             {INPUTS.map((input, index) => (
               <InputTile key={input.label} input={input} index={index} />
             ))}
