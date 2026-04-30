@@ -4,7 +4,7 @@ export default function SectionLabel({ children }) {
   return (
     <div
       style={{
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontFamily: "var(--font-body)",
         fontSize: 13,
         fontWeight: 500,
         letterSpacing: "0.08em",

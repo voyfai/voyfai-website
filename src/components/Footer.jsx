@@ -71,7 +71,7 @@ export default function Footer() {
           </div>
           <p
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 13,
               color: "rgba(255,255,255,0.35)",
               maxWidth: 320,
@@ -120,7 +120,7 @@ export default function Footer() {
         >
           <div
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 12,
               color: "rgba(255,255,255,0.2)",
             }}

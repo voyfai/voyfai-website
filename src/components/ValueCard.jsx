@@ -34,7 +34,7 @@ export default function ValueCard({ icon, title, description, chips = [], accent
       </div>
       <h3
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "var(--font-body)",
           fontSize: 22,
           fontWeight: 600,
           color: COLORS.navy,
@@ -48,7 +48,7 @@ export default function ValueCard({ icon, title, description, chips = [], accent
       </h3>
       <p
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "var(--font-body)",
           fontSize: 15,
           fontWeight: 400,
           lineHeight: 1.7,
@@ -63,7 +63,7 @@ export default function ValueCard({ icon, title, description, chips = [], accent
         <div style={{ marginTop: "auto", paddingTop: 16, borderTop: `1px solid ${COLORS.border}` }}>
           <div
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 12,
               fontWeight: 600,
               letterSpacing: "0.06em",
@@ -87,7 +87,7 @@ export default function ValueCard({ icon, title, description, chips = [], accent
               <span
                 key={chip}
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "var(--font-body)",
                   fontSize: 12,
                   fontWeight: 500,
                   padding: "5px 10px",

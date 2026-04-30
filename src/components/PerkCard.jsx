@@ -29,7 +29,7 @@ export default function PerkCard({ icon, title, description, accent = COLORS.cop
       </div>
       <h4
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "var(--font-body)",
           fontSize: 16,
           fontWeight: 600,
           color: COLORS.navy,
@@ -42,7 +42,7 @@ export default function PerkCard({ icon, title, description, accent = COLORS.cop
       </h4>
       <p
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "var(--font-body)",
           fontSize: 14,
           fontWeight: 400,
           lineHeight: 1.65,

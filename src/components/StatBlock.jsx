@@ -5,7 +5,7 @@ export default function StatBlock({ value, label }) {
     <div style={{ textAlign: "center" }}>
       <div
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "var(--font-body)",
           fontSize: "clamp(32px, 4.5vw, 48px)",
           fontWeight: 600,
           color: COLORS.copper,
@@ -17,7 +17,7 @@ export default function StatBlock({ value, label }) {
       </div>
       <div
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "var(--font-body)",
           fontSize: 13,
           fontWeight: 500,
           color: COLORS.textMuted,

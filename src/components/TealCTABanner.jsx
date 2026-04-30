@@ -49,7 +49,7 @@ export default function TealCTABanner({
       {subtitle && (
         <p
           style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "var(--font-body)",
             fontSize: 15,
             fontWeight: 400,
             lineHeight: 1.65,

@@ -57,7 +57,7 @@ export default function TeamSpotlight({ members }) {
                 borderRadius: RADIUS.md,
                 cursor: "pointer",
                 textAlign: "left",
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 transition:
                   "background 200ms ease, border-color 200ms ease, transform 160ms var(--ease-out)",
                 boxShadow: isActive ? "var(--shadow-sm)" : "none",
@@ -171,7 +171,7 @@ export default function TeamSpotlight({ members }) {
         >
           <p
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "clamp(16px, 1.6vw, 19px)",
               fontWeight: 400,
               lineHeight: 1.7,
@@ -213,7 +213,7 @@ export default function TeamSpotlight({ members }) {
             <div>
               <div
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "var(--font-body)",
                   fontSize: 15,
                   fontWeight: 600,
                   color: COLORS.white,
@@ -223,7 +223,7 @@ export default function TeamSpotlight({ members }) {
               </div>
               <div
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "var(--font-body)",
                   fontSize: 13,
                   color: COLORS.copperLight,
                   marginTop: 2,

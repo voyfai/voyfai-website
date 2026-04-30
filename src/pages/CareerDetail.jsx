@@ -24,7 +24,7 @@ function Pill({ children, tone = "light" }) {
     <span
       style={{
         ...styles,
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
+        fontFamily: "var(--font-body)",
         fontSize: 13,
         fontWeight: 500,
         padding: "6px 12px",
@@ -112,7 +112,7 @@ export default function CareerDetail() {
         </h1>
         <p
           style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "var(--font-body)",
             fontSize: 16,
             color: COLORS.textMuted,
             margin: "0 0 32px",
@@ -167,7 +167,7 @@ export default function CareerDetail() {
               alignItems: "center",
               gap: 8,
               color: "rgba(255,255,255,0.6)",
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 14,
               fontWeight: 500,
               textDecoration: "none",
@@ -184,7 +184,7 @@ export default function CareerDetail() {
           </Link>
           <div
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 13,
               fontWeight: 600,
               letterSpacing: "0.08em",
@@ -264,7 +264,7 @@ export default function CareerDetail() {
           >
             <div
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: 13,
                 fontWeight: 600,
                 letterSpacing: "0.06em",
@@ -277,7 +277,7 @@ export default function CareerDetail() {
             </div>
             <p
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: 14,
                 color: COLORS.text,
                 lineHeight: 1.65,
@@ -302,7 +302,7 @@ export default function CareerDetail() {
             </a>
             <div
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: 12,
                 color: COLORS.textMuted,
                 marginTop: 14,

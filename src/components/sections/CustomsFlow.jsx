@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { Icons } from "../../constants/icons";
@@ -16,81 +16,19 @@ const NODES = [
 
 export default function CustomsFlow() {
   const containerRef = useRef(null);
-  const trackRef = useRef(null);
   const activeLineRef = useRef(null);
-  const nodeRefs = useRef([]);
-  const [lineMetrics, setLineMetrics] = useState({ x1: 0, x2: 0, y: 0, length: 0 });
 
   useLayoutEffect(() => {
-    const measureLine = () => {
-      const track = trackRef.current;
-      const firstNode = nodeRefs.current[0];
-      const lastNode = nodeRefs.current[NODES.length - 1];
-
-      if (!track || !firstNode || !lastNode) {
-        return;
-      }
-
-      const trackRect = track.getBoundingClientRect();
-      const firstRect = firstNode.getBoundingClientRect();
-      const lastRect = lastNode.getBoundingClientRect();
-      const x1 = firstRect.left + firstRect.width / 2 - trackRect.left;
-      const x2 = lastRect.left + lastRect.width / 2 - trackRect.left;
-      const y = trackRect.height / 2;
-      const length = Math.max(0, x2 - x1);
-
-      setLineMetrics((current) => {
-        if (
-          Math.abs(current.x1 - x1) < 0.5 &&
-          Math.abs(current.x2 - x2) < 0.5 &&
-          Math.abs(current.y - y) < 0.5
-        ) {
-          return current;
-        }
-
-        return { x1, x2, y, length };
-      });
-    };
-
-    measureLine();
-
-    const resizeObserver =
-      typeof ResizeObserver !== "undefined" ? new ResizeObserver(measureLine) : null;
-
-    if (resizeObserver && trackRef.current) {
-      resizeObserver.observe(trackRef.current);
-    }
-
-    window.addEventListener("resize", measureLine);
-
-    return () => {
-      resizeObserver?.disconnect();
-      window.removeEventListener("resize", measureLine);
-    };
-  }, []);
-
-  useLayoutEffect(() => {
-    if (!lineMetrics.length || !activeLineRef.current) {
-      return;
-    }
+    if (!activeLineRef.current) return;
 
     const canPin =
       window.matchMedia("(min-width: 900px)").matches &&
       !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (!canPin) {
-      gsap.set(activeLineRef.current, {
-        strokeDasharray: lineMetrics.length,
-        strokeDashoffset: 0,
-      });
-      return;
-    }
+    if (!canPin) return;
 
     const ctx = gsap.context(() => {
-      gsap.set(activeLineRef.current, {
-        strokeDasharray: lineMetrics.length,
-        strokeDashoffset: lineMetrics.length,
-      });
+      gsap.set(activeLineRef.current, { scaleX: 0, transformOrigin: "left center" });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -99,18 +37,14 @@ export default function CustomsFlow() {
           end: "+=20%",
           pin: true,
           scrub: 0.5,
-        }
+        },
       });
 
-      tl.to(activeLineRef.current, {
-        strokeDashoffset: 0,
-        ease: "none",
-        duration: 1
-      }, 0);
+      tl.to(activeLineRef.current, { scaleX: 1, ease: "none", duration: 1 }, 0);
 
       NODES.forEach((_, i) => {
         const nodeProgress = i / (NODES.length - 1);
-        
+
         tl.to(`.node-${i}`, {
           borderColor: "var(--voyfai-teal)",
           color: "var(--voyfai-teal)",
@@ -125,7 +59,7 @@ export default function CustomsFlow() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, [lineMetrics.length]);
+  }, []);
 
   return (
     /* Pinned ScrollTrigger scrub section — sized by viewport, so it skips the canonical 96px padding. */
@@ -136,37 +70,20 @@ export default function CustomsFlow() {
             <MaskReveal>From shipper email to customs filing</MaskReveal>
           </h2>
         </div>
-        
-        <div ref={trackRef} className="customs-flow-track">
-          {lineMetrics.length > 0 && (
-            <svg className="customs-flow-line-svg" aria-hidden="true">
-              <line
-                className="customs-flow-line customs-flow-line--base"
-                x1={lineMetrics.x1}
-                x2={lineMetrics.x2}
-                y1={lineMetrics.y}
-                y2={lineMetrics.y}
-              />
-              <line
-                ref={activeLineRef}
-                className="customs-flow-line customs-flow-line--active"
-                x1={lineMetrics.x1}
-                x2={lineMetrics.x2}
-                y1={lineMetrics.y}
-                y2={lineMetrics.y}
-                strokeDasharray={lineMetrics.length}
-                strokeDashoffset={lineMetrics.length}
-              />
-            </svg>
-          )}
 
-          {/* Nodes */}
+        <div className="customs-flow-track">
+          <div className="customs-flow-line customs-flow-line--base" aria-hidden="true" />
+          <div
+            ref={activeLineRef}
+            className="customs-flow-line customs-flow-line--active"
+            aria-hidden="true"
+          />
+
           {NODES.map((node, i) => (
             <div key={node.id} className="customs-flow-node">
-              {/* Node Data Popup */}
-              <div 
+              <div
                 className={`node-data-${i}`}
-                style={{ 
+                style={{
                   position: "absolute", bottom: "100%", marginBottom: 16, background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 6, padding: "8px 12px", width: 140, transform: "translateY(0)",
                 }}
               >
@@ -174,12 +91,8 @@ export default function CustomsFlow() {
                 <div style={{ fontSize: 11, fontFamily: "monospace", color: "var(--voyfai-teal)" }}>{node.data.value}</div>
               </div>
 
-              {/* Node Circle */}
-              <div 
+              <div
                 className={`node-${i}`}
-                ref={(el) => {
-                  nodeRefs.current[i] = el;
-                }}
                 style={{ width: 48, height: 48, borderRadius: "50%", background: "#000", border: "2px solid var(--voyfai-teal)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--voyfai-teal)", transition: "border-color 200ms var(--ease-out-quart), color 200ms var(--ease-out-quart)" }}
               >
                 {node.icon}

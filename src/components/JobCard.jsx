@@ -30,7 +30,7 @@ export default function JobCard({ job }) {
       >
         <h3
           style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "var(--font-body)",
             fontSize: 18,
             fontWeight: 600,
             color: COLORS.navy,
@@ -43,7 +43,7 @@ export default function JobCard({ job }) {
         </h3>
         <span
           style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "var(--font-body)",
             fontSize: 11,
             fontWeight: 600,
             padding: "4px 10px",
@@ -69,7 +69,7 @@ export default function JobCard({ job }) {
           fontSize: 13,
           color: COLORS.textMuted,
           marginBottom: 20,
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "var(--font-body)",
         }}
       >
         <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
@@ -114,7 +114,7 @@ export default function JobCard({ job }) {
       >
         <span
           style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "var(--font-body)",
             fontSize: 13,
             fontWeight: 500,
             color: COLORS.textMuted,
@@ -127,7 +127,7 @@ export default function JobCard({ job }) {
             display: "inline-flex",
             alignItems: "center",
             gap: 8,
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "var(--font-body)",
             fontSize: 14,
             fontWeight: 600,
             color: COLORS.copper,

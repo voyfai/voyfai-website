@@ -10,16 +10,43 @@
                  U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/BricolageGrotesque-800.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                 U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Plus Jakarta Sans is the live body face — kept over the AGENT.md-mandated
+   Segoe UI to preserve current visual identity. Single variable file covers
+   weights 400–700 (latin subset). */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/PlusJakartaSans-VF.woff2") format("woff2-variations"),
+       url("/PlusJakartaSans-VF.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                 U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* Metric-adjusted fallback — minimizes CLS when Adrianna misses the
-   font-display: optional budget. Calibrate visually with
-   https://meowni.ca/font-style-matcher/ if heading reflow is visible. */
+   font-display: optional budget and Bricolage is the rendered display face.
+   Override values calibrated against Adrianna Extended Bold metrics; recheck
+   with the font-style-matcher if Adrianna is later swapped. */
 @font-face {
   font-family: "Adrianna Extended Fallback";
-  src: local("Plus Jakarta Sans Bold"), local("PlusJakartaSans-Bold"),
+  src: local("Bricolage Grotesque ExtraBold"), local("BricolageGrotesque-ExtraBold"),
        local("Arial Bold"), local("Arial");
-  font-weight: 700;
+  font-weight: 700 800;
   font-style: normal;
-  size-adjust: 108%;
+  size-adjust: 100%;
   ascent-override: 95%;
   descent-override: 22%;
   line-gap-override: 0%;
@@ -34,10 +61,10 @@
 }
 
 :root {
-  /* Bricolage Grotesque (per AGENT.md) is not yet self-hosted; metric-
-     adjusted Plus Jakarta Sans is the active fallback. Follow-up: self-host. */
   --font-display: "Adrianna Extended", "Adrianna Extended Fallback",
-    "Plus Jakarta Sans", system-ui, sans-serif;
+    "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", "Segoe UI", -apple-system,
+    BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -62,7 +89,7 @@
   --voyfai-teal-tint-10: rgba(3, 166, 150, 0.1);
   --voyfai-ink: #111111;
   --voyfai-ink-muted: #666666;
-  --voyfai-ink-faint: #808080;
+  --voyfai-ink-faint: #6B6B6B;
   --voyfai-surface: #ffffff;
   --voyfai-surface-page: #fafafa;
   --voyfai-surface-subtle: #f5f5f5;
@@ -96,7 +123,7 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
 }
 
 /* ─── ANIMATIONS ─────────────────────────────────────────────── */
@@ -250,7 +277,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
   font-size: 15px;
   font-weight: 500;
   padding: 14px 28px;
@@ -415,7 +442,7 @@ body {
 /* ─── FOOTER LINKS ───────────────────────────────────────────── */
 
 .footer-link {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
   font-size: 13px;
   color: rgba(255, 255, 255, 0.4);
   text-decoration: none;
@@ -448,7 +475,7 @@ body {
   margin: 0;
   padding: 4px 2px;
   cursor: pointer;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
   line-height: inherit;
 }
 
@@ -467,7 +494,7 @@ body {
 /* ─── PROSE (job descriptions) ───────────────────────────────── */
 
 .prose {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.75;
   color: #3a3a3c;
@@ -631,7 +658,7 @@ body {
 
 .hub-preview-heading p {
   color: var(--voyfai-ink-muted);
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
   font-size: 17px;
   font-weight: 400;
   line-height: 1.7;
@@ -1270,30 +1297,27 @@ body {
   position: relative;
 }
 
-.customs-flow-line-svg {
-  height: 100%;
-  inset: 0;
-  overflow: visible;
-  pointer-events: none;
+.customs-flow-line {
+  /* Track is flex; nodes are 100px wide. Line spans node-center to node-center
+     via 50px insets — geometry is layout-derived, no JS measurement. */
   position: absolute;
-  width: 100%;
+  top: 50%;
+  left: 50px;
+  right: 50px;
+  height: 1.5px;
+  pointer-events: none;
+  transform: translateY(-50%);
   z-index: 1;
 }
 
-.customs-flow-line {
-  fill: none;
-  stroke-linecap: round;
-  stroke-width: 1.5;
-  vector-effect: non-scaling-stroke;
-}
-
 .customs-flow-line--base {
-  stroke: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .customs-flow-line--active {
-  stroke: var(--voyfai-teal);
-  will-change: stroke-dashoffset;
+  background: var(--voyfai-teal);
+  transform-origin: left center;
+  will-change: transform;
 }
 
 .customs-flow-node {
@@ -1708,7 +1732,7 @@ body {
 /* ─── LEGAL PROSE (privacy / imprint pages) ──────────────────── */
 
 .legal-prose {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
   color: var(--voyfai-ink);
 }
 
@@ -1729,7 +1753,7 @@ body {
 }
 
 .legal-prose h3 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.01em;

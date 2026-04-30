@@ -29,7 +29,7 @@ export default function BenefitCard({ icon, title, subtitle, description, items 
       </div>
       <h3
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "var(--font-body)",
           fontSize: 21,
           fontWeight: 600,
           color: COLORS.navy,
@@ -42,7 +42,7 @@ export default function BenefitCard({ icon, title, subtitle, description, items 
       </h3>
       <p
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "var(--font-body)",
           fontSize: 15,
           fontWeight: 400,
           color: COLORS.copper,
@@ -54,7 +54,7 @@ export default function BenefitCard({ icon, title, subtitle, description, items 
       </p>
       <p
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "var(--font-body)",
           fontSize: 15,
           fontWeight: 400,
           lineHeight: 1.7,
@@ -70,7 +70,7 @@ export default function BenefitCard({ icon, title, subtitle, description, items 
             <li
               key={i}
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: 14,
                 color: COLORS.text,
                 display: "flex",

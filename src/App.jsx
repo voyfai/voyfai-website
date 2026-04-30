@@ -42,7 +42,7 @@ export default function App() {
       <ScrollToLocation />
       <div
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "var(--font-body)",
           color: "#1D1D1F",
           fontWeight: 400,
           background: "#FFFFFF",

@@ -158,6 +158,9 @@ export default function Navbar() {
           <button
             className="mobile-trigger"
             onClick={() => setMobileMenu(!mobileMenu)}
+            aria-label={mobileMenu ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenu}
+            aria-controls="mobile-menu"
             style={{
               display: "none",
               background: "none",
@@ -175,6 +178,7 @@ export default function Navbar() {
       {/* Mobile Menu Overlay */}
       {mobileMenu && (
         <div
+          id="mobile-menu"
           className="mobile-menu"
           style={{
             position: "fixed",
@@ -193,7 +197,7 @@ export default function Navbar() {
         >
           {navLinks.map((link) => {
             const commonStyle = {
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 18,
               fontWeight: 400,
               color: "rgba(255,255,255,0.8)",

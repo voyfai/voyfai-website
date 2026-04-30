@@ -272,7 +272,7 @@ export default function Careers() {
           </h1>
           <p
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "clamp(16px, 2vw, 18px)",
               fontWeight: 300,
               lineHeight: 1.75,
@@ -320,7 +320,7 @@ export default function Careers() {
         >
           <span
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 11,
               fontWeight: 400,
               letterSpacing: "0.12em",
@@ -403,7 +403,7 @@ export default function Careers() {
             </h2>
             <p
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: 17,
                 lineHeight: 1.7,
                 color: COLORS.textMuted,
@@ -456,7 +456,7 @@ export default function Careers() {
             </h2>
             <p
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: 17,
                 lineHeight: 1.7,
                 color: COLORS.textMuted,
@@ -515,7 +515,7 @@ export default function Careers() {
                 <div style={{ position: "relative", paddingBottom: 16 }}>
                   <div
                     style={{
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontFamily: "var(--font-body)",
                       fontSize: 48,
                       fontWeight: 600,
                       color: COLORS.navy,
@@ -538,7 +538,7 @@ export default function Careers() {
                 </div>
                 <div
                   style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontFamily: "var(--font-body)",
                     fontSize: 14,
                     color: COLORS.textMuted,
                     fontWeight: 500,
@@ -574,7 +574,7 @@ export default function Careers() {
             </h2>
             <p
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: 17,
                 lineHeight: 1.7,
                 color: COLORS.textMuted,
@@ -623,7 +623,7 @@ export default function Careers() {
             </h2>
             <p
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: 17,
                 lineHeight: 1.7,
                 color: COLORS.textMuted,
@@ -712,7 +712,7 @@ export default function Careers() {
           </h2>
           <p
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 17,
               fontWeight: 300,
               lineHeight: 1.7,
@@ -780,7 +780,7 @@ export default function Careers() {
             </h2>
             <p
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: 17,
                 lineHeight: 1.7,
                 color: COLORS.textMuted,
@@ -841,7 +841,7 @@ export default function Careers() {
           >
             <p
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 color: COLORS.textMuted,
                 marginBottom: 16,
               }}
@@ -866,7 +866,7 @@ export default function Careers() {
               textAlign: "center",
               padding: "48px 24px",
               color: COLORS.textMuted,
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
             }}
           >
             No open positions in this department right now.
@@ -948,7 +948,7 @@ export default function Careers() {
           </h2>
           <p
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 17,
               fontWeight: 300,
               lineHeight: 1.7,

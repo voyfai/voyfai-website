@@ -2,7 +2,7 @@
    Loaded after the library's stylesheet so cascade wins. */
 
 #cc-main {
-  --cc-font-family: "Plus Jakarta Sans", sans-serif;
+  --cc-font-family: var(--font-body);
 
   --cc-bg: #ffffff;
   --cc-primary-color: #1d1d1f;

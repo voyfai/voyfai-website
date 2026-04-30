@@ -65,7 +65,7 @@ export default function DetailSection({ id, label, title, items, bg }) {
             <div style={{ padding: "32px 24px", flex: 1 }}>
               <div
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "var(--font-body)",
                   fontSize: 13,
                   fontWeight: 500,
                   color: COLORS.copper,
@@ -75,9 +75,9 @@ export default function DetailSection({ id, label, title, items, bg }) {
               >
                 0{i + 1}
               </div>
-              <h4
+              <h3
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "var(--font-body)",
                   fontSize: 17,
                   fontWeight: 600,
                   color: COLORS.navy,
@@ -87,10 +87,10 @@ export default function DetailSection({ id, label, title, items, bg }) {
                 }}
               >
                 {item.title}
-              </h4>
+              </h3>
               <p
                 style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontFamily: "var(--font-body)",
                   fontSize: 15,
                   fontWeight: 400,
                   lineHeight: 1.7,

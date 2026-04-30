@@ -31,7 +31,7 @@ export default function LegalPage({ eyebrow = "Legal", title, lastUpdated, child
           {lastUpdated && (
             <p
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: 13,
                 color: COLORS.textMuted,
                 marginTop: 12,

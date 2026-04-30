@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { COLORS } from "../constants/colors";
 import { Icons } from "../constants/icons";
 import Section from "../components/Section";
@@ -6,7 +6,6 @@ import SectionLabel from "../components/SectionLabel";
 import BenefitCard from "../components/BenefitCard";
 import DetailSection from "../components/DetailSection";
 import TestimonialCard from "../components/TestimonialCard";
-import NorthernEuropeMap from "../components/NorthernEuropeMap";
 import Reveal from "../components/Reveal";
 import useReducedMotion from "../hooks/useReducedMotion";
 
@@ -18,16 +17,17 @@ import heartcoreLogo from "../assets/2-Heartcore.svg";
 import earlybirdLogo from "../assets/3-Earlybird.svg";
 import blisceLogo from "../assets/4-blisce.png";
 
-// Tech graphics
-import RateCompare from "../components/sections/tech/RateCompare";
-import ShipmentIntake from "../components/sections/tech/ShipmentIntake";
-import HubTracker from "../components/sections/tech/HubTracker";
-import CustomsScan from "../components/sections/tech/CustomsScan";
-
-import BenchmarkChart from "../components/sections/BenchmarkChart";
-import CustomsFlow from "../components/sections/CustomsFlow";
-import HubPreview from "../components/sections/HubPreview";
-import ComplianceBand from "../components/sections/ComplianceBand";
+// Below-the-fold — code-split so GSAP, the Europe map SVG, and the heavier
+// section bundles don't block the entry chunk or the LCP paint.
+const NorthernEuropeMap = lazy(() => import("../components/NorthernEuropeMap"));
+const RateCompare = lazy(() => import("../components/sections/tech/RateCompare"));
+const ShipmentIntake = lazy(() => import("../components/sections/tech/ShipmentIntake"));
+const HubTracker = lazy(() => import("../components/sections/tech/HubTracker"));
+const CustomsScan = lazy(() => import("../components/sections/tech/CustomsScan"));
+const BenchmarkChart = lazy(() => import("../components/sections/BenchmarkChart"));
+const CustomsFlow = lazy(() => import("../components/sections/CustomsFlow"));
+const HubPreview = lazy(() => import("../components/sections/HubPreview"));
+const ComplianceBand = lazy(() => import("../components/sections/ComplianceBand"));
 
 export default function Home() {
   const reducedMotion = useReducedMotion();
@@ -147,7 +147,7 @@ export default function Home() {
 
           <p
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: "clamp(16px, 2vw, 18px)",
               fontWeight: 300,
               lineHeight: 1.75,
@@ -191,7 +191,7 @@ export default function Home() {
         >
           <span
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 11,
               fontWeight: 400,
               letterSpacing: "0.12em",
@@ -244,7 +244,7 @@ export default function Home() {
           </h2>
           <p
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 17,
               fontWeight: 400,
               lineHeight: 1.7,
@@ -336,7 +336,7 @@ export default function Home() {
             </h2>
             <p
               style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontFamily: "var(--font-body)",
                 fontSize: 17,
                 fontWeight: 400,
                 lineHeight: 1.7,
@@ -368,7 +368,7 @@ export default function Home() {
                   <div style={{ position: "relative", paddingBottom: 16 }}>
                     <div
                       style={{
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontFamily: "var(--font-body)",
                         fontSize: 48,
                         fontWeight: 600,
                         color: COLORS.navy,
@@ -391,7 +391,7 @@ export default function Home() {
                   </div>
                   <div
                     style={{
-                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                      fontFamily: "var(--font-body)",
                       fontSize: 14,
                       color: COLORS.textMuted,
                       fontWeight: 500,
@@ -406,51 +406,59 @@ export default function Home() {
           </div>
 
           <div style={{ paddingTop: 16 }}>
-            <NorthernEuropeMap />
+            <Suspense fallback={null}>
+              <NorthernEuropeMap />
+            </Suspense>
           </div>
         </div>
         </Reveal>
       </Section>
 
-      <BenchmarkChart />
+      <Suspense fallback={null}>
+        <BenchmarkChart />
+      </Suspense>
 
       {/* ─── TECHNOLOGY ─────────────────────────────────────────── */}
-      <DetailSection
-        id="technology"
-        bg={COLORS.cream}
-        label="AI Technology"
-        title="Tools built by forwarders, for forwarders"
-        items={[
-          {
-            graphic: <RateCompare />,
-            title: "Instant Rate Comparison",
-            description:
-              "Compare carrier options in seconds and deliver accurate quotes within minutes. Operators spend time on relationships, not spreadsheets.",
-          },
-          {
-            graphic: <ShipmentIntake />,
-            title: "Automated Shipment Creation",
-            description:
-              "Our AI agent converts booking emails directly into structured shipments in the TMS, reducing manual data entry and eliminating errors.",
-          },
-          {
-            graphic: <HubTracker />,
-            title: "Voyfai Hub: Live Visibility",
-            description:
-              "A client portal that keeps clients continuously informed with smart alerts, automated updates, and full shipment transparency from origin to destination.",
-          },
-          {
-            graphic: <CustomsScan />,
-            title: "Intelligent Customs Automation",
-            description:
-              "Streamline customs declarations with AI that classifies HS codes and processes documents, improving both speed and accuracy.",
-          },
-        ]}
-      />
+      <Suspense fallback={null}>
+        <DetailSection
+          id="technology"
+          bg={COLORS.cream}
+          label="AI Technology"
+          title="Tools built by forwarders, for forwarders"
+          items={[
+            {
+              graphic: <RateCompare />,
+              title: "Instant Rate Comparison",
+              description:
+                "Compare carrier options in seconds and deliver accurate quotes within minutes. Operators spend time on relationships, not spreadsheets.",
+            },
+            {
+              graphic: <ShipmentIntake />,
+              title: "Automated Shipment Creation",
+              description:
+                "Our AI agent converts booking emails directly into structured shipments in the TMS, reducing manual data entry and eliminating errors.",
+            },
+            {
+              graphic: <HubTracker />,
+              title: "Voyfai Hub: Live Visibility",
+              description:
+                "A client portal that keeps clients continuously informed with smart alerts, automated updates, and full shipment transparency from origin to destination.",
+            },
+            {
+              graphic: <CustomsScan />,
+              title: "Intelligent Customs Automation",
+              description:
+                "Streamline customs declarations with AI that classifies HS codes and processes documents, improving both speed and accuracy.",
+            },
+          ]}
+        />
+      </Suspense>
 
-      <CustomsFlow />
-      <HubPreview />
-      <ComplianceBand />
+      <Suspense fallback={null}>
+        <CustomsFlow />
+        <HubPreview />
+        <ComplianceBand />
+      </Suspense>
 
       {/* ─── TESTIMONIALS ───────────────────────────────────────── */}
       <Section bg={COLORS.warmWhite}>
@@ -555,7 +563,7 @@ export default function Home() {
           </h2>
           <p
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 17,
               fontWeight: 300,
               lineHeight: 1.7,
@@ -587,7 +595,7 @@ export default function Home() {
           </div>
           <p
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 13,
               color: "rgba(255,255,255,0.3)",
               marginTop: 24,
@@ -645,7 +653,7 @@ export default function Home() {
           </h2>
           <p
             style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 17,
               fontWeight: 400,
               lineHeight: 1.7,
@@ -678,15 +686,17 @@ export default function Home() {
             }}
           >
             {[
-              { src: atlanticLabsLogo, alt: "Atlantic Labs", height: 48 },
-              { src: heartcoreLogo, alt: "Heartcore", height: 48 },
-              { src: earlybirdLogo, alt: "Earlybird", height: 52 },
-              { src: blisceLogo, alt: "blisce", height: 55 },
+              { src: atlanticLabsLogo, alt: "Atlantic Labs", width: 69, height: 48 },
+              { src: heartcoreLogo, alt: "Heartcore", width: 52, height: 48 },
+              { src: earlybirdLogo, alt: "Earlybird", width: 119, height: 52 },
+              { src: blisceLogo, alt: "blisce", width: 85, height: 55 },
             ].map((logo, i) => (
               <Reveal key={logo.alt} delay={i * 60}>
                 <img
                   src={logo.src}
                   alt={logo.alt}
+                  width={logo.width}
+                  height={logo.height}
                   className="investor-logo"
                   style={{
                     height: logo.height,

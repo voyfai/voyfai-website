@@ -15,7 +15,7 @@ export default function TestimonialCard({ quote, name, company, role }) {
       <div style={{ color: COLORS.copper, marginBottom: 16 }}>{Icons.quote}</div>
       <p
         style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif",
+          fontFamily: "var(--font-body)",
           fontSize: 16,
           fontWeight: 400,
           lineHeight: 1.75,
@@ -29,7 +29,7 @@ export default function TestimonialCard({ quote, name, company, role }) {
       <div>
         <div
           style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "var(--font-body)",
             fontSize: 15,
             fontWeight: 500,
             color: COLORS.navy,
@@ -39,7 +39,7 @@ export default function TestimonialCard({ quote, name, company, role }) {
         </div>
         <div
           style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontFamily: "var(--font-body)",
             fontSize: 13,
             color: COLORS.textMuted,
             marginTop: 2,

@@ -8,12 +8,12 @@ const SRC = resolve(__dirname, "../src/assets/Voyfai-hero.jpg");
 const OUT = resolve(__dirname, "../public/hero");
 
 const variants = [
-  { width: 1280, format: "avif", quality: 40 },
-  { width: 1920, format: "avif", quality: 38 },
-  { width: 2560, format: "avif", quality: 36 },
-  { width: 1280, format: "webp", quality: 65 },
-  { width: 1920, format: "webp", quality: 62 },
-  { width: 2560, format: "webp", quality: 60 },
+  { width: 1280, format: "avif", quality: 32 },
+  { width: 1920, format: "avif", quality: 30 },
+  { width: 2560, format: "avif", quality: 28 },
+  { width: 1280, format: "webp", quality: 58 },
+  { width: 1920, format: "webp", quality: 55 },
+  { width: 2560, format: "webp", quality: 52 },
   { width: 1920, format: "jpg",  quality: 70 },
 ];
 
