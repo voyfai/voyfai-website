@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import useInView from "../../hooks/useInView";
-import CountUp from "../motion/CountUp";
 
 export default function HorizontalBars({ data }) {
   const [ref, inView] = useInView({ threshold: 0.25 });
@@ -18,18 +17,7 @@ export default function HorizontalBars({ data }) {
 
         return (
           <div key={item.label} className={`benchmark-row ${item.isHero ? "is-hero" : ""}`}>
-            <div className="benchmark-row-top">
-              <div className="benchmark-label">{item.label}</div>
-              <div className="benchmark-value">
-                <CountUp
-                  to={item.value}
-                  decimals={1}
-                  duration={1200}
-                  delay={index * 80}
-                  suffix="%"
-                />
-              </div>
-            </div>
+            <div className="benchmark-label">{item.label}</div>
             <div className="benchmark-track">
               <motion.div
                 className="benchmark-fill"

@@ -533,28 +533,13 @@ body {
   gap: 10px;
 }
 
-.benchmark-row-top {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 16px;
-  align-items: baseline;
-}
-
 .benchmark-label {
   color: rgba(255, 255, 255, 0.68);
   font-size: 14px;
   line-height: 1.35;
 }
 
-.benchmark-value {
-  color: #ffffff;
-  font-size: 22px;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
-.benchmark-row.is-hero .benchmark-label,
-.benchmark-row.is-hero .benchmark-value {
+.benchmark-row.is-hero .benchmark-label {
   color: var(--voyfai-teal);
 }
 

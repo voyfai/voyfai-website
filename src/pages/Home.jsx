@@ -156,8 +156,8 @@ export default function Home() {
               margin: "0 auto 48px",
             }}
           >
-            A group of independent local heroes operating autonomously at local
-            level while benefiting from the collective scale.
+            A group of independent freight forwarders operating autonomously at
+            local level while benefiting from the collective scale.
           </p>
 
           <div
@@ -360,7 +360,7 @@ export default function Home() {
             >
               {[
                 { number: 8, label: "Partner Companies" },
-                { number: 200, prefix: "+", label: "Years Combined Experience" },
+                { number: 50, suffix: "k+", label: "Annual TEU" },
                 { number: 25, label: "Office Locations" },
                 { number: 6, label: "Countries" },
               ].map((stat, i) => (
@@ -376,7 +376,7 @@ export default function Home() {
                         letterSpacing: "-0.02em",
                       }}
                     >
-                      <CountUp to={stat.number} duration={1400} prefix={stat.prefix || ""} delay={i * 100} />
+                      <CountUp to={stat.number} duration={1400} prefix={stat.prefix || ""} suffix={stat.suffix || ""} delay={i * 100} />
                     </div>
                     {/* Animated divider */}
                     <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: "rgba(0,0,0,0.06)" }}>

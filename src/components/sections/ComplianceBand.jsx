@@ -19,7 +19,7 @@ export default function ComplianceBand() {
                 <div style={{ color: "var(--voyfai-teal)" }}>
                   {Icons.check}
                 </div>
-                <div style={{ fontFamily: "monospace", fontSize: 11, color: "rgba(255,255,255,0.6)", textTransform: "uppercase", letterSpacing: "0.02em" }}>
+                <div style={{ fontFamily: "monospace", fontSize: 13, color: "rgba(255,255,255,0.6)", textTransform: "uppercase", letterSpacing: "0.02em" }}>
                   {item.label}
                 </div>
               </div>

@@ -18,11 +18,8 @@ export default function BenchmarkChart() {
           <div style={{ textAlign: "center", marginBottom: 64 }}>
             <SectionLabel>Performance</SectionLabel>
             <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 700, lineHeight: 1.25, letterSpacing: "-0.02em", margin: "0 0 16px", color: "#fff" }}>
-              Forwarding teams are more efficient with the Voyfai platform
+              Less manual work, more forwarding.
             </h2>
-            <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 400, lineHeight: 1.7, color: "rgba(255,255,255,0.6)", maxWidth: 540, margin: "0 auto" }}>
-              Efficiency measured by freight forwarder operator hours required per shipment.
-            </p>
           </div>
         </FadeUp>
         
@@ -30,7 +27,7 @@ export default function BenchmarkChart() {
         
         <FadeUp delay={800}>
           <div style={{ textAlign: "center", color: "rgba(255,255,255,0.4)", fontSize: 13, marginTop: 32 }}>
-            Internal workflow model for common freight forwarding operating tasks.
+            Operator effort across common freight-forwarding workflows.
           </div>
         </FadeUp>
       </div>
