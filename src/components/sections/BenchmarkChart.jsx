@@ -21,7 +21,7 @@ export default function BenchmarkChart() {
               Forwarding teams are more efficient with the Voyfai platform
             </h2>
             <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 17, fontWeight: 400, lineHeight: 1.7, color: "rgba(255,255,255,0.6)", maxWidth: 540, margin: "0 auto" }}>
-              A product benchmark across quote preparation, booking intake, document handling, shipment visibility, and exception follow-up.
+              Efficiency measured by freight forwarder operator hours required per shipment.
             </p>
           </div>
         </FadeUp>
