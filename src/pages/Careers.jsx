@@ -73,7 +73,7 @@ const STATS = [
   { value: 8, label: "Partner companies" },
   { value: 6, label: "Countries" },
   { value: 25, label: "Office locations" },
-  { value: 2024, label: "Founded" },
+  { value: 2023, label: "Founded" },
 ];
 
 const TEAM = [
