@@ -7,7 +7,6 @@ const navLinks = [
   { label: "Benefits", href: "#benefits" },
   { label: "Group", href: "#partners" },
   { label: "Technology", href: "#technology" },
-  { label: "Careers", href: "/careers", absolute: true },
 ];
 
 const LIGHT_HEADER_ROUTES = ["/privacy-policy", "/imprint"];

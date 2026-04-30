@@ -1204,7 +1204,7 @@ export default function VoyfaiHomepage() {
             talking about what's possible.
           </p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="mailto:partner@voyfai.com" className="cta-btn cta-primary" style={{ fontSize: 16, padding: "16px 32px" }}>
+            <a href="mailto:contact@voyfai.com" className="cta-btn cta-primary" style={{ fontSize: 16, padding: "16px 32px" }}>
               Schedule a Conversation
               <span>{Icons.arrowRight}</span>
             </a>
@@ -1215,7 +1215,7 @@ export default function VoyfaiHomepage() {
             color: "rgba(255,255,255,0.3)",
             marginTop: 24,
           }}>
-            Or reach us directly at partner@voyfai.com
+            Or reach us directly at contact@voyfai.com
           </p>
         </div>
       </section>

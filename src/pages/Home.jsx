@@ -577,7 +577,7 @@ export default function Home() {
             }}
           >
             <a
-              href="mailto:partner@voyfai.com"
+              href="mailto:contact@voyfai.com"
               className="cta-btn cta-primary"
               style={{ fontSize: 16, padding: "16px 32px" }}
             >
@@ -593,7 +593,7 @@ export default function Home() {
               marginTop: 24,
             }}
           >
-            Or reach us directly at partner@voyfai.com
+            Or reach us directly at contact@voyfai.com
           </p>
         </Reveal>
       </section>

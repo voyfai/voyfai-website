@@ -3,8 +3,6 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import Careers from "./pages/Careers";
-import CareerDetail from "./pages/CareerDetail";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Imprint from "./pages/Imprint";
 import { initCookieConsent } from "./lib/cookieConsent";
@@ -52,8 +50,6 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/careers/:jobId" element={<CareerDetail />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/imprint" element={<Imprint />} />
         </Routes>

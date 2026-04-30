@@ -6,7 +6,6 @@ const navLinks = [
   { label: "Benefits", hash: "#benefits" },
   { label: "Group", hash: "#partners" },
   { label: "Technology", hash: "#technology" },
-  { label: "Careers", href: "/careers", route: true },
 ];
 
 const legalLinks = [
