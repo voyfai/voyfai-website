@@ -79,6 +79,14 @@ export default function CareerDetail() {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [jobId]);
 
+  useEffect(() => {
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex, nofollow";
+    document.head.appendChild(meta);
+    return () => { document.head.removeChild(meta); };
+  }, []);
+
   if (loading) {
     return (
       <main style={{ background: COLORS.warmWhite, paddingTop: 120, minHeight: "100vh" }}>

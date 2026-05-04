@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "motion/react";
 import { COLORS, RADIUS } from "../constants/colors";
@@ -156,6 +156,14 @@ export default function Careers() {
   const [selectedDept, setSelectedDept] = useState("All");
   const reducedMotion = useReducedMotion();
   const [heroLoaded, setHeroLoaded] = useState(reducedMotion);
+
+  useEffect(() => {
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex, nofollow";
+    document.head.appendChild(meta);
+    return () => { document.head.removeChild(meta); };
+  }, []);
 
   const lifeImgRef = useRef(null);
   const { scrollYProgress: lifeImgScroll } = useScroll({
