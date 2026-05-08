@@ -1,153 +1,96 @@
-import { useMemo, useState, useRef, useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion } from "motion/react";
 import { COLORS, RADIUS } from "../constants/colors";
 import { Icons } from "../constants/icons";
 import Section from "../components/Section";
 import SectionLabel from "../components/SectionLabel";
-import DetailSection from "../components/DetailSection";
 import Reveal from "../components/Reveal";
 import ValueCard from "../components/ValueCard";
 import PerkCard from "../components/PerkCard";
-import LifeCard from "../components/LifeCard";
-import StatBlock from "../components/StatBlock";
-import TeamSpotlight from "../components/TeamSpotlight";
 import JobCard from "../components/JobCard";
 import DepartmentFilter from "../components/DepartmentFilter";
-import TealCTABanner from "../components/TealCTABanner";
 import useAshbyJobs from "../hooks/useAshbyJobs";
 import useReducedMotion from "../hooks/useReducedMotion";
 import CountUp from "../components/motion/CountUp";
-import MaskReveal from "../components/motion/MaskReveal";
-import OperatorCapacity from "../components/sections/careers/OperatorCapacity";
-import PartnerNetwork from "../components/sections/careers/PartnerNetwork";
-import SignalToInsight from "../components/sections/careers/SignalToInsight";
-import HowDecisionsFlow from "../components/sections/careers/HowDecisionsFlow";
+import GroupNarrative from "../components/sections/careers/GroupNarrative";
+import OurStory from "../components/sections/careers/OurStory";
+import TeamVoices from "../components/sections/careers/TeamVoices";
+import InterviewProcess from "../components/sections/careers/InterviewProcess";
+import FoundersAndInvestors from "../components/sections/careers/FoundersAndInvestors";
+import DarkCTA from "../components/sections/DarkCTA";
 
 const VALUES = [
   {
     icon: Icons.users,
     title: "Voyaging together",
     description:
-      "Freight forwarding is a team sport. We work closely with operators, partner companies, and product teams so decisions reflect the reality of daily shipments.",
-    chips: ["Trust", "Clear communication", "Partner context", "Shared ownership"],
+      "We solve problems side by side and ask for help early. Teams share context openly, give direct and constructive feedback, and focus on what moves the company forward, not individual silos.",
+    chips: [],
   },
   {
     icon: Icons.heart,
     title: "Entrepreneurs at heart",
     description:
-      "Our partners are independent operators. We build with respect for that autonomy and keep the bias toward practical improvements that make their teams faster.",
-    chips: ["Ownership", "Pragmatism", "Speed", "Operator empathy"],
+      "We think in solutions, take ownership, and make progress with the information and resources we have. Small experiments beat long discussions. If we see something broken, we fix it or propose how to fix it.",
+    chips: [],
   },
   {
     icon: Icons.zap,
     title: "Humble with bold moves",
     description:
-      "We are ambitious about AI in logistics, but we validate ideas against real documents, real lanes, and real forwarding workflows before calling them progress.",
-    chips: ["Evidence", "Focus", "Craft", "Measured risk"],
-  },
-];
-
-const LIFE = [
-  {
-    icon: Icons.users,
-    title: "Close to operations",
-    description:
-      "Product decisions are shaped by freight operators, customs documents, carrier updates, and the workflows our partner teams use every day.",
-  },
-  {
-    icon: Icons.book,
-    title: "Learning the domain",
-    description:
-      "We expect curiosity about forwarding, trade lanes, documents, and exception handling, not just software patterns.",
-  },
-  {
-    icon: Icons.camera,
-    title: "Shipping useful work",
-    description:
-      "The bar is whether a change helps operators quote faster, enter less data, avoid misses, or serve customers with more confidence.",
+      "We balance ambition with curiosity. We challenge assumptions, including our own. We move fast when needed and slow down when it matters. Mistakes are part of learning, not something to hide.",
+    chips: [],
   },
 ];
 
 const STATS = [
-  { value: 8, label: "Partner companies" },
-  { value: 6, label: "Countries" },
-  { value: 25, label: "Office locations" },
-  { value: 2023, label: "Founded" },
-];
-
-const TEAM = [
+  { value: 30, suffix: "+", label: "Team members" },
+  { value: 14, suffix: "+", label: "Nationalities" },
   {
-    name: "Operations",
-    role: "Forwarding context",
-    note: "Freight workflows, partner support, and day-to-day operator feedback",
-    quote:
-      "We keep the work grounded in what forwarders actually need: faster quote prep, clearer shipment status, fewer manual checks, and fewer surprises for customers.",
-  },
-  {
-    name: "Product & AI",
-    role: "Workflow automation",
-    note: "Document parsing, shipment creation, visibility tools, and internal systems",
-    quote:
-      "The best product work here is specific. A good AI feature has to survive messy emails, incomplete documents, different customer habits, and the pace of operations.",
-  },
-  {
-    name: "Partner Growth",
-    role: "Group building",
-    note: "Commercial support, integration planning, and shared procurement initiatives",
-    quote:
-      "We support independent forwarders without flattening what makes them strong locally. The work is about useful scale, not central control for its own sake.",
+    value: 4,
+    suffix: "★",
+    label: "On Glassdoor",
+    href: "https://www.glassdoor.de/Bewertungen/Voyfai-Bewertungen-E10579397.htm",
   },
 ];
 
 const PERKS = [
   {
-    icon: Icons.dollar,
-    title: "Competitive compensation",
+    icon: Icons.calendar,
+    title: "Generous Holiday Allowance",
     description:
-      "Compensation is role-specific and discussed directly during the process, with clarity on expectations and scope.",
-  },
-  {
-    icon: Icons.clock,
-    title: "Sustainable pace",
-    description:
-      "We care about doing focused work well and keeping enough room for life outside the office.",
-  },
-  {
-    icon: Icons.mapPin,
-    title: "Hybrid work",
-    description:
-      "A Berlin-centered hybrid rhythm with in-person collaboration where it makes the work better.",
+      "More days off than you'd expect from a startup. Because we know the best work comes from people who actually get to switch off.",
   },
   {
     icon: Icons.laptop,
-    title: "Useful setup",
+    title: "Hybrid Working",
     description:
-      "The tools and equipment needed to build, test, and support freight workflows properly.",
+      "Three days a week in our Berlin office, two days wherever you do your best thinking. Flexibility that actually works.",
   },
   {
-    icon: Icons.book,
-    title: "Domain learning",
+    icon: Icons.car,
+    title: "Navit Mobility Budget",
     description:
-      "Time with product, operations, and partner teams so you understand the logistics context behind the work.",
+      "€50 monthly through Navit to cover however you get around.",
   },
   {
-    icon: Icons.users,
-    title: "Small-team ownership",
+    icon: Icons.pizza,
+    title: "Pizza Thursdays",
     description:
-      "Clear ownership, direct communication, and room to take responsibility for meaningful pieces of the product.",
+      "Bi-weekly post-All Hands pizza nights. Good food, good people, no agenda.",
   },
   {
-    icon: Icons.calendar,
-    title: "Team rituals",
+    icon: Icons.compass,
+    title: "Company Offsites",
     description:
-      "Regular moments to review work, share domain learnings, and align around partner priorities.",
+      "Twice a year we step back, celebrate what we've built, and spend real time together outside the office.",
   },
   {
     icon: Icons.coffee,
-    title: "Office basics",
+    title: "Office Perks",
     description:
-      "A practical workspace for deep work, design reviews, technical discussions, and partner planning.",
+      "Great coffee, soft drinks, nuts and snacks to keep you going through the day.",
   },
 ];
 
@@ -162,15 +105,10 @@ export default function Careers() {
     meta.name = "robots";
     meta.content = "noindex, nofollow";
     document.head.appendChild(meta);
-    return () => { document.head.removeChild(meta); };
+    return () => {
+      document.head.removeChild(meta);
+    };
   }, []);
-
-  const lifeImgRef = useRef(null);
-  const { scrollYProgress: lifeImgScroll } = useScroll({
-    target: lifeImgRef,
-    offset: ["start end", "end start"]
-  });
-  const lifeImgY = useTransform(lifeImgScroll, [0, 1], ["-5%", "5%"]);
 
   const departments = useMemo(() => {
     const set = new Set(jobs.map((j) => j.department).filter(Boolean));
@@ -199,7 +137,6 @@ export default function Careers() {
           padding: "120px 24px 80px",
         }}
       >
-        {/* Hero background image */}
         <picture>
           <img
             src="/images/voyfai_careers_hero_1777475797821.png"
@@ -213,7 +150,7 @@ export default function Careers() {
               height: "100%",
               objectFit: "cover",
               objectPosition: "center",
-              filter: "brightness(0.3) saturate(0.7)",
+              filter: "brightness(0.4) saturate(0.8)",
               clipPath: heroLoaded ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
               transition: reducedMotion
                 ? "none"
@@ -226,7 +163,7 @@ export default function Careers() {
             position: "absolute",
             inset: 0,
             background: `
-              linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.6) 100%),
+              linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.7) 100%),
               radial-gradient(ellipse 800px 600px at 20% 80%, rgba(3,166,150,0.06) 0%, transparent 60%)
             `,
           }}
@@ -248,51 +185,82 @@ export default function Careers() {
             animation: "fadeInUp 1s ease",
           }}
         >
-          {/* Hero intentionally pairs two Adrianna display lines (#jointhevoyage + headline) per AGENT.md §10 user override of §3.1. */}
+          {/* Top banner eyebrow from Notion */}
+          <div
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: 13,
+              fontWeight: 500,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.55)",
+              marginBottom: 24,
+            }}
+          >
+            Ownership is real · Impact is fast · Your work matters
+          </div>
+
           <motion.h1
-            initial={reducedMotion ? { opacity: 0 } : { clipPath: "inset(0 100% 0 0)" }}
-            animate={reducedMotion ? { opacity: 1 } : { clipPath: "inset(0 0% 0 0)" }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.6, 0.01, 0.05, 1] }}
+            initial={
+              reducedMotion ? { opacity: 0 } : { clipPath: "inset(0 100% 0 0)" }
+            }
+            animate={
+              reducedMotion ? { opacity: 1 } : { clipPath: "inset(0 0% 0 0)" }
+            }
+            transition={{
+              duration: reducedMotion ? 0.2 : 0.7,
+              delay: 0.2,
+              ease: [0.6, 0.01, 0.05, 1],
+            }}
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(38px, 5.8vw, 68px)",
               fontWeight: 700,
               color: COLORS.copperLight,
               lineHeight: 1.1,
-              letterSpacing: "-0.035em",
-              margin: "0 0 8px",
+              letterSpacing: "-0.02em",
+              margin: "0 0 28px",
             }}
           >
             #jointhevoyage
           </motion.h1>
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(38px, 5.8vw, 68px)",
-              fontWeight: 700,
-              color: COLORS.white,
-              lineHeight: 1.1,
-              margin: "0 0 20px",
-              letterSpacing: "-0.035em",
-            }}
-          >
-            Shape the future of freight forwarding.
-          </h1>
+
           <p
             style={{
               fontFamily: "var(--font-body)",
               fontSize: "clamp(16px, 2vw, 18px)",
               fontWeight: 300,
               lineHeight: 1.75,
-              color: "rgba(255,255,255,0.55)",
-              maxWidth: 560,
-              margin: "0 auto 48px",
+              color: "rgba(255,255,255,0.62)",
+              maxWidth: 680,
+              margin: "0 auto 40px",
+              textWrap: "pretty",
             }}
           >
-            Join the team building AI tools and shared infrastructure for
-            independent freight forwarders. We work on the operational details that
-            help local forwarding teams compete with more speed and clarity.
+            Freight forwarding runs on relationships, grit, and an intimate
+            knowledge of global trade. We're an AI company that believes those
+            things still matter. We build tools that give SME freight forwarders
+            the intelligence to do what they do best, only faster, smarter, and
+            at scale.
           </p>
+          <p
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "clamp(15px, 1.8vw, 17px)",
+              fontWeight: 300,
+              lineHeight: 1.75,
+              color: "rgba(255,255,255,0.5)",
+              maxWidth: 640,
+              margin: "0 auto 48px",
+              textWrap: "pretty",
+            }}
+          >
+            Headquartered in Berlin and active across European markets, Voyfai is
+            a Series A startup where your work ships fast and your fingerprints
+            stay on it. If that sounds like your kind of voyage, we'd love to
+            meet you.
+          </p>
+
           <div
             style={{
               display: "flex",
@@ -361,39 +329,11 @@ export default function Careers() {
         </div>
       </header>
 
-      {/* ─── OUR MISSION ────────────────────────────────────────── */}
-      <DetailSection
-        id="mission"
-        bg={COLORS.cream}
-        label="Our Mission"
-        title="Empowering freight forwarders around the globe to redefine what's possible"
-        items={[
-          {
-            graphic: <OperatorCapacity />,
-            title: "Operator Capacity",
-            description:
-              "Reducing repetitive manual work so partner teams can keep serving customers as volumes and complexity grow.",
-          },
-          {
-            graphic: <PartnerNetwork />,
-            title: "Independent Forwarder Strength",
-            description:
-              "Giving established SME forwarders access to shared technology, procurement support, and group knowledge without losing local autonomy.",
-          },
-          {
-            graphic: <SignalToInsight />,
-            title: "Better Logistics Decisions",
-            description:
-              "Turning shipment, document, and status data into clearer decisions for operators, customers, and partner companies.",
-          },
-        ]}
-      />
-
-      {/* ─── OUR VALUES ─────────────────────────────────────────── */}
-      <Section id="values" bg={COLORS.warmWhite}>
+      {/* ─── VALUES ─────────────────────────────────────────────── */}
+      <Section id="values" bg={COLORS.cream}>
         <Reveal>
           <div style={{ textAlign: "center", marginBottom: 44 }}>
-            <SectionLabel>Our Values</SectionLabel>
+            <SectionLabel>Values We Live By</SectionLabel>
             <h2
               style={{
                 fontFamily: "var(--font-display)",
@@ -419,8 +359,8 @@ export default function Careers() {
                 margin: "0 auto",
               }}
             >
-              These principles guide everything we do, from how we build products to
-              how we treat each other.
+              We believe the best work happens when people trust each other and
+              share the same goal. We move fast, but we move together.
             </p>
           </div>
         </Reveal>
@@ -429,7 +369,7 @@ export default function Careers() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 16,
+            gap: 24,
           }}
         >
           {VALUES.map((v, i) => (
@@ -440,178 +380,122 @@ export default function Careers() {
         </div>
       </Section>
 
-      <HowDecisionsFlow />
+      {/* ─── GROUP NARRATIVE ────────────────────────────────────── */}
+      <GroupNarrative />
 
+      {/* ─── OUR STORY ──────────────────────────────────────────── */}
+      <OurStory />
 
-      {/* ─── LIFE AT VOYFAI ─────────────────────────────────────── */}
-      <Section id="life-at-voyfai" bg={COLORS.cream}>
-        <Reveal>
-          <div style={{ textAlign: "center", marginBottom: 40 }}>
-            <SectionLabel>Life at Voyfai</SectionLabel>
-            <h2
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(28px, 3.5vw, 42px)",
-                fontWeight: 700,
-                color: COLORS.navy,
-                margin: "0 auto 14px",
-                lineHeight: 1.25,
-                letterSpacing: "-0.02em",
-                maxWidth: 500,
-              }}
-            >
-              Built around real logistics work
-            </h2>
-            <p
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: 17,
-                lineHeight: 1.7,
-                color: COLORS.textMuted,
-                maxWidth: 540,
-                margin: "0 auto",
-              }}
-            >
-              We are a small team working close to freight operations. The culture is
-              practical, direct, and focused on building tools that forwarders can trust.
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal>
-          <div style={{ marginBottom: 56, borderRadius: RADIUS.lg, overflow: "hidden", height: "min(60vh, 500px)", position: "relative" }}>
-            <motion.img 
-              ref={lifeImgRef}
-              src="/images/voyfai_careers_life_1777475811545.png" 
-              alt="Life at Voyfai" 
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", scale: 1.1, y: reducedMotion ? 0 : lifeImgY }} 
-            />
-          </div>
-        </Reveal>
-
-        <div
-          className="life-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 16,
-            marginBottom: 56,
-          }}
-        >
-          {LIFE.map((l, i) => (
-            <Reveal key={l.title} delay={i * 50}>
-              <LifeCard {...l} />
-            </Reveal>
-          ))}
-        </div>
-
+      {/* ─── STATS ──────────────────────────────────────────────── */}
+      <Section id="stats" bg={COLORS.warmWhite}>
         <Reveal>
           <div
             className="stats-row"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: 16,
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: 24,
               padding: "32px 24px",
               background: COLORS.white,
               border: `1px solid ${COLORS.border}`,
               borderRadius: RADIUS.lg,
+              maxWidth: 960,
+              margin: "0 auto",
             }}
           >
-            {STATS.map((stat, i) => (
-              <div key={i} style={{ position: "relative" }}>
-                <div style={{ position: "relative", paddingBottom: 16 }}>
+            {STATS.map((stat, i) => {
+              const inner = (
+                <>
+                  <div style={{ position: "relative", paddingBottom: 16 }}>
+                    <div
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        fontSize: 48,
+                        fontWeight: 600,
+                        color: COLORS.navy,
+                        lineHeight: 1,
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      <CountUp
+                        to={stat.value}
+                        duration={1400}
+                        suffix={stat.suffix || ""}
+                        delay={i * 100}
+                      />
+                    </div>
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: 1,
+                        background: "rgba(0,0,0,0.06)",
+                      }}
+                    >
+                      <motion.div
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true, margin: "-10%" }}
+                        transition={{
+                          duration: 0.8,
+                          delay: i * 0.1,
+                          ease: "easeOut",
+                        }}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          background: "var(--voyfai-teal)",
+                          transformOrigin: "left",
+                        }}
+                      />
+                    </div>
+                  </div>
                   <div
                     style={{
                       fontFamily: "var(--font-body)",
-                      fontSize: 48,
-                      fontWeight: 600,
-                      color: COLORS.navy,
-                      lineHeight: 1,
-                      letterSpacing: "-0.02em",
+                      fontSize: 14,
+                      color: COLORS.textMuted,
+                      fontWeight: 500,
+                      marginTop: 12,
                     }}
                   >
-                    <CountUp to={stat.value} duration={1400} prefix={stat.prefix || ""} delay={i * 100} />
+                    {stat.label}
                   </div>
-                  {/* Animated divider */}
-                  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: "rgba(0,0,0,0.06)" }}>
-                    <motion.div
-                      initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      viewport={{ once: true, margin: "-10%" }}
-                      transition={{ duration: 0.8, delay: i * 0.1, ease: "easeOut" }}
-                      style={{ width: "100%", height: "100%", background: "var(--voyfai-teal)", transformOrigin: "left" }}
-                    />
-                  </div>
+                </>
+              );
+
+              return (
+                <div key={i} style={{ position: "relative" }}>
+                  {stat.href ? (
+                    <a
+                      href={stat.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        textDecoration: "none",
+                        color: "inherit",
+                        display: "block",
+                      }}
+                    >
+                      {inner}
+                    </a>
+                  ) : (
+                    inner
+                  )}
                 </div>
-                <div
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: 14,
-                    color: COLORS.textMuted,
-                    fontWeight: 500,
-                    marginTop: 12,
-                  }}
-                >
-                  {stat.label}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </Reveal>
       </Section>
 
       {/* ─── HEAR FROM OUR TEAM ─────────────────────────────────── */}
-      <Section id="team" bg={COLORS.warmWhite}>
-        <Reveal>
-          <div style={{ textAlign: "center", marginBottom: 40 }}>
-            <SectionLabel>How We Work</SectionLabel>
-            <h2
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(28px, 3.5vw, 42px)",
-                fontWeight: 700,
-                color: COLORS.navy,
-                margin: "0 auto 14px",
-                lineHeight: 1.25,
-                letterSpacing: "-0.02em",
-                maxWidth: 500,
-              }}
-            >
-              Cross-functional work, grounded in forwarding
-            </h2>
-            <p
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: 17,
-                lineHeight: 1.7,
-                color: COLORS.textMuted,
-                maxWidth: 540,
-                margin: "0 auto",
-              }}
-            >
-              The work sits between partner companies, operations, product, and AI.
-              These are the lenses that shape how we make decisions.
-            </p>
-          </div>
-        </Reveal>
-        <Reveal>
-          <div style={{ marginBottom: 56, borderRadius: RADIUS.lg, overflow: "hidden", height: "min(60vh, 500px)" }}>
-            <img 
-              src="/images/voyfai_careers_team_1777475827094.png" 
-              alt="Our Team" 
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} 
-            />
-          </div>
-        </Reveal>
-        
-        <Reveal delay={60}>
-          <TeamSpotlight members={TEAM} />
-        </Reveal>
-      </Section>
+      <TeamVoices />
 
       {/* ─── PERKS & BENEFITS ───────────────────────────────────── */}
-      <Section id="perks" bg={COLORS.cream}>
+      <Section id="perks" bg={COLORS.warmWhite}>
         <Reveal>
           <div style={{ textAlign: "center", marginBottom: 44 }}>
             <SectionLabel>Perks &amp; Benefits</SectionLabel>
@@ -624,10 +508,10 @@ export default function Careers() {
                 margin: "0 auto 14px",
                 lineHeight: 1.25,
                 letterSpacing: "-0.02em",
-                maxWidth: 500,
+                maxWidth: 540,
               }}
             >
-              Practical support for focused work
+              The everyday things that make work work
             </h2>
             <p
               style={{
@@ -639,8 +523,7 @@ export default function Careers() {
                 margin: "0 auto",
               }}
             >
-              Benefits are designed to help people do strong, focused work while
-              staying close to the domain and the team.
+              Practical support for focused work, in the office and beyond.
             </p>
           </div>
         </Reveal>
@@ -648,124 +531,17 @@ export default function Careers() {
           className="perks-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 16,
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: 24,
           }}
         >
           {PERKS.map((p, i) => (
-            <Reveal key={p.title} delay={i * 40}>
+            <Reveal key={p.title} delay={60 + i * 60}>
               <PerkCard {...p} />
             </Reveal>
           ))}
         </div>
       </Section>
-
-      {/* ─── JOIN OUR TEAM CTA ───────────────────────────────── */}
-      <section
-        style={{
-          background: "linear-gradient(165deg, #000000 0%, #141414 100%)",
-          padding: "96px 24px",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* Subtle texture */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            opacity: 0.04,
-            backgroundImage: `
-              radial-gradient(circle at 25% 50%, rgba(3,166,150,0.3) 0%, transparent 50%),
-              radial-gradient(circle at 75% 50%, rgba(20,20,20,0.4) 0%, transparent 50%)
-            `,
-          }}
-        />
-
-        <Reveal
-          style={{
-            maxWidth: 680,
-            margin: "0 auto",
-            textAlign: "center",
-            position: "relative",
-          }}
-        >
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: 12,
-              background: "rgba(3,166,150,0.15)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: COLORS.copperLight,
-              margin: "0 auto 28px",
-            }}
-          >
-            {Icons.send}
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 3.5vw, 42px)",
-              fontWeight: 700,
-              color: COLORS.white,
-              margin: "0 0 16px",
-              lineHeight: 1.25,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Join our team
-          </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: 17,
-              fontWeight: 300,
-              lineHeight: 1.7,
-              color: "rgba(255,255,255,0.5)",
-              margin: "0 auto 40px",
-              maxWidth: 540,
-            }}
-          >
-            Build the tools, workflows, and shared systems that help independent freight forwarders move faster without losing what makes them local.
-          </p>
-          <div
-            style={{
-              display: "flex",
-              gap: 16,
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <Link
-              to="/careers#find-your-role"
-              className="cta-btn cta-primary"
-              style={viewOpenRolesCtaStyle}
-            >
-              View open positions
-              <span>{Icons.arrowRight}</span>
-            </Link>
-            <a
-              href="https://jobs.ashbyhq.com/voyfai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-btn cta-secondary"
-              style={{
-                fontSize: 16,
-                padding: "16px 32px",
-                background: "rgba(255,255,255,0.05)",
-                color: COLORS.white,
-                borderColor: "rgba(255,255,255,0.1)"
-              }}
-            >
-              View all jobs on Ashby
-              <span>{Icons.external}</span>
-            </a>
-          </div>
-        </Reveal>
-      </section>
 
       {/* ─── OPEN POSITIONS ─────────────────────────────────────── */}
       <Section id="find-your-role" bg={COLORS.cream}>
@@ -796,8 +572,8 @@ export default function Careers() {
                 margin: "0 auto 40px",
               }}
             >
-              Open roles are loaded directly from Ashby. Each listing has the current
-              team, location, employment type, and application link.
+              Open roles are loaded directly from Ashby. Each listing has the
+              current team, location, employment type, and application link.
             </p>
           </div>
         </Reveal>
@@ -818,7 +594,7 @@ export default function Careers() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
-              gap: 16,
+              gap: 24,
             }}
           >
             {[0, 1, 2, 3].map((i) => (
@@ -887,11 +663,11 @@ export default function Careers() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
-              gap: 16,
+              gap: 24,
             }}
           >
             {filteredJobs.map((job, i) => (
-              <Reveal key={job.id} delay={i * 40}>
+              <Reveal key={job.id} delay={60 + i * 60}>
                 <JobCard job={job} />
               </Reveal>
             ))}
@@ -899,94 +675,30 @@ export default function Careers() {
         )}
       </Section>
 
+      {/* ─── INTERVIEW PROCESS ──────────────────────────────────── */}
+      <InterviewProcess />
+
+      {/* ─── FOUNDERS + INVESTORS ───────────────────────────────── */}
+      <FoundersAndInvestors />
+
       {/* ─── READY TO SHAPE THE FUTURE? ─────────────────────────── */}
-      <section
-        style={{
-          background: "linear-gradient(165deg, #000000 0%, #141414 100%)",
-          padding: "96px 24px",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            inset: 0,
-            opacity: 0.05,
-            backgroundImage:
-              "radial-gradient(circle at 30% 50%, rgba(3,166,150,0.4) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(20,20,20,0.4) 0%, transparent 50%)",
-          }}
-        />
-        <Reveal
-          style={{
-            maxWidth: 680,
-            margin: "0 auto",
-            textAlign: "center",
-            position: "relative",
-          }}
-        >
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: 12,
-              background: "rgba(3,166,150,0.15)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: COLORS.copperLight,
-              margin: "0 auto 28px",
-            }}
+      <DarkCTA
+        icon={Icons.compass}
+        headline="Ready to join the voyage?"
+        body="Join us in building the operating layer for independent freight forwarders."
+        primary={
+          <a
+            href="https://jobs.ashbyhq.com/voyfai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cta-btn cta-primary"
+            style={viewOpenRolesCtaStyle}
           >
-            {Icons.compass}
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 3.5vw, 42px)",
-              fontWeight: 700,
-              color: COLORS.white,
-              margin: "0 0 16px",
-              lineHeight: 1.25,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Ready to shape the future?
-          </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: 17,
-              fontWeight: 300,
-              lineHeight: 1.7,
-              color: "rgba(255,255,255,0.5)",
-              margin: "0 auto 40px",
-              maxWidth: 540,
-            }}
-          >
-            Join us in building the operating layer for independent freight forwarders.
-          </p>
-          <div
-            style={{
-              display: "flex",
-              gap: 16,
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <a
-              href="https://jobs.ashbyhq.com/voyfai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-btn cta-primary"
-            >
-              Apply now
-              <span>{Icons.external}</span>
-            </a>
-          </div>
-        </Reveal>
-      </section>
+            Apply now
+            <span>{Icons.external}</span>
+          </a>
+        }
+      />
     </>
   );
 }

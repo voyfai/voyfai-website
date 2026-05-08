@@ -7,6 +7,7 @@ import BenefitCard from "../components/BenefitCard";
 import DetailSection from "../components/DetailSection";
 import TestimonialCard from "../components/TestimonialCard";
 import Reveal from "../components/Reveal";
+import DarkCTA from "../components/sections/DarkCTA";
 import useReducedMotion from "../hooks/useReducedMotion";
 
 const HERO_BASE = `${import.meta.env.BASE_URL}hero`;
@@ -121,7 +122,7 @@ export default function Home() {
               color: COLORS.white,
               lineHeight: 1.1,
               margin: "0 0 8px",
-              letterSpacing: "-0.035em",
+              letterSpacing: "-0.02em",
             }}
           >
             Independent Freight
@@ -139,7 +140,7 @@ export default function Home() {
               color: COLORS.copperLight,
               lineHeight: 1.1,
               margin: "0 0 36px",
-              letterSpacing: "-0.035em",
+              letterSpacing: "-0.02em",
             }}
           >
             Stronger Together.
@@ -503,108 +504,29 @@ export default function Home() {
       </Section>
 
       {/* ─── CTA / CONTACT ──────────────────────────────────────── */}
-      <section
+      <DarkCTA
         id="contact"
-        style={{
-          background: "linear-gradient(165deg, #000000 0%, #141414 100%)",
-          padding: "96px 24px",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* Subtle texture */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            opacity: 0.04,
-            backgroundImage: `
-              radial-gradient(circle at 25% 50%, rgba(3,166,150,0.3) 0%, transparent 50%),
-              radial-gradient(circle at 75% 50%, rgba(20,20,20,0.4) 0%, transparent 50%)
-            `,
-          }}
-        />
-
-        <Reveal
-          style={{
-            maxWidth: 680,
-            margin: "0 auto",
-            textAlign: "center",
-            position: "relative",
-          }}
-        >
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: 12,
-              background: "rgba(3,166,150,0.15)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: COLORS.copperLight,
-              margin: "0 auto 28px",
-            }}
+        icon={Icons.mail}
+        headline="Ready to write the next chapter?"
+        body={
+          <>
+            Every Voyfai partnership starts with a conversation rooted in shared
+            values &mdash; independence, ambition, and a belief in what the group
+            can build together. No pressure, no pitch.
+          </>
+        }
+        primary={
+          <a
+            href="mailto:contact@voyfai.com"
+            className="cta-btn cta-primary"
+            style={{ fontSize: 16, padding: "16px 32px" }}
           >
-            {Icons.mail}
-          </div>
-          <h2
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(28px, 3.5vw, 42px)",
-              fontWeight: 700,
-              color: COLORS.white,
-              margin: "0 0 16px",
-              lineHeight: 1.25,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Ready to write the next chapter?
-          </h2>
-          <p
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: 17,
-              fontWeight: 300,
-              lineHeight: 1.7,
-              color: "rgba(255,255,255,0.5)",
-              margin: "0 auto 40px",
-              maxWidth: 540,
-            }}
-          >
-            Every Voyfai partnership starts with a conversation rooted in shared values
-            &mdash; independence, ambition, and a belief in what the group can build
-            together. No pressure, no pitch.
-          </p>
-          <div
-            style={{
-              display: "flex",
-              gap: 16,
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <a
-              href="mailto:contact@voyfai.com"
-              className="cta-btn cta-primary"
-              style={{ fontSize: 16, padding: "16px 32px" }}
-            >
-              Explore Partnership
-              <span>{Icons.arrowRight}</span>
-            </a>
-          </div>
-          <p
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: 13,
-              color: "rgba(255,255,255,0.3)",
-              marginTop: 24,
-            }}
-          >
-            Or reach us directly at contact@voyfai.com
-          </p>
-        </Reveal>
-      </section>
+            Explore Partnership
+            <span>{Icons.arrowRight}</span>
+          </a>
+        }
+        footnote="Or reach us directly at contact@voyfai.com"
+      />
 
       {/* ─── INVESTORS ─────────────────────────────────────────── */}
       <section
