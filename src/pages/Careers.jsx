@@ -181,25 +181,10 @@ export default function Careers() {
           style={{
             position: "relative",
             textAlign: "center",
-            maxWidth: 820,
+            maxWidth: 1080,
             animation: "fadeInUp 1s ease",
           }}
         >
-          {/* Top banner eyebrow from Notion */}
-          <div
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: 13,
-              fontWeight: 500,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.55)",
-              marginBottom: 24,
-            }}
-          >
-            Ownership is real · Impact is fast · Your work matters
-          </div>
-
           <motion.h1
             initial={
               reducedMotion ? { opacity: 0 } : { clipPath: "inset(0 100% 0 0)" }
@@ -208,18 +193,18 @@ export default function Careers() {
               reducedMotion ? { opacity: 1 } : { clipPath: "inset(0 0% 0 0)" }
             }
             transition={{
-              duration: reducedMotion ? 0.2 : 0.7,
+              duration: reducedMotion ? 0.2 : 0.9,
               delay: 0.2,
               ease: [0.6, 0.01, 0.05, 1],
             }}
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(38px, 5.8vw, 68px)",
+              fontSize: "clamp(44px, 6.8vw, 84px)",
               fontWeight: 700,
               color: COLORS.copperLight,
-              lineHeight: 1.1,
+              lineHeight: 1.05,
               letterSpacing: "-0.02em",
-              margin: "0 0 28px",
+              margin: "0 0 24px",
             }}
           >
             #jointhevoyage
@@ -227,38 +212,36 @@ export default function Careers() {
 
           <p
             style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "clamp(16px, 2vw, 18px)",
-              fontWeight: 300,
-              lineHeight: 1.75,
-              color: "rgba(255,255,255,0.62)",
-              maxWidth: 680,
-              margin: "0 auto 40px",
-              textWrap: "pretty",
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(26px, 3.2vw, 38px)",
+              fontWeight: 700,
+              color: COLORS.white,
+              lineHeight: 1.2,
+              letterSpacing: "-0.015em",
+              margin: "0 auto 36px",
+              maxWidth: 900,
+              textWrap: "balance",
             }}
           >
-            Freight forwarding runs on relationships, grit, and an intimate
-            knowledge of global trade. We're an AI company that believes those
-            things still matter. We build tools that give SME freight forwarders
-            the intelligence to do what they do best, only faster, smarter, and
-            at scale.
+            This is where ownership is real, impact is fast, and your work actually matters.
           </p>
+
           <p
             style={{
               fontFamily: "var(--font-body)",
-              fontSize: "clamp(15px, 1.8vw, 17px)",
-              fontWeight: 300,
-              lineHeight: 1.75,
-              color: "rgba(255,255,255,0.5)",
-              maxWidth: 640,
+              fontSize: "clamp(15px, 1.6vw, 17px)",
+              fontWeight: 400,
+              lineHeight: 1.7,
+              color: "rgba(255,255,255,0.7)",
+              maxWidth: 720,
               margin: "0 auto 48px",
               textWrap: "pretty",
             }}
           >
-            Headquartered in Berlin and active across European markets, Voyfai is
-            a Series A startup where your work ships fast and your fingerprints
-            stay on it. If that sounds like your kind of voyage, we'd love to
-            meet you.
+            We build AI tools for the SME freight forwarders who run on
+            relationships, grit, and decades of know-how. Berlin-based, Series A,
+            and small enough that what you ship lands in operators' hands within
+            weeks.
           </p>
 
           <div
