@@ -121,7 +121,7 @@ const styles = {
       "linear-gradient(to right, black 0%, black 92%, transparent 100%)",
   },
   slot: {
-    flex: "0 0 calc((100% - 48px) / 3)",
+    flex: "0 0 calc((100% - 72px) / 3.4)",
     minWidth: 0,
     scrollSnapAlign: "start",
     display: "grid",

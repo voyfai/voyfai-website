@@ -222,10 +222,7 @@ export default function TeamVoices() {
       <Reveal>
         <div style={{ textAlign: "center", marginBottom: 48 }}>
           <SectionLabel>Hear from our team</SectionLabel>
-          <h2 style={styles.heading}>
-            We could tell you what it's like to work here. But honestly, our team
-            does it better.
-          </h2>
+          <h2 style={styles.heading}>Don't take our word for it.</h2>
         </div>
       </Reveal>
 

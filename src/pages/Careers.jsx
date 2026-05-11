@@ -400,33 +400,29 @@ export default function Careers() {
                         lineHeight: 1,
                         letterSpacing: "-0.02em",
                         display: "flex",
-                        alignItems: "baseline",
+                        alignItems: "flex-end",
                         gap: 10,
+                        height: 48,
                       }}
                     >
-                      <CountUp
-                        to={stat.value}
-                        duration={1400}
-                        suffix={stat.suffix || ""}
-                        delay={i * 100}
-                      />
-                      {stat.stars && (
+                      {stat.stars ? (
                         <span
-                          aria-hidden="true"
+                          role="img"
+                          aria-label={`${stat.stars} out of 5 stars on Glassdoor`}
                           style={{
                             display: "inline-flex",
                             alignItems: "center",
-                            gap: 2,
+                            gap: 4,
                             color: "var(--voyfai-teal)",
-                            transform: "translateY(-6px)",
                           }}
                         >
                           {Array.from({ length: stat.stars }).map((_, si) => (
                             <span
                               key={si}
+                              aria-hidden="true"
                               style={{
-                                width: 18,
-                                height: 18,
+                                width: 40,
+                                height: 40,
                                 display: "inline-flex",
                               }}
                             >
@@ -434,6 +430,13 @@ export default function Careers() {
                             </span>
                           ))}
                         </span>
+                      ) : (
+                        <CountUp
+                          to={stat.value}
+                          duration={1400}
+                          suffix={stat.suffix || ""}
+                          delay={i * 100}
+                        />
                       )}
                     </div>
                     <div
