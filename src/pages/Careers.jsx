@@ -48,8 +48,10 @@ const STATS = [
   { value: 30, suffix: "+", label: "Team members" },
   { value: 14, suffix: "+", label: "Nationalities" },
   {
-    value: 4,
+    value: 4.2,
+    decimals: 1,
     stars: 4,
+    total: 5,
     label: "On Glassdoor",
     href: "https://www.glassdoor.de/Bewertungen/Voyfai-Bewertungen-E10579397.htm",
   },
@@ -408,27 +410,47 @@ export default function Careers() {
                       {stat.stars ? (
                         <span
                           role="img"
-                          aria-label={`${stat.stars} out of 5 stars on Glassdoor`}
+                          aria-label={`${stat.value} out of ${stat.total} stars on Glassdoor`}
                           style={{
                             display: "inline-flex",
                             alignItems: "center",
-                            gap: 4,
+                            gap: 12,
                             color: "var(--voyfai-teal)",
                           }}
                         >
-                          {Array.from({ length: stat.stars }).map((_, si) => (
-                            <span
-                              key={si}
-                              aria-hidden="true"
-                              style={{
-                                width: 40,
-                                height: 40,
-                                display: "inline-flex",
-                              }}
-                            >
-                              {Icons.star}
-                            </span>
-                          ))}
+                          <CountUp
+                            to={stat.value}
+                            decimals={stat.decimals || 0}
+                            duration={1400}
+                            delay={i * 100}
+                          />
+                          <span
+                            aria-hidden="true"
+                            style={{
+                              display: "inline-flex",
+                              alignItems: "center",
+                              gap: 2,
+                            }}
+                          >
+                            {Array.from({ length: stat.total }).map((_, si) => {
+                              const filled = si < stat.stars;
+                              return (
+                                <svg
+                                  key={si}
+                                  width="30"
+                                  height="30"
+                                  viewBox="0 0 24 24"
+                                  fill={filled ? "currentColor" : "none"}
+                                  stroke={filled ? "none" : "rgba(0,0,0,0.18)"}
+                                  strokeWidth="1.5"
+                                  strokeLinejoin="round"
+                                  style={{ flexShrink: 0 }}
+                                >
+                                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                </svg>
+                              );
+                            })}
+                          </span>
                         </span>
                       ) : (
                         <CountUp
