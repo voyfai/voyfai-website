@@ -243,7 +243,7 @@ export default function Careers() {
           >
             We build AI tools for the SME freight forwarders who run on
             relationships, grit, and decades of know-how. Berlin-based, Series A,
-            and small enough that what you ship lands in operators' hands within
+            and small enough that what you build lands in operators' hands within
             weeks.
           </p>
 

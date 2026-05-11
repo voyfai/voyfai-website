@@ -12,6 +12,7 @@ const MEMBERS = [
     name: "Rajat",
     role: "AI Engineer",
     initials: "R",
+    photo: "/images/careers/team/rajat.jpg",
     quote:
       "Everyone shares the same vision and pulls in the same direction. There are no silos, only a common vision.",
     qa: [
@@ -49,6 +50,7 @@ const MEMBERS = [
     name: "Dana",
     role: "Product Manager",
     initials: "D",
+    photo: "/images/careers/team/dana.jpg",
     quote:
       "You will feel the impact right away. Your top-down and 'so-what' thinking will be very helpful, but the rest is up to your eagerness to go broad and in depth.",
     qa: [
@@ -87,6 +89,7 @@ const MEMBERS = [
     name: "Marco",
     role: "Engineering Lead",
     initials: "M",
+    photo: "/images/careers/team/marco.jpg",
     quote:
       "Voyfai is a rare combination of market opportunity and a team that can actually execute on it.",
     qa: [
@@ -326,10 +329,10 @@ const styles = {
   },
   pullQuote: {
     fontFamily: "var(--font-body)",
-    fontSize: 15,
-    fontWeight: 400,
-    lineHeight: 1.55,
-    color: COLORS.textMuted,
+    fontSize: 16,
+    fontWeight: 500,
+    lineHeight: 1.5,
+    color: COLORS.navy,
     margin: 0,
     fontStyle: "italic",
     textWrap: "pretty",

@@ -56,7 +56,7 @@ export default function OurStory() {
           <Reveal>
             <SectionLabel>Our Story</SectionLabel>
             <h2 style={styles.heading}>
-              From operators inside the industry to operators building for it
+              We came from inside freight tech. We're building for the operators it left behind.
             </h2>
           </Reveal>
 
