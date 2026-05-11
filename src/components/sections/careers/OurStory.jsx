@@ -1,10 +1,9 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { COLORS, RADIUS } from "../../../constants/colors";
+import { Icons } from "../../../constants/icons";
 import Section from "../../Section";
 import SectionLabel from "../../SectionLabel";
 import Reveal from "../../Reveal";
-import useReducedMotion from "../../../hooks/useReducedMotion";
 
 const PARAGRAPHS = [
   "We founded Voyfai in August 2023, after years in executive roles at Forto working closely alongside the CFO and CEO. That experience gave us a deep understanding of what the freight forwarding industry gets right, and where it falls short.",
@@ -15,66 +14,40 @@ const PARAGRAPHS = [
 
 const PHOTOS = [
   {
-    id: "founding",
-    eyebrow: "August 2023",
-    caption: "Berlin, Germany",
-    aspect: "4 / 3",
-    pattern: `
-      linear-gradient(135deg, ${COLORS.copperMuted} 0%, transparent 60%),
-      radial-gradient(ellipse at 30% 20%, rgba(3,166,150,0.10) 0%, transparent 55%),
-      repeating-linear-gradient(115deg, transparent 0px, transparent 22px, rgba(3,166,150,0.045) 22px, rgba(3,166,150,0.045) 23px)
-    `,
-    parallaxRange: ["-8%", "8%"],
+    id: "strategy",
+    src: "/images/careers/our-story/strategy-session.jpg",
+    srcAvif: "/images/careers/our-story/strategy-session.avif",
+    caption: "Strategy session, Berlin office",
+    width: 1600,
+    height: 900,
+    eager: true,
   },
   {
-    id: "today",
-    eyebrow: "Today",
-    caption: "Six countries, growing",
-    aspect: "4 / 3",
-    pattern: `
-      linear-gradient(225deg, ${COLORS.copperMuted} 0%, transparent 60%),
-      radial-gradient(ellipse at 70% 80%, rgba(3,166,150,0.12) 0%, transparent 55%),
-      repeating-linear-gradient(65deg, transparent 0px, transparent 22px, rgba(3,166,150,0.045) 22px, rgba(3,166,150,0.045) 23px)
-    `,
-    parallaxRange: ["8%", "-8%"],
+    id: "team-day",
+    src: "/images/careers/our-story/team-day.jpg",
+    srcAvif: "/images/careers/our-story/team-day.avif",
+    caption: "Team day at WhatAGame",
+    width: 1600,
+    height: 900,
   },
 ];
 
-function StoryPhoto({ photo, reducedMotion }) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], photo.parallaxRange);
-
-  return (
-    <div
-      ref={ref}
-      data-asset={`our-story-photo-${photo.id}`}
-      style={{
-        ...styles.photoFrame,
-        aspectRatio: photo.aspect,
-      }}
-    >
-      <motion.div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: photo.pattern,
-          y: reducedMotion ? 0 : y,
-        }}
-      />
-      <div style={styles.photoOverlay}>
-        <div style={styles.photoEyebrow}>{photo.eyebrow}</div>
-        <div style={styles.photoCaption}>{photo.caption}</div>
-      </div>
-    </div>
-  );
-}
-
 export default function OurStory() {
-  const reducedMotion = useReducedMotion();
+  const [expanded, setExpanded] = useState(false);
+  const collapsibleRef = useRef(null);
+  const [collapsibleHeight, setCollapsibleHeight] = useState(0);
+
+  useEffect(() => {
+    if (!collapsibleRef.current) return;
+    if (expanded) {
+      setCollapsibleHeight(collapsibleRef.current.scrollHeight);
+    } else {
+      setCollapsibleHeight(0);
+    }
+  }, [expanded]);
+
+  const visibleParagraphs = PARAGRAPHS.slice(0, 2);
+  const hiddenParagraphs = PARAGRAPHS.slice(2);
 
   return (
     <Section id="our-story" bg={COLORS.cream}>
@@ -88,23 +61,78 @@ export default function OurStory() {
           </Reveal>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-            {PARAGRAPHS.map((p, i) => (
+            {visibleParagraphs.map((p, i) => (
               <Reveal key={i} delay={60 + i * 60}>
                 <p style={styles.paragraph}>{p}</p>
               </Reveal>
             ))}
-            <Reveal delay={60 + PARAGRAPHS.length * 60}>
-              <p style={styles.attribution}>
-                Adrian Detlefs &amp; James Maund, Co-Founders and Managing Directors
-              </p>
+
+            <div
+              className="story-collapsible"
+              data-expanded={expanded}
+              style={{
+                ...styles.collapsible,
+                maxHeight: collapsibleHeight,
+                opacity: expanded ? 1 : 0,
+              }}
+              aria-hidden={!expanded}
+            >
+              <div
+                ref={collapsibleRef}
+                style={{ display: "flex", flexDirection: "column", gap: 18 }}
+              >
+                {hiddenParagraphs.map((p, i) => (
+                  <p key={i} style={styles.paragraph}>
+                    {p}
+                  </p>
+                ))}
+                <p style={styles.attribution}>
+                  Adrian Detlefs &amp; James Maund, Co-Founders and Managing Directors
+                </p>
+              </div>
+            </div>
+
+            <Reveal delay={60 + visibleParagraphs.length * 60}>
+              <button
+                type="button"
+                onClick={() => setExpanded((v) => !v)}
+                aria-expanded={expanded}
+                className="story-readmore"
+                style={styles.readMore}
+              >
+                {expanded ? "Show less" : "Read more"}
+                <span
+                  aria-hidden="true"
+                  className="story-readmore-chevron"
+                  data-expanded={expanded}
+                  style={styles.readMoreChevron}
+                >
+                  {Icons.chevronDown}
+                </span>
+              </button>
             </Reveal>
           </div>
         </div>
 
-        <div className="story-photo-stack" style={styles.col}>
+        <div className="story-photo-stack" style={styles.photoStack}>
           {PHOTOS.map((photo, i) => (
-            <Reveal key={photo.id} delay={60 + i * 60}>
-              <StoryPhoto photo={photo} reducedMotion={reducedMotion} />
+            <Reveal key={photo.id} delay={60 + i * 80}>
+              <figure className="story-photo" style={styles.photoFigure}>
+                <picture>
+                  <source srcSet={photo.srcAvif} type="image/avif" />
+                  <img
+                    src={photo.src}
+                    alt={photo.caption}
+                    width={photo.width}
+                    height={photo.height}
+                    loading={photo.eager ? "eager" : "lazy"}
+                    decoding="async"
+                    style={styles.photoImg}
+                  />
+                </picture>
+                <div style={styles.photoGradient} aria-hidden="true" />
+                <figcaption style={styles.photoCaption}>{photo.caption}</figcaption>
+              </figure>
             </Reveal>
           ))}
         </div>
@@ -149,35 +177,75 @@ const styles = {
     fontStyle: "italic",
     margin: "8px 0 0",
   },
-  photoFrame: {
+  collapsible: {
+    overflow: "hidden",
+    maxHeight: 0,
+    opacity: 0,
+    transition:
+      "max-height 360ms var(--ease-out-expo), opacity 300ms var(--ease-out)",
+  },
+  readMore: {
+    appearance: "none",
+    background: "transparent",
+    border: "none",
+    padding: 0,
+    margin: "8px 0 0",
+    cursor: "pointer",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+    fontFamily: "var(--font-body)",
+    fontSize: 14,
+    fontWeight: 600,
+    color: COLORS.copper,
+    letterSpacing: "0.01em",
+    width: "fit-content",
+  },
+  readMoreChevron: {
+    display: "inline-flex",
+    alignItems: "center",
+    transition: "transform 240ms var(--ease-out-quart)",
+  },
+  photoStack: {
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: 16,
+  },
+  photoFigure: {
     position: "relative",
-    width: "100%",
+    margin: 0,
+    aspectRatio: "16 / 9",
     borderRadius: RADIUS.lg,
     overflow: "hidden",
     background: COLORS.warmWhite,
     border: `1px solid ${COLORS.border}`,
   },
-  photoOverlay: {
-    position: "absolute",
-    left: 24,
-    bottom: 24,
-    color: COLORS.navy,
-    pointerEvents: "none",
+  photoImg: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    display: "block",
   },
-  photoEyebrow: {
-    fontFamily: "var(--font-body)",
-    fontSize: 12,
-    fontWeight: 500,
-    letterSpacing: "0.12em",
-    textTransform: "uppercase",
-    color: COLORS.copper,
-    marginBottom: 6,
+  photoGradient: {
+    position: "absolute",
+    inset: 0,
+    pointerEvents: "none",
+    background:
+      "linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.28) 28%, rgba(0,0,0,0) 55%)",
   },
   photoCaption: {
-    fontFamily: "var(--font-display)",
-    fontSize: 22,
-    fontWeight: 700,
-    color: COLORS.navy,
-    letterSpacing: "-0.01em",
+    position: "absolute",
+    left: 24,
+    right: 24,
+    bottom: 20,
+    color: "#fff",
+    fontFamily: "var(--font-body)",
+    fontSize: 14,
+    fontWeight: 600,
+    letterSpacing: "0.01em",
+    margin: 0,
+    pointerEvents: "none",
+    textShadow: "0 1px 2px rgba(0,0,0,0.35)",
   },
 };

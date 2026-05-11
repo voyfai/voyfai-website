@@ -7,7 +7,6 @@ import Section from "../components/Section";
 import SectionLabel from "../components/SectionLabel";
 import Reveal from "../components/Reveal";
 import ValueCard from "../components/ValueCard";
-import PerkCard from "../components/PerkCard";
 import JobCard from "../components/JobCard";
 import DepartmentFilter from "../components/DepartmentFilter";
 import useAshbyJobs from "../hooks/useAshbyJobs";
@@ -18,6 +17,7 @@ import OurStory from "../components/sections/careers/OurStory";
 import TeamVoices from "../components/sections/careers/TeamVoices";
 import InterviewProcess from "../components/sections/careers/InterviewProcess";
 import FoundersAndInvestors from "../components/sections/careers/FoundersAndInvestors";
+import PerksScroller from "../components/sections/careers/PerksScroller";
 import DarkCTA from "../components/sections/DarkCTA";
 
 const VALUES = [
@@ -49,7 +49,7 @@ const STATS = [
   { value: 14, suffix: "+", label: "Nationalities" },
   {
     value: 4,
-    suffix: "★",
+    stars: 4,
     label: "On Glassdoor",
     href: "https://www.glassdoor.de/Bewertungen/Voyfai-Bewertungen-E10579397.htm",
   },
@@ -57,16 +57,16 @@ const STATS = [
 
 const PERKS = [
   {
-    icon: Icons.calendar,
-    title: "Generous Holiday Allowance",
-    description:
-      "More days off than you'd expect from a startup. Because we know the best work comes from people who actually get to switch off.",
-  },
-  {
     icon: Icons.laptop,
     title: "Hybrid Working",
     description:
       "Three days a week in our Berlin office, two days wherever you do your best thinking. Flexibility that actually works.",
+  },
+  {
+    icon: Icons.calendar,
+    title: "Generous Holiday Allowance",
+    description:
+      "More days off than you'd expect from a startup. Because we know the best work comes from people who actually get to switch off.",
   },
   {
     icon: Icons.car,
@@ -75,22 +75,22 @@ const PERKS = [
       "€50 monthly through Navit to cover however you get around.",
   },
   {
-    icon: Icons.pizza,
-    title: "Pizza Thursdays",
-    description:
-      "Bi-weekly post-All Hands pizza nights. Good food, good people, no agenda.",
-  },
-  {
-    icon: Icons.compass,
-    title: "Company Offsites",
-    description:
-      "Twice a year we step back, celebrate what we've built, and spend real time together outside the office.",
-  },
-  {
     icon: Icons.coffee,
     title: "Office Perks",
     description:
       "Great coffee, soft drinks, nuts and snacks to keep you going through the day.",
+  },
+  {
+    icon: Icons.compass,
+    title: "Company Party",
+    description:
+      "Twice a year the whole team gets together to celebrate what we've built and share a few proper meals.",
+  },
+  {
+    icon: Icons.pizza,
+    title: "Pizza Thursdays",
+    description:
+      "Bi-weekly post-All Hands pizza nights. Good food, good people, no agenda.",
   },
 ];
 
@@ -138,8 +138,9 @@ export default function Careers() {
         }}
       >
         <picture>
+          <source srcSet="/images/careers/hero-spree.avif" type="image/avif" />
           <img
-            src="/images/voyfai_careers_hero_1777475797821.png"
+            src="/images/careers/hero-spree.jpg"
             alt=""
             aria-hidden="true"
             onLoad={() => setHeroLoaded(true)}
@@ -150,7 +151,7 @@ export default function Careers() {
               height: "100%",
               objectFit: "cover",
               objectPosition: "center",
-              filter: "brightness(0.4) saturate(0.8)",
+              filter: "brightness(0.45) saturate(0.85)",
               clipPath: heroLoaded ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
               transition: reducedMotion
                 ? "none"
@@ -398,6 +399,9 @@ export default function Careers() {
                         color: COLORS.navy,
                         lineHeight: 1,
                         letterSpacing: "-0.02em",
+                        display: "flex",
+                        alignItems: "baseline",
+                        gap: 10,
                       }}
                     >
                       <CountUp
@@ -406,6 +410,31 @@ export default function Careers() {
                         suffix={stat.suffix || ""}
                         delay={i * 100}
                       />
+                      {stat.stars && (
+                        <span
+                          aria-hidden="true"
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: 2,
+                            color: "var(--voyfai-teal)",
+                            transform: "translateY(-6px)",
+                          }}
+                        >
+                          {Array.from({ length: stat.stars }).map((_, si) => (
+                            <span
+                              key={si}
+                              style={{
+                                width: 18,
+                                height: 18,
+                                display: "inline-flex",
+                              }}
+                            >
+                              {Icons.star}
+                            </span>
+                          ))}
+                        </span>
+                      )}
                     </div>
                     <div
                       style={{
@@ -494,7 +523,7 @@ export default function Careers() {
                 maxWidth: 540,
               }}
             >
-              The everyday things that make work work
+              The things that help great work happen
             </h2>
             <p
               style={{
@@ -502,28 +531,16 @@ export default function Careers() {
                 fontSize: 17,
                 lineHeight: 1.7,
                 color: COLORS.textMuted,
-                maxWidth: 540,
+                maxWidth: 600,
                 margin: "0 auto",
               }}
             >
-              Practical support for focused work, in the office and beyond.
+              Built for people who care deeply about what they do, and want the
+              flexibility and support to do it well.
             </p>
           </div>
         </Reveal>
-        <div
-          className="perks-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 24,
-          }}
-        >
-          {PERKS.map((p, i) => (
-            <Reveal key={p.title} delay={60 + i * 60}>
-              <PerkCard {...p} />
-            </Reveal>
-          ))}
-        </div>
+        <PerksScroller perks={PERKS} />
       </Section>
 
       {/* ─── OPEN POSITIONS ─────────────────────────────────────── */}
@@ -540,10 +557,10 @@ export default function Careers() {
                 margin: "0 auto 14px",
                 lineHeight: 1.25,
                 letterSpacing: "-0.02em",
-                maxWidth: 600,
+                maxWidth: 760,
               }}
             >
-              Find your role
+              Join a team built for people who like building
             </h2>
             <p
               style={{
@@ -551,12 +568,15 @@ export default function Careers() {
                 fontSize: 17,
                 lineHeight: 1.7,
                 color: COLORS.textMuted,
-                maxWidth: 540,
+                maxWidth: 720,
                 margin: "0 auto 40px",
               }}
             >
-              Open roles are loaded directly from Ashby. Each listing has the
-              current team, location, employment type, and application link.
+              We're hiring people who want ownership, move fast without ego, and
+              care about solving real operational problems. Whether your
+              background is in startups, logistics, product, engineering, or
+              operations, what matters most here is curiosity, execution, and
+              the willingness to figure things out together.
             </p>
           </div>
         </Reveal>

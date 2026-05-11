@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { COLORS, RADIUS } from "../../../constants/colors";
 import { Icons } from "../../../constants/icons";
 import Section from "../../Section";
@@ -123,34 +123,99 @@ const MEMBERS = [
 const GLASSDOOR_URL =
   "https://www.glassdoor.de/Bewertungen/Voyfai-Bewertungen-E10579397.htm";
 
-export default function TeamVoices() {
-  const [activeId, setActiveId] = useState(MEMBERS[0].id);
-  const tabRefs = useRef({});
-  const active = MEMBERS.find((m) => m.id === activeId) || MEMBERS[0];
+function InterviewCard({ member, isOpen, onToggle }) {
+  const panelId = `interview-panel-${member.id}`;
+  const triggerId = `interview-trigger-${member.id}`;
+  const panelRef = useRef(null);
+  const [panelHeight, setPanelHeight] = useState(0);
 
-  const onTabKeyDown = (e) => {
-    const idx = MEMBERS.findIndex((m) => m.id === activeId);
-    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-      e.preventDefault();
-      const next = MEMBERS[(idx + 1) % MEMBERS.length];
-      setActiveId(next.id);
-      tabRefs.current[next.id]?.focus();
-    } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-      e.preventDefault();
-      const prev = MEMBERS[(idx - 1 + MEMBERS.length) % MEMBERS.length];
-      setActiveId(prev.id);
-      tabRefs.current[prev.id]?.focus();
-    } else if (e.key === "Home") {
-      e.preventDefault();
-      setActiveId(MEMBERS[0].id);
-      tabRefs.current[MEMBERS[0].id]?.focus();
-    } else if (e.key === "End") {
-      e.preventDefault();
-      const last = MEMBERS[MEMBERS.length - 1];
-      setActiveId(last.id);
-      tabRefs.current[last.id]?.focus();
+  useEffect(() => {
+    if (!panelRef.current) return;
+    if (isOpen) {
+      setPanelHeight(panelRef.current.scrollHeight);
+    } else {
+      setPanelHeight(0);
     }
-  };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen || !panelRef.current) return;
+    const ro = new ResizeObserver(() => {
+      if (panelRef.current) setPanelHeight(panelRef.current.scrollHeight);
+    });
+    ro.observe(panelRef.current);
+    return () => ro.disconnect();
+  }, [isOpen]);
+
+  return (
+    <div
+      className="interview-card"
+      data-open={isOpen}
+      style={styles.card}
+    >
+      <button
+        type="button"
+        id={triggerId}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        onClick={onToggle}
+        className="interview-trigger"
+        style={styles.trigger}
+      >
+        <div style={styles.triggerInner}>
+          <Avatar
+            initials={member.initials}
+            src={member.photo}
+            alt={`${member.name}, ${member.role}`}
+            size={72}
+          />
+          <div style={styles.identity}>
+            <div style={styles.name}>{member.name}</div>
+            <div style={styles.role}>{member.role}</div>
+          </div>
+          <p style={styles.pullQuote}>&ldquo;{member.quote}&rdquo;</p>
+          <span
+            aria-hidden="true"
+            className="interview-chevron"
+            data-open={isOpen}
+            style={styles.chevron}
+          >
+            {Icons.chevronDown}
+          </span>
+        </div>
+      </button>
+
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={triggerId}
+        className="interview-panel"
+        style={{
+          ...styles.panel,
+          maxHeight: panelHeight,
+        }}
+      >
+        <div ref={panelRef} className="interview-panel-inner" style={styles.panelInner}>
+          <div className="interview-qa" style={styles.qaBody}>
+            {member.qa.map((row, i) => (
+              <div key={i} className="interview-qa-row" style={styles.qaRow}>
+                <h4 style={styles.qaQuestion}>{row.question}</h4>
+                {row.answer.split("\n\n").map((para, pi) => (
+                  <p key={pi} style={styles.qaAnswer}>
+                    {para}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function TeamVoices() {
+  const [openId, setOpenId] = useState(null);
 
   return (
     <Section id="team-voices" bg={COLORS.cream}>
@@ -165,95 +230,15 @@ export default function TeamVoices() {
       </Reveal>
 
       <Reveal>
-        <div className="team-voices-split" style={styles.split}>
-          {/* Tab strip — names on top */}
-          <div
-            role="tablist"
-            aria-orientation="horizontal"
-            aria-label="Team interviews"
-            className="team-voices-tablist"
-            style={{
-              ...styles.tablist,
-              gridTemplateColumns: `repeat(${MEMBERS.length}, 1fr)`,
-            }}
-            onKeyDown={onTabKeyDown}
-          >
-            {MEMBERS.map((m) => {
-              const isActive = m.id === activeId;
-              return (
-                <button
-                  key={m.id}
-                  ref={(el) => (tabRefs.current[m.id] = el)}
-                  role="tab"
-                  type="button"
-                  aria-selected={isActive}
-                  aria-controls={`panel-${m.id}`}
-                  id={`tab-${m.id}`}
-                  tabIndex={isActive ? 0 : -1}
-                  onClick={() => setActiveId(m.id)}
-                  className="team-voice-tab"
-                  data-active={isActive}
-                  style={{
-                    ...styles.tab,
-                    ...(isActive ? styles.tabActive : null),
-                  }}
-                >
-                  <Avatar
-                    initials={m.initials}
-                    alt={`${m.name}, ${m.role}`}
-                    size={44}
-                  />
-                  <span style={styles.tabText}>
-                    <span style={styles.tabName}>{m.name}</span>
-                    <span style={styles.tabRole}>{m.role}</span>
-                  </span>
-                </button>
-              );
-            })}
-
-            {/* Animated active indicator */}
-            <span
-              aria-hidden="true"
-              className="team-voice-indicator"
-              style={{
-                ...styles.indicator,
-                width: `${100 / MEMBERS.length}%`,
-                transform: `translateX(${
-                  MEMBERS.findIndex((m) => m.id === activeId) * 100
-                }%)`,
-              }}
+        <div className="interview-stack" style={styles.stack}>
+          {MEMBERS.map((m) => (
+            <InterviewCard
+              key={m.id}
+              member={m}
+              isOpen={openId === m.id}
+              onToggle={() => setOpenId(openId === m.id ? null : m.id)}
             />
-          </div>
-
-          {/* Detail panel — full interview */}
-          <div
-            role="tabpanel"
-            id={`panel-${active.id}`}
-            aria-labelledby={`tab-${active.id}`}
-            className="team-voices-panel"
-            style={styles.panel}
-          >
-            <div
-              key={active.id}
-              className="team-voices-panel-inner"
-              style={styles.panelInner}
-            >
-              <p style={styles.panelLede}>“{active.quote}”</p>
-
-              <div className="team-voices-qa" style={styles.panelBody}>
-                {active.qa.map((row, i) => (
-                  <div key={i} className="team-voices-qa-row" style={styles.qaRow}>
-                    <h4 style={styles.qaQuestion}>{row.question}</h4>
-                    {row.answer.split("\n\n").map((para, pi) => (
-                      <p key={pi} style={styles.qaAnswer}>
-                        {para}
-                      </p>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </Reveal>
 
@@ -287,111 +272,98 @@ const styles = {
     letterSpacing: "-0.02em",
     textWrap: "balance",
   },
-  split: {
+  stack: {
     display: "flex",
     flexDirection: "column",
-    gap: 0,
-    background: COLORS.cream,
+    gap: 16,
+    maxWidth: 1100,
+    margin: "0 auto",
+  },
+  card: {
+    background: COLORS.white,
     border: `1px solid ${COLORS.border}`,
     borderRadius: RADIUS.lg,
     overflow: "hidden",
+    transition: "border-color 240ms var(--ease-out)",
   },
-  tablist: {
-    display: "grid",
-    gap: 0,
-    position: "relative",
-    borderBottom: `1px solid ${COLORS.border}`,
-    background: COLORS.cream,
-  },
-  tab: {
+  trigger: {
     appearance: "none",
     background: "transparent",
     border: "none",
-    borderRadius: 0,
-    padding: "20px 20px",
-    display: "flex",
-    alignItems: "center",
-    gap: 14,
+    width: "100%",
+    padding: 0,
+    margin: 0,
     cursor: "pointer",
     textAlign: "left",
     fontFamily: "var(--font-body)",
-    color: COLORS.text,
-    minWidth: 0,
-    transition: "background 200ms var(--ease-out)",
+    color: "inherit",
   },
-  tabActive: {
-    background: COLORS.white,
+  triggerInner: {
+    display: "grid",
+    gridTemplateColumns: "auto minmax(140px, 220px) minmax(0, 1fr) auto",
+    alignItems: "center",
+    gap: 28,
+    padding: "24px 32px",
   },
-  tabText: {
-    flex: 1,
-    minWidth: 0,
+  identity: {
     display: "flex",
     flexDirection: "column",
-    gap: 2,
+    gap: 4,
+    minWidth: 0,
   },
-  tabName: {
+  name: {
     fontFamily: "var(--font-display)",
-    fontSize: 17,
+    fontSize: 22,
     fontWeight: 700,
     color: COLORS.navy,
     letterSpacing: "-0.01em",
-    lineHeight: 1.2,
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
+    lineHeight: 1.15,
   },
-  tabRole: {
+  role: {
     fontSize: 12,
     fontWeight: 500,
     color: COLORS.copper,
-    letterSpacing: "0.06em",
+    letterSpacing: "0.08em",
     textTransform: "uppercase",
     lineHeight: 1.3,
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
   },
-  indicator: {
-    position: "absolute",
-    bottom: -1,
-    left: 0,
-    height: 2,
-    background: COLORS.copper,
-    borderRadius: 2,
-    pointerEvents: "none",
-    transition: "transform 360ms var(--ease-out)",
+  pullQuote: {
+    fontFamily: "var(--font-body)",
+    fontSize: 15,
+    fontWeight: 400,
+    lineHeight: 1.55,
+    color: COLORS.textMuted,
+    margin: 0,
+    fontStyle: "italic",
+    textWrap: "pretty",
+    minWidth: 0,
+  },
+  chevron: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 36,
+    height: 36,
+    borderRadius: "50%",
+    background: COLORS.cream,
+    color: COLORS.navy,
+    transition: "transform 240ms var(--ease-out-quart), background 200ms var(--ease-out)",
+    flexShrink: 0,
   },
   panel: {
-    background: COLORS.white,
-    padding: 0,
-    minHeight: 360,
     overflow: "hidden",
-    position: "relative",
+    maxHeight: 0,
+    transition: "max-height 320ms var(--ease-out-expo)",
   },
   panelInner: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    padding: "36px 48px 40px",
-    maxWidth: 1180,
-    margin: "0 auto",
-    width: "100%",
+    padding: "8px 32px 36px",
+    borderTop: `1px solid ${COLORS.border}`,
+    marginTop: 0,
   },
-  panelLede: {
-    fontFamily: "var(--font-display)",
-    fontSize: "clamp(20px, 2.2vw, 24px)",
-    fontWeight: 700,
-    lineHeight: 1.4,
-    color: COLORS.navy,
-    margin: "0 0 32px",
-    letterSpacing: "-0.015em",
-    textWrap: "pretty",
-    paddingBottom: 28,
-    borderBottom: `1px solid ${COLORS.border}`,
-  },
-  panelBody: {
+  qaBody: {
     columnCount: 2,
     columnGap: 56,
+    paddingTop: 28,
   },
   qaRow: {
     display: "flex",

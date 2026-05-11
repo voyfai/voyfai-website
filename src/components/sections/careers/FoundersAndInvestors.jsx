@@ -27,10 +27,34 @@ const FOUNDERS = [
 ];
 
 const INVESTORS = [
-  { name: "Atlantic Labs", src: atlanticLabsLogo, width: 46, height: 32 },
-  { name: "Heartcore", src: heartcoreLogo, width: 35, height: 32 },
-  { name: "Earlybird", src: earlybirdLogo, width: 80, height: 32 },
-  { name: "blisce", src: blisceLogo, width: 49, height: 32 },
+  {
+    name: "Atlantic Labs",
+    src: atlanticLabsLogo,
+    width: 46,
+    height: 32,
+    blurb: "Berlin-based pre-seed and seed fund, focused on industrial and B2B software.",
+  },
+  {
+    name: "Heartcore",
+    src: heartcoreLogo,
+    width: 35,
+    height: 32,
+    blurb: "Copenhagen-led Series A fund backing European consumer and SaaS founders.",
+  },
+  {
+    name: "Earlybird",
+    src: earlybirdLogo,
+    width: 80,
+    height: 32,
+    blurb: "Pan-European early-stage VC with a long track record in industrial software.",
+  },
+  {
+    name: "blisce",
+    src: blisceLogo,
+    width: 49,
+    height: 32,
+    blurb: "Paris and New York growth investor; portfolio includes Spotify, Brex, and Lydia.",
+  },
 ];
 
 export default function FoundersAndInvestors() {
@@ -85,17 +109,20 @@ export default function FoundersAndInvestors() {
               <div
                 key={inv.name}
                 className="investor-logo-color"
-                style={styles.logoSlot}
+                style={styles.investorBlock}
               >
-                <img
-                  src={inv.src}
-                  alt={inv.name}
-                  width={inv.width}
-                  height={inv.height}
-                  loading="lazy"
-                  decoding="async"
-                  style={styles.logoImg}
-                />
+                <div style={styles.logoSlot}>
+                  <img
+                    src={inv.src}
+                    alt={inv.name}
+                    width={inv.width}
+                    height={inv.height}
+                    loading="lazy"
+                    decoding="async"
+                    style={styles.logoImg}
+                  />
+                </div>
+                <p style={styles.investorBlurb}>{inv.blurb}</p>
               </div>
             ))}
           </div>
@@ -170,12 +197,21 @@ const styles = {
     textWrap: "pretty",
   },
   investorsStrip: {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
+    display: "grid",
+    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+    alignItems: "start",
     justifyContent: "center",
-    gap: 56,
+    gap: 40,
     padding: 0,
+    maxWidth: 1080,
+    margin: "0 auto",
+  },
+  investorBlock: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 14,
+    minWidth: 0,
   },
   logoSlot: {
     height: 36,
@@ -188,5 +224,16 @@ const styles = {
     maxWidth: 120,
     objectFit: "contain",
     display: "block",
+  },
+  investorBlurb: {
+    fontFamily: "var(--font-body)",
+    fontSize: 13,
+    fontWeight: 400,
+    lineHeight: 1.55,
+    color: COLORS.textMuted,
+    margin: 0,
+    textAlign: "center",
+    maxWidth: "26ch",
+    textWrap: "pretty",
   },
 };
