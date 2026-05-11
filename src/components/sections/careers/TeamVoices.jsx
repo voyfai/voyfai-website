@@ -48,7 +48,7 @@ const MEMBERS = [
   {
     id: "dana",
     name: "Dana",
-    role: "Product Manager",
+    role: "Staff Product Manager",
     initials: "D",
     photo: "/images/careers/team/dana.jpg",
     quote:
