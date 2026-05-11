@@ -87,7 +87,7 @@ const MEMBERS = [
   {
     id: "marco",
     name: "Marco",
-    role: "Engineering Lead",
+    role: "Head of Engineering",
     initials: "M",
     photo: "/images/careers/team/marco.jpg",
     quote:
