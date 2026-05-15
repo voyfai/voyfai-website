@@ -25,21 +25,21 @@ const VALUES = [
     icon: Icons.users,
     title: "Voyaging together",
     description:
-      "We solve problems side by side and ask for help early. Teams share context openly, give direct and constructive feedback, and focus on what moves the company forward, not individual silos.",
+      "Every voyage needs a crew that rows together. We surface what we know, ask for help before we're stuck, give direct and constructive feedback, and call out the rocks we see ahead - even when they're in someone else's lane. No passengers, no silos.",
     chips: [],
   },
   {
     icon: Icons.heart,
     title: "Entrepreneurs at heart",
     description:
-      "We think in solutions, take ownership, and make progress with the information and resources we have. Small experiments beat long discussions. If we see something broken, we fix it or propose how to fix it.",
+      "Every entrepreneur owns the outcome, not just the task. We make the call with the information we have, run the small experiment instead of debating for a week, and when something's broken, we fix it.",
     chips: [],
   },
   {
     icon: Icons.zap,
     title: "Humble with bold moves",
     description:
-      "We balance ambition with curiosity. We challenge assumptions, including our own. We move fast when needed and slow down when it matters. Mistakes are part of learning, not something to hide.",
+      "Every bold move needs a humble mind behind it. We back ourselves enough to place the bet and stay open enough to question it, moving fast when we can and pausing when it counts. Mistakes aren't buried; they're how we grow.",
     chips: [],
   },
 ];
