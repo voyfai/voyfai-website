@@ -1,13 +1,14 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Home from "./pages/Home";
-import Careers from "./pages/Careers";
-import CareerDetail from "./pages/CareerDetail";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import Imprint from "./pages/Imprint";
 import { initCookieConsent } from "./lib/cookieConsent";
+
+const Home = lazy(() => import("./pages/Home"));
+const Careers = lazy(() => import("./pages/Careers"));
+const CareerDetail = lazy(() => import("./pages/CareerDetail"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const Imprint = lazy(() => import("./pages/Imprint"));
 
 function ScrollToLocation() {
   const { pathname, hash } = useLocation();
@@ -50,13 +51,15 @@ export default function App() {
         }}
       >
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/careers/:jobId" element={<CareerDetail />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/imprint" element={<Imprint />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/careers/:jobId" element={<CareerDetail />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/imprint" element={<Imprint />} />
+          </Routes>
+        </Suspense>
         <Footer />
       </div>
     </BrowserRouter>

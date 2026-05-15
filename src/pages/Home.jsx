@@ -67,7 +67,7 @@ export default function Home() {
             aria-hidden="true"
             width={1920}
             height={1440}
-            fetchpriority="high"
+            fetchPriority="high"
             decoding="async"
             onLoad={() => setHeroLoaded(true)}
             style={{
