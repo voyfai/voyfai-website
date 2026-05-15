@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { COLORS, RADIUS } from "../constants/colors";
@@ -101,16 +101,6 @@ export default function Careers() {
   const [selectedDept, setSelectedDept] = useState("All");
   const reducedMotion = useReducedMotion();
   const [heroLoaded, setHeroLoaded] = useState(reducedMotion);
-
-  useEffect(() => {
-    const meta = document.createElement("meta");
-    meta.name = "robots";
-    meta.content = "noindex, nofollow";
-    document.head.appendChild(meta);
-    return () => {
-      document.head.removeChild(meta);
-    };
-  }, []);
 
   const departments = useMemo(() => {
     const set = new Set(jobs.map((j) => j.department).filter(Boolean));

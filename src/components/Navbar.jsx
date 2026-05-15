@@ -7,6 +7,7 @@ const navLinks = [
   { label: "Benefits", href: "#benefits" },
   { label: "Group", href: "#partners" },
   { label: "Technology", href: "#technology" },
+  { label: "Careers", href: "/careers", absolute: true },
 ];
 
 const LIGHT_HEADER_ROUTES = ["/privacy-policy", "/imprint"];
@@ -146,7 +147,9 @@ export default function Navbar() {
                 background: scrolled ? COLORS.copper : "rgba(255,255,255,0.12)",
                 color: COLORS.white,
                 borderRadius: 6,
-                border: scrolled ? "none" : "1px solid rgba(255,255,255,0.2)",
+                border: scrolled
+                  ? "1px solid transparent"
+                  : "1px solid rgba(255,255,255,0.2)",
                 textDecoration: "none",
               }}
             >

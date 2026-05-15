@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /careers
-Disallow: /careers/
 
 Sitemap: https://voyfai.com/sitemap.xml
