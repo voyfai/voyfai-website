@@ -4,7 +4,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const SRC = resolve(__dirname, "../src/assets/Voyfai-hero.jpg");
+const SRC = resolve(__dirname, "../src/assets/Voyfai-hero-ship.png");
 const OUT = resolve(__dirname, "../public/hero");
 
 const variants = [

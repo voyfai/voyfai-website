@@ -81,7 +81,7 @@
   --shadow-copper: 0 10px 30px rgba(3, 166, 150, 0.25);
 
   --copper: #03a696;
-  --copper-light: #04c9b4;
+  --copper-light: #03a696;
   --voyfai-teal: var(--copper);
   --voyfai-teal-700: #029486;
   --voyfai-teal-50: rgba(3, 166, 150, 0.05);
@@ -101,7 +101,7 @@
   --voyfai-dark: #0a0a0a;
   --voyfai-dark-surface: #121212;
   --focus-ring: 0 0 0 2px #ffffff, 0 0 0 4px #03a696;
-  --focus-ring-dark: 0 0 0 2px #111111, 0 0 0 4px #04c9b4;
+  --focus-ring-dark: 0 0 0 2px #111111, 0 0 0 4px #03a696;
   
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
@@ -336,13 +336,16 @@ body {
   box-shadow: var(--focus-ring);
 }
 
+/* Brand teal #03A696 — the single teal used site-wide (source of truth).
+   White-on-#03A696 at the button's 15px is ~3:1, below WCAG AA (4.5:1) for this
+   size; accepted by founder 2026-06-10 to keep the teal on-brand. Hover → teal-700. */
 .cta-primary {
-  background: #027d72;
+  background: #03a696;
   color: #ffffff;
 }
 
 .cta-primary:hover {
-  background: #026f66;
+  background: #029486;
   transform: translateY(-1px);
   box-shadow: var(--shadow-copper);
 }

@@ -1,3 +1,5 @@
+// NOTE: hero visual deviates from AGENT.md §7/§3.2 (cargo-ship imagery, glows).
+// Approved for preview by founder 2026-06-10. Source: src/assets/Voyfai-hero-ship.png.
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { COLORS } from "../constants/colors";
 import { Icons } from "../constants/icons";
@@ -126,7 +128,7 @@ export default function Home() {
             alt=""
             aria-hidden="true"
             width={1920}
-            height={1440}
+            height={1333}
             fetchPriority="high"
             decoding="async"
             onLoad={() => setHeroLoaded(true)}
@@ -136,8 +138,8 @@ export default function Home() {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "center 40%",
-              filter: "brightness(0.3) saturate(0.7)",
+              objectPosition: "center 45%",
+              filter: "brightness(0.62) saturate(0.9)",
               clipPath: heroLoaded ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
               transition: reducedMotion
                 ? "none"
@@ -151,7 +153,7 @@ export default function Home() {
             position: "absolute",
             inset: 0,
             background: `
-              linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.6) 100%),
+              linear-gradient(180deg, rgba(0,0,0,0.36) 0%, rgba(0,0,0,0.2) 45%, rgba(0,0,0,0.54) 100%),
               radial-gradient(ellipse 800px 600px at 20% 80%, rgba(3,166,150,0.06) 0%, transparent 60%)
             `,
           }}
@@ -161,7 +163,7 @@ export default function Home() {
           style={{
             position: "absolute",
             inset: 0,
-            boxShadow: "inset 0 0 200px rgba(0,0,0,0.3)",
+            boxShadow: "inset 0 0 200px rgba(0,0,0,0.27)",
             pointerEvents: "none",
           }}
         />
@@ -204,8 +206,9 @@ export default function Home() {
               fontSize: "clamp(16px, 2vw, 18px)",
               fontWeight: 300,
               lineHeight: 1.75,
-              color: "rgba(255,255,255,0.55)",
-              maxWidth: 560,
+              color: "rgba(255,255,255,0.6)",
+              maxWidth: 700,
+              textWrap: "balance",
               margin: "0 auto 48px",
             }}
           >
