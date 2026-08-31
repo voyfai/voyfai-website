@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { COLORS } from "../constants/colors";
 
+// NOTE: footer tagline ("Forward is the Way") uses Title Case, deviating from
+// AGENT.md §3.1 sentence-case rule. Confirmed by Alexis 2026-08-31.
+
 const navLinks = [
   { label: "Benefits", hash: "#benefits" },
   { label: "Group", hash: "#partners" },
@@ -83,8 +86,7 @@ export default function Footer() {
               lineHeight: 1.6,
             }}
           >
-            A group of independent freight forwarders united by shared scale,
-            technology, and partnerships.
+            Forward is the Way
           </p>
         </div>
         <div
