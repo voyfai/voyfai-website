@@ -5,7 +5,7 @@ import { Icons } from "../constants/icons";
 
 const navLinks = [
   { label: "Benefits", href: "#benefits" },
-  { label: "Group", href: "#partners" },
+  { label: "Partners", href: "#partners" },
   { label: "Technology", href: "#technology" },
   { label: "Careers", href: "/careers", absolute: true },
 ];

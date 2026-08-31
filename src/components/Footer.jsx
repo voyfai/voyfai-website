@@ -6,7 +6,7 @@ import { COLORS } from "../constants/colors";
 
 const navLinks = [
   { label: "Benefits", hash: "#benefits" },
-  { label: "Group", hash: "#partners" },
+  { label: "Partners", hash: "#partners" },
   { label: "Technology", hash: "#technology" },
 ];
 

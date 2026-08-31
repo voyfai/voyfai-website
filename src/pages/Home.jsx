@@ -314,8 +314,8 @@ export default function Home() {
               margin: "0 0 40px",
             }}
           >
-            Voyfai group forwarders access the resources that unlock the next stage of
-            growth.
+            Voyfai's partners have access to the resources that unlock the next
+            stage of growth.
           </p>
         </Reveal>
         <div
@@ -331,9 +331,9 @@ export default function Home() {
               icon={Icons.anchor}
               title="Central Trade Management"
               subtitle="Direct, lasting carrier partnerships at scale."
-              description="We leverage the group's collective procurement power to secure stronger terms and lasting relationships with major carriers worldwide."
+              description="We leverage the network's collective procurement power to secure stronger terms and lasting relationships with major carriers worldwide."
               items={[
-                "Group negotiated rates across all trade lanes",
+                "Network-negotiated rates across all trade lanes",
                 "Direct carrier relationships with secured allocations",
                 "Flexible rate structures from spot to annual",
               ]}
@@ -393,7 +393,7 @@ export default function Home() {
                 letterSpacing: "-0.02em",
               }}
             >
-              A growing group of independent freight forwarders
+              A growing network of independent freight forwarders
             </h2>
             <p
               style={{
@@ -544,7 +544,7 @@ export default function Home() {
       <Section bg={COLORS.warmWhite}>
         <Reveal>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
-            <SectionLabel>What Voyfai Group Forwarders Say</SectionLabel>
+            <SectionLabel>What Voyfai Partners Say</SectionLabel>
             <h2
               style={{
                 fontFamily: "var(--font-display)",
@@ -573,7 +573,7 @@ export default function Home() {
         >
           <Reveal delay={60}>
             <TestimonialCard
-              quote="Our experience with Voyfai during the process was exceptionally smooth, transparent, and well-communicated. From the outset, James and Adrian made it clear that their approach is built on trust and autonomy, and they have followed through on that commitment. Since the deal, we've continued to run Corten independently, with Voyfai offering meaningful support where needed, from tech development to procurement efficiencies. Their input has been practical and value-adding, without ever being overbearing."
+              quote="Our experience with Voyfai has been exceptionally smooth, transparent, and well-communicated. From the outset, James and Adrian made it clear that their approach is built on trust and autonomy, and they have followed through on that commitment. Since partnering with Voyfai, we've continued to run Corten independently, with Voyfai offering meaningful support where needed, from tech development to procurement efficiencies. Their input has been practical and value-adding, without ever being overbearing."
               name="Sam"
               company="Corten"
               role="Managing Director"
@@ -590,8 +590,8 @@ export default function Home() {
         body={
           <>
             Every Voyfai partnership starts with a conversation rooted in shared
-            values &mdash; independence, ambition, and a belief in what the group
-            can build together. No pressure, no pitch.
+            values &mdash; independence, ambition, and a belief in what we can
+            build together. No pressure, no pitch.
           </>
         }
         primary={
