@@ -1,5 +1,7 @@
 // NOTE: hero visual deviates from AGENT.md §7/§3.2 (cargo-ship imagery, glows).
 // Approved for preview by founder 2026-06-10. Source: src/assets/Voyfai-hero-ship.png.
+// NOTE: hero headline first line ("The Operating Infrastructure") uses Title Case,
+// deviating from AGENT.md §3.1 sentence-case rule. Confirmed by Alexis 2026-08-31.
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { COLORS } from "../constants/colors";
 import { Icons } from "../constants/icons";
@@ -172,7 +174,7 @@ export default function Home() {
           style={{
             position: "relative",
             textAlign: "center",
-            maxWidth: 800,
+            maxWidth: 1260,
             animation: "fadeInUp 1s ease",
           }}
         >
@@ -187,23 +189,27 @@ export default function Home() {
               letterSpacing: "-0.02em",
             }}
           >
-            <span style={{ display: "block", marginBottom: 8 }}>
-              Independent Freight
-              <br />
-              Forwarders.
-            </span>
             <span
               className={reducedMotion ? undefined : "hero-accent-line"}
-              style={{ display: "block", color: COLORS.copperLight }}
+              style={{ display: "block", marginBottom: 8, color: COLORS.copperLight }}
             >
-              Stronger Together.
+              The Operating Infrastructure
+            </span>
+            <span
+              style={{
+                display: "block",
+                color: COLORS.white,
+                fontSize: "clamp(36px, 5.5vw, 64.5px)",
+              }}
+            >
+              behind SME freight forwarding
             </span>
           </h1>
 
           <p
             style={{
               fontFamily: "var(--font-body)",
-              fontSize: "clamp(16px, 2vw, 18px)",
+              fontSize: "clamp(18px, 2.3vw, 21px)",
               fontWeight: 300,
               lineHeight: 1.75,
               color: "rgba(255,255,255,0.6)",
@@ -212,8 +218,7 @@ export default function Home() {
               margin: "0 auto 48px",
             }}
           >
-            A group of independent freight forwarders operating autonomously at
-            local level while benefiting from the collective scale.
+            Turning local strength into global scale.
           </p>
 
           <div
