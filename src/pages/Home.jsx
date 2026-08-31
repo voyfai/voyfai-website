@@ -23,7 +23,7 @@ import blisceLogo from "../assets/4-blisce.png";
 
 // Below-the-fold — code-split so GSAP, the Europe map SVG, and the heavier
 // section bundles don't block the entry chunk or the LCP paint.
-const NorthernEuropeMap = lazy(() => import("../components/NorthernEuropeMap"));
+const CoverageMap = lazy(() => import("../components/CoverageMap"));
 const RateCompare = lazy(() => import("../components/sections/tech/RateCompare"));
 const ShipmentIntake = lazy(() => import("../components/sections/tech/ShipmentIntake"));
 const HubTracker = lazy(() => import("../components/sections/tech/HubTracker"));
@@ -381,7 +381,7 @@ export default function Home() {
           }}
         >
           <div>
-            <SectionLabel>Our Group</SectionLabel>
+            <SectionLabel>Our Partners</SectionLabel>
             <h2
               style={{
                 fontFamily: "var(--font-display)",
@@ -406,24 +406,22 @@ export default function Home() {
                 maxWidth: 540,
               }}
             >
-              Established freight forwarders, each a leader in their market, united
-              under the Voyfai group. Every partner maintains their identity while
-              gaining the strength of the collective.
+              Voyfai's infrastructure powers a growing network of SME freight
+              forwarders across the globe.
             </p>
 
             {/* Key stats */}
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                gridTemplateColumns: "1fr 1fr 1fr",
                 gap: 32,
               }}
             >
               {[
-                { number: 8, label: "Partner Companies" },
+                { number: 18, label: "Partner Companies" },
                 { number: 50, suffix: "k+", label: "Annual TEU" },
-                { number: 25, label: "Office Locations" },
-                { number: 6, label: "Countries" },
+                { number: 15, label: "Countries" },
               ].map((stat, i) => (
                 <div key={i} style={{ position: "relative" }}>
                   <div style={{ position: "relative", paddingBottom: 16 }}>
@@ -472,7 +470,7 @@ export default function Home() {
           <div style={{ paddingTop: 16 }}>
             <LoadWhenNear minHeight={360} rootMargin="700px 0px">
               <Suspense fallback={null}>
-                <NorthernEuropeMap />
+                <CoverageMap />
               </Suspense>
             </LoadWhenNear>
           </div>

@@ -1377,16 +1377,16 @@ body {
 
 /* ─── MAP ────────────────────────────────────────────────────── */
 
-.northern-europe-svg path {
+.coverage-map-svg path {
   transition: fill 900ms var(--ease-out-expo);
 }
 
-.northern-europe-svg path[data-partner="true"] {
+.coverage-map-svg path[data-partner="true"] {
   fill: var(--voyfai-teal-100);
   transition-delay: var(--partner-delay, 0ms);
 }
 
-.northern-europe-map[data-in-view="true"] .northern-europe-svg path[data-partner="true"] {
+.coverage-map[data-in-view="true"] .coverage-map-svg path[data-partner="true"] {
   fill: var(--voyfai-teal);
 }
 
