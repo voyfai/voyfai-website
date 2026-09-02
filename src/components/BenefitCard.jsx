@@ -9,20 +9,20 @@ export default function BenefitCard({ icon, title, subtitle, description, items 
         background: "transparent",
         border: `1px solid transparent`,
         borderRadius: RADIUS.lg,
-        padding: "36px 28px",
+        padding: "24px 24px",
       }}
     >
       <div
         style={{
-          width: 56,
-          height: 56,
+          width: 48,
+          height: 48,
           borderRadius: RADIUS.md,
           background: COLORS.copperMuted,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           color: COLORS.copper,
-          marginBottom: 24,
+          marginBottom: 14,
         }}
       >
         {icon}
@@ -30,10 +30,10 @@ export default function BenefitCard({ icon, title, subtitle, description, items 
       <h3
         style={{
           fontFamily: "var(--font-body)",
-          fontSize: 21,
+          fontSize: 20,
           fontWeight: 600,
           color: COLORS.navy,
-          margin: "0 0 8px",
+          margin: "0 0 6px",
           lineHeight: 1.3,
           letterSpacing: "-0.01em",
         }}
@@ -46,8 +46,7 @@ export default function BenefitCard({ icon, title, subtitle, description, items 
           fontSize: 15,
           fontWeight: 400,
           color: COLORS.copperText,
-          margin: "0 0 16px",
-          fontStyle: "italic",
+          margin: "0 0 10px",
         }}
       >
         {subtitle}
@@ -57,9 +56,10 @@ export default function BenefitCard({ icon, title, subtitle, description, items 
           fontFamily: "var(--font-body)",
           fontSize: 15,
           fontWeight: 400,
-          lineHeight: 1.7,
+          lineHeight: 1.6,
           color: COLORS.textMuted,
-          margin: "0 0 20px",
+          margin: "0 0 14px",
+          textWrap: "balance",
         }}
       >
         {description}
@@ -76,14 +76,14 @@ export default function BenefitCard({ icon, title, subtitle, description, items 
                 display: "flex",
                 alignItems: "flex-start",
                 gap: 10,
-                marginBottom: 10,
+                marginBottom: 6,
                 lineHeight: 1.5,
               }}
             >
               <span style={{ color: COLORS.copper, flexShrink: 0, marginTop: 2 }}>
                 {Icons.check}
               </span>
-              {item}
+              <span style={{ textWrap: "balance" }}>{item}</span>
             </li>
           ))}
         </ul>

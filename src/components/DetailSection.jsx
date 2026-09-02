@@ -6,7 +6,11 @@ export default function DetailSection({ id, label, title, items, bg }) {
   const hasGraphics = items.some((item) => item.graphic);
 
   return (
-    <Section bg={bg} id={id}>
+    <Section
+      bg={bg}
+      id={id}
+      style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center" }}
+    >
       <div
         className={`detail-section-heading${
           hasGraphics ? " detail-section-heading--graphic" : ""
@@ -24,6 +28,7 @@ export default function DetailSection({ id, label, title, items, bg }) {
             lineHeight: 1.25,
             letterSpacing: "-0.02em",
             maxWidth: hasGraphics ? 760 : 600,
+            textWrap: "balance",
           }}
         >
           {title}
@@ -84,6 +89,7 @@ export default function DetailSection({ id, label, title, items, bg }) {
                   margin: "0 0 12px",
                   lineHeight: 1.35,
                   letterSpacing: "-0.01em",
+                  textWrap: "balance",
                 }}
               >
                 {item.title}
@@ -96,6 +102,7 @@ export default function DetailSection({ id, label, title, items, bg }) {
                   lineHeight: 1.7,
                   color: COLORS.textMuted,
                   margin: 0,
+                  textWrap: "pretty",
                 }}
               >
                 {item.description}

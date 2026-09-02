@@ -92,7 +92,7 @@ export default function CustomsFlow() {
   return (
     /* Pinned ScrollTrigger scrub section — sized by viewport, so it skips the canonical 96px padding. */
     <section ref={containerRef} className="customs-flow-section">
-      <div style={{ width: "100%", maxWidth: 1200, padding: "0 24px", position: "relative", zIndex: 1 }}>
+      <div style={{ width: "100%", maxWidth: 1280, padding: "0 24px", position: "relative", zIndex: 1 }}>
         <div className="customs-flow-heading">
           <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(24px, 3vw, 36px)", letterSpacing: "-0.02em" }}>
             <MaskReveal>From shipper email to customs filing</MaskReveal>

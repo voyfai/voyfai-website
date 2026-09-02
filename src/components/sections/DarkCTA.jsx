@@ -18,6 +18,11 @@ export default function DarkCTA({
         padding: "120px 24px",
         position: "relative",
         overflow: "hidden",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        scrollSnapAlign: "start",
       }}
     >
       <div
@@ -32,7 +37,8 @@ export default function DarkCTA({
 
       <Reveal
         style={{
-          maxWidth: 680,
+          width: "100%",
+          maxWidth: 1280,
           margin: "0 auto",
           textAlign: "center",
           position: "relative",
@@ -65,6 +71,7 @@ export default function DarkCTA({
             margin: "0 0 16px",
             lineHeight: 1.25,
             letterSpacing: "-0.02em",
+            textWrap: "balance",
           }}
         >
           {headline}
@@ -80,6 +87,7 @@ export default function DarkCTA({
               color: "rgba(255,255,255,0.5)",
               margin: "0 auto 40px",
               maxWidth: 540,
+              textWrap: "pretty",
             }}
           >
             {body}

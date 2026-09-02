@@ -11,22 +11,32 @@ export default function BenchmarkChart() {
   ];
 
   return (
-    <section style={{ background: "var(--voyfai-ink)", padding: "96px 24px", color: "#fff" }}>
-      {/* 900 cap is intentional — keeps horizontal bars within a comfortable read length */}
-      <div style={{ maxWidth: 900, margin: "0 auto" }}>
+    <section
+      style={{
+        background: "var(--voyfai-ink)",
+        padding: "96px 24px",
+        color: "#fff",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        scrollSnapAlign: "start",
+      }}
+    >
+      <div style={{ width: "100%", maxWidth: 1280, margin: "0 auto" }}>
         <FadeUp>
           <div style={{ textAlign: "center", marginBottom: 64 }}>
             <SectionLabel>Performance</SectionLabel>
-            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 700, lineHeight: 1.25, letterSpacing: "-0.02em", margin: "0 0 16px", color: "#fff" }}>
+            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3.5vw, 42px)", fontWeight: 700, lineHeight: 1.25, letterSpacing: "-0.02em", margin: "0 0 16px", color: "#fff", textWrap: "balance" }}>
               Less manual work, more forwarding.
             </h2>
           </div>
         </FadeUp>
-        
+
         <HorizontalBars data={chartData} />
-        
+
         <FadeUp delay={800}>
-          <div style={{ textAlign: "center", color: "rgba(255,255,255,0.4)", fontSize: 13, marginTop: 32 }}>
+          <div style={{ textAlign: "center", color: "rgba(255,255,255,0.4)", fontSize: 13, marginTop: 32, textWrap: "pretty" }}>
             Efficiency measured by freight forwarder operator time required per shipment.
           </div>
         </FadeUp>

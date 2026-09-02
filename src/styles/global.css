@@ -113,6 +113,7 @@ html {
   scroll-behavior: smooth;
   background-color: #111111;
   overscroll-behavior: none;
+  scroll-snap-type: y proximity;
 }
 
 section[id] {
@@ -661,18 +662,24 @@ body {
 
 .hub-preview-section {
   background: var(--voyfai-surface-page);
-  padding: 96px 24px;
+  padding: 64px 24px;
   transition: background-color 400ms var(--ease-out-expo);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scroll-snap-align: start;
 }
 
 .hub-preview-wrap {
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
 }
 
 .hub-preview-heading {
   max-width: 690px;
-  margin: 0 0 40px;
+  margin: 0 0 24px;
 }
 
 .hub-preview-heading h2 {
@@ -702,7 +709,7 @@ body {
   display: grid;
   gap: 24px;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  min-height: 592px;
+  min-height: 460px;
   position: relative;
 }
 
@@ -2127,6 +2134,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+    scroll-snap-type: none;
   }
 
   *,

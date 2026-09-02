@@ -22,6 +22,7 @@ export default function TestimonialCard({ quote, name, company, role }) {
           color: COLORS.text,
           margin: "0 0 24px",
           fontStyle: "italic",
+          textWrap: "pretty",
         }}
       >
         &ldquo;{quote}&rdquo;

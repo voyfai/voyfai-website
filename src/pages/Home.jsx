@@ -1,7 +1,10 @@
-// NOTE: hero visual deviates from AGENT.md §7/§3.2 (cargo-ship imagery, glows).
-// Approved for preview by founder 2026-06-10. Source: src/assets/Voyfai-hero-ship.png.
 // NOTE: hero headline first line ("The Operating Infrastructure") uses Title Case,
 // deviating from AGENT.md §3.1 sentence-case rule. Confirmed by Alexis 2026-08-31.
+// NOTE: hero background is a real aerial photo of a container terminal
+// (src/assets/Voyfai-hero.jpg, cropped) with a functional dark gradient overlay
+// for text legibility — not the decorative/colorful gradient AGENT.md §3.2
+// targets. Carrier logos visible in the photo (Maersk, Evergreen, etc.) are
+// real carrier partners, not competitors. Confirmed by Alexis 2026-09-01.
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { COLORS } from "../constants/colors";
 import { Icons } from "../constants/icons";
@@ -20,6 +23,13 @@ import CountUp from "../components/motion/CountUp";
 import heartcoreLogo from "../assets/2-Heartcore.svg";
 import earlybirdLogo from "../assets/3-Earlybird.svg";
 import blisceLogo from "../assets/4-blisce.png";
+const PHOTOGRAPHY_BASE = `${import.meta.env.BASE_URL}photography`;
+
+const HERO_GRAIN_SVG =
+  "<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'>" +
+  "<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter>" +
+  "<rect width='100%' height='100%' filter='url(#n)'/></svg>";
+const HERO_GRAIN_TEXTURE = `url("data:image/svg+xml,${encodeURIComponent(HERO_GRAIN_SVG)}")`;
 
 // Below-the-fold — code-split so GSAP, the Europe map SVG, and the heavier
 // section bundles don't block the entry chunk or the LCP paint.
@@ -107,13 +117,14 @@ export default function Home() {
           minHeight: "100vh",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          background: "#000",
+          justifyContent: "flex-start",
+          background: COLORS.navy,
           overflow: "hidden",
           padding: "120px 24px 80px",
+          scrollSnapAlign: "start",
         }}
       >
-        {/* Hero background image */}
+        {/* Hero background photo — real container terminal */}
         <picture>
           <source
             type="image/avif"
@@ -130,7 +141,7 @@ export default function Home() {
             alt=""
             aria-hidden="true"
             width={1920}
-            height={1333}
+            height={846}
             fetchPriority="high"
             decoding="async"
             onLoad={() => setHeroLoaded(true)}
@@ -140,8 +151,8 @@ export default function Home() {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "center 45%",
-              filter: "brightness(0.62) saturate(0.9)",
+              objectPosition: "62% 50%",
+              filter: "saturate(0.8) brightness(0.65)",
               clipPath: heroLoaded ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
               transition: reducedMotion
                 ? "none"
@@ -149,49 +160,54 @@ export default function Home() {
             }}
           />
         </picture>
-        {/* Gradient overlay */}
+        {/* Legibility overlay — dark over the text column, lighter toward the photo detail on the right */}
         <div
+          aria-hidden="true"
           style={{
             position: "absolute",
             inset: 0,
             background: `
-              linear-gradient(180deg, rgba(0,0,0,0.36) 0%, rgba(0,0,0,0.2) 45%, rgba(0,0,0,0.54) 100%),
-              radial-gradient(ellipse 800px 600px at 20% 80%, rgba(3,166,150,0.06) 0%, transparent 60%)
+              linear-gradient(100deg, rgba(10,10,10,0.95) 15%, rgba(10,10,10,0.7) 45%, rgba(10,10,10,0.3) 78%, rgba(10,10,10,0.15) 100%),
+              linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0) 22%, rgba(10,10,10,0) 78%, rgba(10,10,10,0.55) 100%)
             `,
           }}
         />
-        {/* Vignette */}
+        {/* Film grain — tactile texture, ties the photo to the rest of the dark UI */}
         <div
+          aria-hidden="true"
           style={{
             position: "absolute",
             inset: 0,
-            boxShadow: "inset 0 0 200px rgba(0,0,0,0.27)",
-            pointerEvents: "none",
+            opacity: 0.05,
+            mixBlendMode: "screen",
+            backgroundImage: HERO_GRAIN_TEXTURE,
+            backgroundRepeat: "repeat",
           }}
         />
 
+        <div style={{ position: "relative", width: "100%", maxWidth: 1280, margin: "0 auto" }}>
         <div
           style={{
             position: "relative",
-            textAlign: "center",
-            maxWidth: 1260,
+            textAlign: "left",
+            maxWidth: 800,
             animation: "fadeInUp 1s ease",
           }}
         >
           <h1
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(38px, 5.8vw, 68px)",
+              fontSize: "clamp(30px, 3.3vw, 44px)",
               fontWeight: 700,
               color: COLORS.white,
-              lineHeight: 1.1,
-              margin: "0 0 36px",
+              lineHeight: 1.12,
+              margin: "0 0 28px",
               letterSpacing: "-0.02em",
             }}
           >
             <span
               className={reducedMotion ? undefined : "hero-accent-line"}
-              style={{ display: "block", marginBottom: 8, color: COLORS.copperLight }}
+              style={{ display: "block", marginBottom: 6, color: COLORS.copperLight }}
             >
               The Operating Infrastructure
             </span>
@@ -199,7 +215,6 @@ export default function Home() {
               style={{
                 display: "block",
                 color: COLORS.white,
-                fontSize: "clamp(36px, 5.5vw, 64.5px)",
               }}
             >
               behind SME freight forwarding
@@ -209,13 +224,13 @@ export default function Home() {
           <p
             style={{
               fontFamily: "var(--font-body)",
-              fontSize: "clamp(18px, 2.3vw, 21px)",
+              fontSize: "clamp(16px, 1.4vw, 18px)",
               fontWeight: 300,
-              lineHeight: 1.75,
-              color: "rgba(255,255,255,0.6)",
-              maxWidth: 700,
+              lineHeight: 1.7,
+              color: "rgba(255,255,255,0.65)",
+              maxWidth: 460,
               textWrap: "balance",
-              margin: "0 auto 48px",
+              margin: "0 0 40px",
             }}
           >
             Turning local strength into global scale.
@@ -225,7 +240,7 @@ export default function Home() {
             style={{
               display: "flex",
               gap: 16,
-              justifyContent: "center",
+              justifyContent: "flex-start",
               flexWrap: "wrap",
             }}
           >
@@ -234,6 +249,7 @@ export default function Home() {
               <span>{Icons.arrowRight}</span>
             </a>
           </div>
+        </div>
         </div>
 
         {/* Scroll indicator */}
@@ -286,7 +302,11 @@ export default function Home() {
       </header>
 
       {/* ─── BENEFITS ───────────────────────────────────────────── */}
-      <Section id="benefits" bg={COLORS.cream}>
+      <Section
+        id="benefits"
+        bg={COLORS.cream}
+        style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center" }}
+      >
         <Reveal>
           <SectionLabel>Partner Benefits</SectionLabel>
           <h2
@@ -295,10 +315,11 @@ export default function Home() {
               fontSize: "clamp(28px, 3.5vw, 42px)",
               fontWeight: 700,
               color: COLORS.navy,
-              margin: "0 0 16px",
+              margin: "0 0 12px",
               lineHeight: 1.25,
               letterSpacing: "-0.02em",
               maxWidth: 600,
+              textWrap: "balance",
             }}
           >
             Everything forwarders need to compete at global scale
@@ -311,7 +332,8 @@ export default function Home() {
               lineHeight: 1.7,
               color: COLORS.textMuted,
               maxWidth: 540,
-              margin: "0 0 40px",
+              margin: "0 0 24px",
+              textWrap: "pretty",
             }}
           >
             Voyfai's partners have access to the resources that unlock the next
@@ -368,8 +390,74 @@ export default function Home() {
         </div>
       </Section>
 
+      <LoadWhenNear minHeight={380} background="var(--voyfai-ink)">
+        <Suspense fallback={null}>
+          <BenchmarkChart />
+        </Suspense>
+      </LoadWhenNear>
+
+      {/* ─── TECHNOLOGY ─────────────────────────────────────────── */}
+      <LoadWhenNear minHeight={1040} background={COLORS.cream}>
+        <Suspense fallback={null}>
+          <DetailSection
+            id="technology"
+            bg={COLORS.cream}
+            label="AI Technology"
+            title="Tools built by forwarders, for forwarders"
+            items={[
+              {
+                graphic: <RateCompare />,
+                title: "Instant Rate Comparison",
+                description:
+                  "Compare carrier options in seconds and deliver accurate quotes within minutes. Operators spend time on relationships, not spreadsheets.",
+              },
+              {
+                graphic: <ShipmentIntake />,
+                title: "Automated Shipment Creation",
+                description:
+                  "Our AI agent converts booking emails directly into structured shipments in the TMS, reducing manual data entry and eliminating errors.",
+              },
+              {
+                graphic: <HubTracker />,
+                title: "Voyfai Hub: Live Visibility",
+                description:
+                  "A client portal that keeps clients continuously informed with smart alerts, automated updates, and full shipment transparency from origin to destination.",
+              },
+              {
+                graphic: <CustomsScan />,
+                title: "Intelligent Customs Automation",
+                description:
+                  "Streamline customs declarations with AI that classifies HS codes and processes documents, improving both speed and accuracy.",
+              },
+            ]}
+          />
+        </Suspense>
+      </LoadWhenNear>
+
+      <LoadWhenNear minHeight={620} background="var(--voyfai-ink)">
+        <Suspense fallback={null}>
+          <CustomsFlow />
+        </Suspense>
+      </LoadWhenNear>
+
+      <LoadWhenNear minHeight={720} background="var(--voyfai-surface-page)">
+        <Suspense fallback={null}>
+          <HubPreview />
+        </Suspense>
+      </LoadWhenNear>
+
+      <LoadWhenNear minHeight={96} background="var(--voyfai-ink)">
+        <Suspense fallback={null}>
+          <ComplianceBand />
+        </Suspense>
+      </LoadWhenNear>
+
       {/* ─── OUR PARTNERS / MAP ─────────────────────────────────── */}
-      <Section id="partners" bg={COLORS.warmWhite}>
+      <Section
+        id="partners"
+        bg={COLORS.warmWhite}
+        style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center" }}
+      >
         <Reveal>
         <div
           className="partners-layout"
@@ -391,6 +479,7 @@ export default function Home() {
                 margin: "0 0 16px",
                 lineHeight: 1.25,
                 letterSpacing: "-0.02em",
+                textWrap: "balance",
               }}
             >
               A growing network of independent freight forwarders
@@ -404,6 +493,7 @@ export default function Home() {
                 color: COLORS.textMuted,
                 margin: "0 0 40px",
                 maxWidth: 540,
+                textWrap: "pretty",
               }}
             >
               Voyfai's infrastructure powers a growing network of SME freight
@@ -478,70 +568,14 @@ export default function Home() {
         </Reveal>
       </Section>
 
-      <LoadWhenNear minHeight={380} background="var(--voyfai-ink)">
-        <Suspense fallback={null}>
-          <BenchmarkChart />
-        </Suspense>
-      </LoadWhenNear>
-
-      {/* ─── TECHNOLOGY ─────────────────────────────────────────── */}
-      <LoadWhenNear minHeight={1040} background={COLORS.cream}>
-        <Suspense fallback={null}>
-          <DetailSection
-            id="technology"
-            bg={COLORS.cream}
-            label="AI Technology"
-            title="Tools built by forwarders, for forwarders"
-            items={[
-              {
-                graphic: <RateCompare />,
-                title: "Instant Rate Comparison",
-                description:
-                  "Compare carrier options in seconds and deliver accurate quotes within minutes. Operators spend time on relationships, not spreadsheets.",
-              },
-              {
-                graphic: <ShipmentIntake />,
-                title: "Automated Shipment Creation",
-                description:
-                  "Our AI agent converts booking emails directly into structured shipments in the TMS, reducing manual data entry and eliminating errors.",
-              },
-              {
-                graphic: <HubTracker />,
-                title: "Voyfai Hub: Live Visibility",
-                description:
-                  "A client portal that keeps clients continuously informed with smart alerts, automated updates, and full shipment transparency from origin to destination.",
-              },
-              {
-                graphic: <CustomsScan />,
-                title: "Intelligent Customs Automation",
-                description:
-                  "Streamline customs declarations with AI that classifies HS codes and processes documents, improving both speed and accuracy.",
-              },
-            ]}
-          />
-        </Suspense>
-      </LoadWhenNear>
-
-      <LoadWhenNear minHeight={620} background="var(--voyfai-ink)">
-        <Suspense fallback={null}>
-          <CustomsFlow />
-        </Suspense>
-      </LoadWhenNear>
-
-      <LoadWhenNear minHeight={720} background="var(--voyfai-surface-page)">
-        <Suspense fallback={null}>
-          <HubPreview />
-        </Suspense>
-      </LoadWhenNear>
-
-      <LoadWhenNear minHeight={96} background="var(--voyfai-ink)">
-        <Suspense fallback={null}>
-          <ComplianceBand />
-        </Suspense>
-      </LoadWhenNear>
 
       {/* ─── TESTIMONIALS ───────────────────────────────────────── */}
-      <Section bg={COLORS.warmWhite}>
+      <Section
+        bg={COLORS.warmWhite}
+        bgImage={`${PHOTOGRAPHY_BASE}/air-freight-1920.webp`}
+        bgImagePosition="center 30%"
+        style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center" }}
+      >
         <Reveal>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <SectionLabel>What Voyfai Partners Say</SectionLabel>
@@ -555,6 +589,7 @@ export default function Home() {
                 lineHeight: 1.25,
                 letterSpacing: "-0.02em",
                 maxWidth: 500,
+                textWrap: "balance",
               }}
             >
               Built on trust, proven by results
@@ -590,7 +625,7 @@ export default function Home() {
         body={
           <>
             Every Voyfai partnership starts with a conversation rooted in shared
-            values &mdash; independence, ambition, and a belief in what we can
+            values: independence, ambition, and a belief in what we can
             build together. No pressure, no pitch.
           </>
         }
@@ -614,8 +649,34 @@ export default function Home() {
           padding: "96px 24px",
           position: "relative",
           overflow: "hidden",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          scrollSnapAlign: "start",
         }}
       >
+        {/* Background photo — real container ship, veiled to a faint texture */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url("${PHOTOGRAPHY_BASE}/sea-freight-1920.webp")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center 60%",
+            filter: "grayscale(0.4) saturate(0.7)",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: COLORS.cream,
+            opacity: 0.88,
+          }}
+        />
         {/* Subtle radial glow */}
         <div
           style={{
@@ -631,6 +692,7 @@ export default function Home() {
 
         <div
           style={{
+            width: "100%",
             maxWidth: 1280,
             margin: "0 auto",
             textAlign: "center",
@@ -648,6 +710,7 @@ export default function Home() {
               lineHeight: 1.25,
               letterSpacing: "-0.02em",
               maxWidth: 600,
+              textWrap: "balance",
             }}
           >
             Backed by the Greatest Investors
@@ -661,6 +724,7 @@ export default function Home() {
               color: COLORS.textMuted,
               maxWidth: 540,
               margin: "0 auto 64px",
+              textWrap: "pretty",
             }}
           >
             All our investors have long proven track records of picking the
