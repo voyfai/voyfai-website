@@ -244,7 +244,7 @@ export default function Home() {
               flexWrap: "wrap",
             }}
           >
-            <a href="#contact" className="cta-btn cta-primary">
+            <a href="#benefits" className="cta-btn cta-primary">
               Explore Partnership
               <span>{Icons.arrowRight}</span>
             </a>

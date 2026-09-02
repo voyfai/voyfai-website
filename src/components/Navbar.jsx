@@ -139,7 +139,7 @@ export default function Navbar() {
               )
             )}
             <a
-              href={resolveHref("#contact")}
+              href={resolveHref("#benefits")}
               className="cta-btn"
               style={{
                 padding: "10px 20px",
@@ -230,7 +230,7 @@ export default function Navbar() {
             );
           })}
           <a
-            href={resolveHref("#contact")}
+            href={resolveHref("#benefits")}
             className="cta-btn cta-primary"
             onClick={() => setMobileMenu(false)}
             style={{ marginTop: 16, justifyContent: "center" }}
